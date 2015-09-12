@@ -1,0 +1,19 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sat Sep 12 16:13:41 2015
+# Process ID: 3464
+# Log file: C:/Users/Carlos/Dropbox/Grupo 1/SegundoAvance/vivado.log
+# Journal file: C:/Users/Carlos/Dropbox/Grupo 1/SegundoAvance\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/Carlos/Dropbox/Grupo 1/SegundoAvance/Proyecto Base.xpr}
+INFO: [Project 1-313] Project file moved from 'Y:/Grupo 1/SegundoAvance' since last save.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-509] GeneratedRun file for 'impl_1' not found
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2015.2/data/ip'.
+open_project: Time (s): cpu = 00:00:21 ; elapsed = 00:00:14 . Memory (MB): peak = 663.324 ; gain = 121.785
