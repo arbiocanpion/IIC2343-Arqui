@@ -50,7 +50,7 @@ component FA
             S : out std_logic);    
         end component;
 
-signal CoutBuffer : std_logic_vector(6 downto 0);
+signal CoutBuffer : std_logic_vector(15 downto 0);
 
 begin
 
@@ -114,8 +114,72 @@ inst_F7: FA port map(
         A => A(7),
         B => B(7),
         Cin => CoutBuffer(6),
-        Cout => Cout,
+        Cout => CoutBuffer(7),
         S => S(7)
+        );
+        
+inst_F8: FA port map(
+        A => A(8),
+        B => B(8),
+        Cin => CoutBuffer(7),
+        Cout => CoutBuffer(8),
+        S => S(8)
+        );
+                
+inst_F9: FA port map(
+        A => A(9),
+        B => B(9),
+        Cin => CoutBuffer(8),
+        Cout => CoutBuffer(9),
+        S => S(9)
+        );
+                
+inst_F10: FA port map(
+        A => A(10),
+        B => B(10),
+        Cin => CoutBuffer(9),
+        Cout => CoutBuffer(10),
+        S => S(10)
+        );
+                
+inst_F11: FA port map(
+        A => A(11),
+        B => B(11),
+        Cin => CoutBuffer(10),
+        Cout => CoutBuffer(11),
+        S => S(11)
+        );
+                
+inst_F12: FA port map(
+        A => A(12),
+        B => B(12),
+        Cin => CoutBuffer(11),
+        Cout => CoutBuffer(12),
+        S => S(12)
+        );
+                
+inst_F13: FA port map(
+        A => A(13),
+        B => B(13),
+        Cin => CoutBuffer(12),
+        Cout => CoutBuffer(13),
+        S => S(13)
+        );
+                
+inst_F14: FA port map(
+        A => A(14),
+        B => B(14),
+        Cin => CoutBuffer(13),
+        Cout => CoutBuffer(14),
+        S => S(14)
+        );
+                
+inst_F15: FA port map(
+        A => A(15),
+        B => B(15),
+        Cin => CoutBuffer(14),
+        Cout => Cout,
+        S => S(15)
         );
 
 end Behavioral;

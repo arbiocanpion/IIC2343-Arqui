@@ -58,7 +58,7 @@ with sel select result <=
     resultShiftRight when "110",
     resultShiftLeft when "111",
     "0000000000000000" when others;
-    
+
 with sel select co <=
     CoutAdder when "000",
     CoutSubstracter when "001",
