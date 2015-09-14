@@ -20,7 +20,7 @@ constant clock_divide_max : std_logic_vector(17 downto 0) := "011110000100000000
 constant segment_var_max : std_logic_vector(1 downto 0) := "11";
 
 signal clock_divide_counter: std_logic_vector(26 downto 0) := (others => '0');
-signal segment_var : std_logic_vector(3 downto 0) := (others => '0');
+signal segment_var : std_logic_vector(1 downto 0) := (others => '0');
 
 signal slected_dis : std_logic_vector(3 downto 0) := (others => '0');
 

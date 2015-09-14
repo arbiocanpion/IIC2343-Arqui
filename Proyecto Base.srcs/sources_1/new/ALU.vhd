@@ -21,24 +21,10 @@ component Adder
         S : out std_logic_vector (15 downto 0)
     );
     end component;
-    
-component ShiftLeft is
-        Port ( A : in STD_LOGIC_VECTOR (15 downto 0);
-               result : out STD_LOGIC_VECTOR (15 downto 0);
-               Cout : out STD_LOGIC);
-    end component;
-    
-component ShiftRight is
-        Port ( A : in STD_LOGIC_VECTOR (15 downto 0);
-               result : out STD_LOGIC_VECTOR (15 downto 0);
-               Cout : out STD_LOGIC);
-    end component;
 
 -- SENALES DE RESULTADO DE OPERACIONES
 signal resultAdder : std_logic_vector (15 downto 0);
 signal resultSubstracter : std_logic_vector (15 downto 0);
-signal resultShiftRight : std_logic_vector (15 downto 0);
-signal resultShiftLeft : std_logic_vector (15 downto 0);
 signal CoutAdder : std_logic;
 signal CoutSubstracter : std_logic;
 signal CoutShiftRight : std_logic;
@@ -51,12 +37,12 @@ begin
 with sel select result <=
     resultAdder when "000",
     resultSubstracter when "001",
-    A and B when "010",
-    A or B when "100",
-    A xor B when "011",
-    not(A) when "101",
-    resultShiftRight when "110",
-    resultShiftLeft when "111",
+    a and b when "010",
+    a or b when "011",
+    a xor b when "100",
+    not(a) when "101",
+    '0' & a(15 downto 1) when "110",
+    a(14 downto 0) & '0' when "111",
     "0000000000000000" when others;
 
 with sel select co <=
@@ -65,6 +51,14 @@ with sel select co <=
     CoutShiftRight when "110",
     CoutShiftLeft when "111",
     '0' when others;
+    
+with sel select CoutShiftRight <=
+        a(0) when "110",
+        '0' when others;
+
+with sel select CoutShiftLeft <=
+        a(15) when "111",
+        '0' when others;
 
 -- INSTANCIAS
 
@@ -79,21 +73,9 @@ inst_Adder: Adder port map(
 inst_Substracter: Adder port map(
         A => a,
         B => not(b),
-        Cin => not(ci), -- ci es '0' por defecto
+        Cin => ci,
         Cout => CoutSubstracter,
         S => resultSubstracter
-    );
-    
-inst_ShiftRight: ShiftRight port map(
-        A => a,
-        result => resultShiftRight,
-        Cout => CoutShiftRight
-    );
-        
-inst_ShiftLeft: ShiftLeft port map(
-        A => a,
-        result => resultShiftLeft,
-        Cout => CoutShiftLeft
     );
    
 end Behavioral;

@@ -5,6 +5,7 @@ entity Basys3 is
     Port (
         sw          : in   std_logic_vector (2 downto 0);
         btn         : in   std_logic_vector (4 downto 0);  -- 0 Center, 1 Up, 2 Left, 3 Right, 4 Down
+        led         : out  std_logic_vector (2 downto 0);
         clk         : in   std_logic;
         clk_up      : in   std_logic;
         seg         : out  std_logic_vector (7 downto 0);
@@ -71,12 +72,20 @@ signal valueA : std_logic_vector(15 downto 0);
 signal valueB : std_logic_vector(15 downto 0);
 
 -- SENAL OVERFLOW
-signal Coverflow : std_logic;
+signal Cout : std_logic;
 
 -- SENAL RESULTADO OPERACION ALU
 signal Salu : std_logic_vector (15 downto 0);
 
+-- SENAL CARRY IN
+signal ci : std_logic;
+
 begin
+
+-- CARRY IN
+with sw select ci <=
+    '1' when "001",
+    '0' when others;
 
 -- AUMENTAR VALOR DE A y B
 upA <= btn(1) and btn(2);   --A izquierdo
@@ -142,8 +151,8 @@ inst_ALU: ALU port map(
         A => valueA,
         B => valueB,
         sel => sw,
-        ci => '0',
-        co => Coverflow,
+        ci => ci,
+        co => Cout,
         result => Salu
     );
 
