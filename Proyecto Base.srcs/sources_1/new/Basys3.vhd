@@ -15,6 +15,39 @@ end Basys3;
 
 architecture Behavioral of Basys3 is
 
+component Adder
+    Port ( A : in STD_LOGIC_VECTOR (15 downto 0);
+           B : in STD_LOGIC_VECTOR (15 downto 0);
+           Cin : in STD_LOGIC;
+           Cout : out STD_LOGIC;
+           S : out STD_LOGIC_VECTOR (15 downto 0)
+           );
+           end component;
+
+component RAM
+    Port ( clock       : in   std_logic;
+           write       : in   std_logic;
+           address     : in   std_logic_vector (11 downto 0);
+           datain      : in   std_logic_vector (15 downto 0);
+           dataout     : out  std_logic_vector (15 downto 0)
+    );
+    end component;
+
+component ROM
+    Port ( 
+            address   : in  std_logic_vector(11 downto 0);
+            dataout   : out std_logic_vector(32 downto 0)
+    );
+    end component;
+
+component PC 
+    Port ( clock    : in  std_logic;
+           load     : in  std_logic;
+           datain   : in  std_logic_vector (11 downto 0);
+           dataout  : out std_logic_vector (11 downto 0)
+           );
+    end component;
+
 component Clock_Divider
     Port ( clk          : in std_logic;
            clk_up       : in std_logic;
@@ -53,7 +86,35 @@ component ALU
     end component;  
 
 -- SENAL CLOCK
-signal clock   : std_logic;                     
+signal clock   : std_logic;   
+
+--SENAL instrucciones rom
+signal romout : std_logic_vector(32 downto 0);
+
+--SENAL Conteo PC
+signal PCount : std_logic_vector(11 downto 0);
+signal PC1 : std_logic_vector(11 downto 0);
+
+--SENAl RAM 
+signal ramout : std_logic_vector(15 downto 0);
+signal ramin : std_logic_vector(15 downto 0);
+
+--SEÑALES CU  
+signal LPC std_logic;--load pc
+signal LA std_logic;-- load A
+signal LB std_logic;-- load B
+signal LC std_logic;-- Load C
+signal SA std_logic_vector(1 downto 0);-- mux A
+signal SB std_logic_vector(1 downto 0);-- mux B
+signal SL std_logic_vector(2 downto 0)-- ALU
+signal SAdd std_logic_vector(1 downto 0); -- address
+signal SDin std_logic; -- mux datain RAM
+signal SPC std_logic; -- mux PC
+signal W std_logic; -- write o no write
+signal IncSp std_logic;
+signal DecSp std_logic;
+
+                 
             
 -- SENALES DISPLAY
 signal dis_a : std_logic_vector(3 downto 0);
@@ -67,9 +128,10 @@ signal upB : std_logic;
 signal downA : std_logic;
 signal downB : std_logic;
 
--- SENALES VALORES A y B
+-- SENALES VALORES A, B y C
 signal valueA : std_logic_vector(15 downto 0);
 signal valueB : std_logic_vector(15 downto 0);
+signal valueC : std_logic_vector(15 downto 0);
 
 -- SENAL OVERFLOW
 signal Cout : std_logic;
@@ -81,6 +143,11 @@ signal Salu : std_logic_vector (15 downto 0);
 signal ci : std_logic;
 
 begin
+
+-- MUX DATAIN DE LA RAM
+with SDin select ramin <=
+    "0000" & PC1 when '1', --cuando el selector del mux es 1 se guarda el contador +1
+    Salu when others;--sino se guarda el resultado de la ALU
 
 -- CARRY IN
 with sw select ci <=
@@ -131,29 +198,71 @@ inst_Led_Driver: Led_Driver port map(
 	
 inst_RegA: Reg port map(
         clock => clock,
-        load => '0',
+        load => --señal CU LA
         up => upA,
         down => downA,
-        datain => "0000000000000000",
+        datain => Salu,
         dataout => valueA
     );
     
 inst_RegB: Reg port map(
         clock => clock,
-        load => '0',
+        load => --señal CU LB
         up => upB,
         down => downB,
-        datain => "0000000000000000",
+        datain => Salu,
         dataout => valueB
     );
+
+inst_RegC: Reg port map(
+        clock => clock,
+        load => --señal CU LC
+        up => '0',
+        down => '0',
+        datain => ramout,
+        dataout => valueC
+    );    
+
+inst_Status: Reg port map(
+    clock => clock,
     
+    );    
+
 inst_ALU: ALU port map(
         A => valueA,
         B => valueB,
-        sel => sw,
+        sel => SL,
         ci => ci,
         co => Cout,
         result => Salu
     );
-
+    
+inst_PC: PC port map(
+    clock => clock,
+    load => LPC,
+    datain => romout(28 downto 17),-- en realidad esto tiene que pasar antes por un mux
+    dataout =>PCount
+    );
+    
+inst_ROM: ROM port map(
+    address => PCount,
+    dataout => romout
+    );
+    
+inst_RAM: RAM port map(
+    clock => clock,
+    write => W,
+    address
+    datain
+    dataout => ramout
+    );
+    
+inst_Adder: Adder port map(
+    A => PCount,
+    B => "0000000000000001",
+    Cin =>'0',
+    Cout--conectarlo a nada
+    S => PC1
+    );
+    
 end Behavioral;

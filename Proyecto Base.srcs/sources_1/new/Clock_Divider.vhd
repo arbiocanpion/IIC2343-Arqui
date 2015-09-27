@@ -9,6 +9,7 @@ entity Clock_Divider is
            clock                : out std_logic);
 end Clock_Divider;
 
+
 architecture Behavioral of Clock_Divider is
 
     constant normal_max         : std_logic_vector(26 downto 0) := "100000000000000000000000000";
