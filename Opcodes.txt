@@ -1,0 +1,130 @@
+MOV
+A B        0000000
+B A        0000001
+A Lit      0000010
+B Lit      0000011
+A Dir      0000100
+B Dir      0000101
+Dir A      0000110
+Dir B      0000111
+A DirB     0001000
+B DirB     0001001
+DirB A     0001010
+
+ADD
+A B        0001011
+B A        0001100
+A Lit      0001101
+B Lit      0001110
+A Dir      0001111
+B Dir      0010000
+Dir        0010001
+
+SUB
+A B        0010010
+B A        0010011
+A Lit      0010100
+B Lit      0010101
+A Dir      0010110
+B Dir      0010111
+Dir        0011000
+
+AND
+A B        0011001
+B A        0011010
+A Lit      0011011
+B Lit      0011100
+A Dir      0011101
+B Dir      0011110
+Dir        0011111
+
+OR
+A B        0100000
+B A        0100001
+A Lit      0100010
+B Lit      0100011
+A Dir      0100100
+B Dir      0100101
+Dir        0100110
+
+XOR
+A B        0100111
+B A        0101000
+A Lit      0101001
+A Dir      0101010
+B Dir      0101011
+Dir        0101100
+
+NOT
+A          0101101
+B A        0101110
+Dir A      0101111
+
+SHL
+A          0110000
+B A        0110001
+Dir A      0110010
+
+SHR
+A          0110011
+B A        0110100
+Dir A      0110101
+
+INC
+A          0110110
+B          0110111
+Dir        0111000
+
+DEC
+A          0111001     
+
+CMP
+A B        0111010
+A Lit      0111011
+A Dir      0111100
+
+JMP
+Dir        0111101
+
+JEQ
+Dir        0111110
+
+JNE
+Dir        0111111
+
+JGT
+Dir        1000000
+
+JGE
+Dir        1000001
+
+JLT
+Dir        1000010
+
+JLE
+Dir        1000011
+
+JCR
+Dir        1000100
+
+NOP        1000101
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
