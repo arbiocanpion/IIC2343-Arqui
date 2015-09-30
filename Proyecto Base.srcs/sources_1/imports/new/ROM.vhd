@@ -5,9 +5,9 @@ USE IEEE.NUMERIC_STD.ALL;
 
 entity ROM is
     Port (
-        address   : in  std_logic_vector(11 downto 0);
-        dataout   : out std_logic_vector(32 downto 0)
-          );
+        address   :	in  std_logic_vector(11 downto 0);
+        dataout   :	out std_logic_vector(32 downto 0)
+	);
 end ROM; 
 
 architecture Behavioral of ROM is

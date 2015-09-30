@@ -32,11 +32,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity RegS is
-    Port ( Z : in STD_LOGIC;
-           N : in STD_LOGIC;
-           V : in STD_LOGIC;
-           C : in STD_LOGIC;
-           Stout : out STD_LOGIC_VECTOR (3 downto 0));
+    Port ( 
+    	Z 		: 	in std_logic;		-- zero: 		1 when result = "000..."
+        N 		: 	in std_logic;		-- negative:	the most significative bit (indicates if result is negative)
+        V 		: 	in std_logic;		-- overflow:	if ALU has overflow
+        C 		: 	in std_logic;		-- carry:		carry out of ALU
+        Stout	: 	out std_logic_vector (3 downto 0));
 end RegS;
 
 architecture Behavioral of RegS is
