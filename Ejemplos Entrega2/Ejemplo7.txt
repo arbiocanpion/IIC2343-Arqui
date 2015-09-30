@@ -1,0 +1,39 @@
+DATA:
+CODE:
+JMP start
+error:
+JMP error
+start:
+MOV B,1 // A=1
+MOV A,B // B=A=1
+INC A   // A=A+1=2
+CMP A,B
+JEQ error
+INC B	// B=B+1=2
+CMP A,2
+JNE error
+MOV (0),A //Mem[0]=A=2
+INC B	// B=B+1=3
+CMP A,2
+JGT error
+CMP A,(0)
+JGT error
+INC B	// B=B+1=4
+INC (0) //Mem[0]=Mem[0]+1=3
+CMP A,(0)
+JGE error
+INC B	// B=B+1=5
+CMP A,2
+JLT error
+CMP A,1
+JLT error	
+INC B	// B=B+1=6
+DEC A	// A=A-1=1
+CMP A,0
+JLE error
+INC B	// B=B+1=7
+SHL A	// A=A<<1=2
+JCR error
+SUB A,3   // A=A-3=FFFFh
+JCR error
+MOV A,11h // A=11h No salta cuando no tiene que saltar

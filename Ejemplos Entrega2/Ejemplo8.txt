@@ -1,0 +1,21 @@
+DATA:
+ v1 1100b
+ v2 0101b
+ v3 0h
+CODE:
+ MOV A,(v1)   // A=Mem[v1]=12
+ AND B,(v2)   // B=A|Mem[v2]=4
+ XOR A,(v2)   // A=A^Mem[v2]=9
+ AND A,B      // A=A&B=0
+ NOT (v3),A   // Mem[v3]=~A=FFFFh
+ OR A,B	      // A=A|B=13
+ ADD A,(v3)   // A=A&Mem[v3]=3
+ AND A,1      // A=A&1=1
+ JNE inpar
+ NOT B,A      // B=~A=FFFFh
+ XOR A,B      // A=A^B=0
+ AND B,A      // B=A&B=0
+ inpar:
+ SHL B,A      // B=A<<1=2
+ 
+ 
