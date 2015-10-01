@@ -28,19 +28,23 @@ architecture Behavioral of Basys3 is
 
 component ControlUnit is
     Port (
-        Opcode  :   in  std_logic_vector(6 downto 0);  -- instruction to execute
-        LPC     :   out std_logic;                       -- load pc
-        LA      :   out std_logic;                        -- load A
-        LB      :   out std_logic;                        -- load B
-        SA      :   out std_logic_vector(1 downto 0);     -- mux A
-        SB      :   out std_logic_vector(1 downto 0);     -- mux B
-        SL      :   out std_logic_vector(2 downto 0)      -- ALU
+        Opcode  :   in std_logic_vector(6 downto 0);    -- instruction to execute
+        Z       :   in std_logic;                       -- zero
+        N       :   in std_logic;                       -- negative
+        V       :   in std_logic;                       -- overflow
+        C       :   in std_logic;                       -- carry
+        LPC     :   out std_logic;                      -- load pc
+        LA      :   out std_logic;                      -- load A
+        LB      :   out std_logic;                      -- load B
+        SA      :   out std_logic_vector(1 downto 0);   -- mux A
+        SB      :   out std_logic_vector(1 downto 0);   -- mux B
+        SL      :   out std_logic_vector(2 downto 0)    -- ALU
         SAdd    :   out std_logic_vector(1 downto 0);   -- mux address
         SDin    :   out std_logic;                      -- mux datain RAM
-        SPC     :   out std_logic;                       -- mux PC
-        W       :   out std_logic;                         -- write RAM
-        IncSp   :   out std_logic;                     -- increment stack pointer
-        DecSp   :   out std_logic                      -- decrement stack pointer
+        SPC     :   out std_logic;                      -- mux PC
+        W       :   out std_logic;                      -- write RAM
+        IncSp   :   out std_logic;                      -- increment stack pointer
+        DecSp   :   out std_logic                       -- decrement stack pointer
     );
     end component;
 
@@ -280,6 +284,26 @@ inst_RAM: RAM port map(
     address =>
     datain  =>
     dataout =>  ramout
+    );
+
+inst_ControlUnit: CU port map(
+    Opcode  =>  ramout(6 downto 0),
+    --Z       =>  ,       -- Conectar a registro status
+    --N       =>  ,       -- Conectar a registro status
+    --V       =>  ,       -- Conectar a registro status
+    --C       =>  ,       -- Conectar a registro status
+    LPC     =>  LPC,
+    LA      =>  LA,
+    LB      =>  LB,
+    SA      =>  SA,
+    SB      =>  SB,
+    SL      =>  SL,
+    SAdd    =>  SAdd,
+    SDin    =>  SDin,
+    SPC     =>  SPC,
+    W       =>  W,
+    IncSp   =>  IncSp,
+    DecSp   =>  DecSp
     );
     
 -- TODO: Eliminar, PC tiene su sistema para ir aumentando
