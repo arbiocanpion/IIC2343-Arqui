@@ -15,12 +15,21 @@ end Basys3;
 
 architecture Behavioral of Basys3 is
 
+component RegistroStatus is
+    Port ( 
+        clock   :  in  std_logic;
+        Z       :   in  std_logic;
+        N       :   in  std_logic;
+        C       :   in  std_logic;
+        Sout    :   out std_logic_vector (3 downto 0)
+    );
+    end component;
+
 component ControlUnit is
     Port (
         Opcode  :   in std_logic_vector(6 downto 0);    -- instruction to execute
         Z       :   in std_logic;                       -- zero
         N       :   in std_logic;                       -- negative
-        V       :   in std_logic;                       -- overflow
         C       :   in std_logic;                       -- carry
         LPC     :   out std_logic;                      -- load pc
         LA      :   out std_logic;                      -- load A
@@ -151,7 +160,6 @@ signal downB    :   std_logic;
 -- SENALES VALORES A, B y C
 signal valueA   :   std_logic_vector(15 downto 0);
 signal valueB   :   std_logic_vector(15 downto 0);
-signal valueC   :   std_logic_vector(15 downto 0);
 
 -- SENAL CARRY OUT ALU
 signal Cout     :   std_logic;  -- TODO: Eliminar, va a ser conexión de ALU con Registro Status
@@ -159,7 +167,30 @@ signal Cout     :   std_logic;  -- TODO: Eliminar, va a ser conexión de ALU con 
 -- SENAL RESULTADO OPERACION ALU
 signal Salu     :   std_logic_vector (15 downto 0);
 
+-- SENAL STATUS
+signal Z        :   std_logic;
+signal N        :   std_logic;
+signal C        :   std_logic;
+signal Sout     :   std_logic_vector (2 downto 0);
+
+-- SENALES MUX A, MUX B    -(Pongan las otras salidas de MUX aquí)
+signal MuxAout  :   std_logic_vector(15 downto 0);
+signal MuxBout  :   std_logic_vector(15 downto 0);
+
 begin
+
+-- Mux A
+with SA select MuxAout <=
+    valueA                  when "00",
+    "0000000000000000"      when "01",
+    "0000000000000001"      when "10";
+
+-- Mux B
+with SB select MuxBout <=
+    valueB                  when "00",
+    "0000000000000000"      when "01",
+    romout(32 downto 17)    when "10",
+    ramout                  when "11";
 
 -- MUX DATAIN DE LA RAM
 with SDin select ramin <=
@@ -227,14 +258,14 @@ inst_RegB: Reg port map(
     );   
 
 inst_ALU: ALU port map(
-    A       =>  valueA,
-    B       =>  valueB,
+    A       =>  MuxAout,
+    B       =>  MuxBout,
     sel     =>  SL,
     co      =>  Cout,     
     result  =>  Salu,
-    z       =>  '0', --CONECTAR CON REGISTRO STATUS
-    n       =>  '0',
-    c       =>  '0'
+    z       =>  Z,
+    n       =>  N,
+    c       =>  C
     );
     
 inst_PC: PC port map(
@@ -253,15 +284,15 @@ inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
     address =>  "000000000000",     -- Hacer conexion
-    datain  =>  "0000000000000000",   -- Hacer conexion
+    datain  =>  Salu,
     dataout =>  ramout
     );
 
 inst_ControlUnit: ControlUnit port map(
     Opcode  =>  ramout(6 downto 0),
-    Z       =>  '0',       -- Conectar a registro status
-    N       =>  '0',       -- Conectar a registro status
-    C       =>  '0',       -- Conectar a registro status
+    Z       =>  Sout(2),
+    N       =>  Sout(1),
+    C       =>  Sout(0),
     LPC     =>  LPC,
     LA      =>  LA,
     LB      =>  LB,
@@ -276,5 +307,12 @@ inst_ControlUnit: ControlUnit port map(
     DecSp   =>  DecSp
     );
 
+inst_Status: RegistroStatus port map(
+    clock   =>  clock,
+    Z       =>  Z,
+    N       =>  N,
+    C       =>  C,
+    Sout    =>  Sout
+    );
     
 end Behavioral;
