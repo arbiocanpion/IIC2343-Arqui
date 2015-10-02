@@ -27,7 +27,7 @@ component ControlUnit is
         LB      :   out std_logic;                      -- load B
         SA      :   out std_logic_vector(1 downto 0);   -- mux A
         SB      :   out std_logic_vector(1 downto 0);   -- mux B
-        SL      :   out std_logic_vector(2 downto 0)    -- ALU
+        SL      :   out std_logic_vector(2 downto 0);    -- ALU
         SAdd    :   out std_logic_vector(1 downto 0);   -- mux address
         SDin    :   out std_logic;                      -- mux datain RAM
         SPC     :   out std_logic;                      -- mux PC
@@ -126,7 +126,7 @@ signal LA       :   std_logic;                     -- load A
 signal LB       :   std_logic;                     -- load B
 signal SA       :   std_logic_vector(1 downto 0);  -- mux A
 signal SB       :   std_logic_vector(1 downto 0);  -- mux B
-signal SL       :   std_logic_vector(2 downto 0)   -- ALU
+signal SL       :   std_logic_vector(2 downto 0);   -- ALU
 signal SAdd     :   std_logic_vector(1 downto 0);  -- mux address
 signal SDin     :   std_logic;                     -- mux datain RAM
 signal SPC      :   std_logic;                     -- mux PC
@@ -216,7 +216,7 @@ inst_Led_Driver: Led_Driver port map(
 	
 inst_RegA: Reg port map(
     clock   =>  clock,
-    load    =>  -- señal CU LA
+    load    =>  LA,
     up      =>  upA,
     down    =>  downA,
     datain  =>  Salu,
@@ -225,17 +225,12 @@ inst_RegA: Reg port map(
     
 inst_RegB: Reg port map(
     clock   =>  clock,
-    load    =>  -- señal CU LB
+    load    =>  LB,
     up      =>  upB,
     down    =>  downB,
     datain  =>  Salu,
     dataout =>  valueB
-    );
-
-inst_Status: Reg port map(
-    clock   =>  clock
-    
-    );    
+    );   
 
 inst_ALU: ALU port map(
     A       =>  valueA,
@@ -261,17 +256,17 @@ inst_ROM: ROM port map(
 inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
-    address =>
-    datain  =>
+    address =>  "000000000000",     -- Hacer conexion
+    datain  =>  "0000000000000000",   -- Hacer conexion
     dataout =>  ramout
     );
 
-inst_ControlUnit: CU port map(
+inst_ControlUnit: ControlUnit port map(
     Opcode  =>  ramout(6 downto 0),
-    --Z       =>  ,       -- Conectar a registro status
-    --N       =>  ,       -- Conectar a registro status
-    --V       =>  ,       -- Conectar a registro status
-    --C       =>  ,       -- Conectar a registro status
+    Z       =>  '0',       -- Conectar a registro status
+    N       =>  '0',       -- Conectar a registro status
+    V       =>  '0',       -- Conectar a registro status
+    C       =>  '0',       -- Conectar a registro status
     LPC     =>  LPC,
     LA      =>  LA,
     LB      =>  LB,

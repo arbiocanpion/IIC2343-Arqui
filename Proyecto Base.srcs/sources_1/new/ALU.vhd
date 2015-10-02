@@ -9,7 +9,7 @@ entity ALU is
         sel         :   in  std_logic_vector (2 downto 0);
         ci          :   in  std_logic;
         co          :   out std_logic;
-        resul       :   out std_logic_vector (15 downto 0)
+        result      :   out std_logic_vector (15 downto 0)
     );
 end ALU;
 
@@ -32,6 +32,7 @@ signal CoutAdd      :   std_logic;
 signal CoutSubs     :   std_logic;
 signal CoutShiftR   :   std_logic;
 signal CoutShiftL   :   std_logic;
+signal bMuxed       :   std_logic_vector(15 downto 0);
 
 begin
 
@@ -39,7 +40,7 @@ begin
 
 with sel select result <=
     resultAdd               when "000",
-    resultSubs              when "001",
+    resultAdd               when "001",
     a and b                 when "010",
     a or b                  when "011",
     a xor b                 when "100",
@@ -55,30 +56,24 @@ with sel select co <=
     CoutShiftL              when "111",
     '0'                     when others;
     
-with sel select CoutShiftRight <=
+with sel select CoutShiftR <=
         a(0)    when "110",
         '0'     when others;
 
-with sel select CoutShiftLeft <=
+with sel select CoutShiftL <=
         a(15)   when "111",
         '0'     when others;
 
--- INSTANCIAS
+with ci select bMuxed <=
+        b xor "0000000000000000" when '0',
+        b xor "1111111111111111" when '1';
 
 inst_Adder: Adder port map(
         A       =>  a,
-        B       =>  b,
+        B       =>  bMuxed,
         Cin     =>  ci,
         Cout    =>  CoutAdd,
         S       =>  resultAdd
-    );
-    
-inst_Substracter: Adder port map(
-        A       =>  a,
-        B       =>  not(b),
-        Cin     =>  ci,
-        Cout    =>  CoutSubs,
-        S       =>  resultSubs
     );
    
 end Behavioral;
