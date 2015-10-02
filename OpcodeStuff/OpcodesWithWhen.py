@@ -285,6 +285,35 @@ signal_tab_number = {
 
 # NOW LET'S DO IT
 with open(cd2, "w") as file:
+    file.write("library IEEE;\n")
+    file.write("use IEEE.STD_LOGIC_1164.ALL;\n")
+    file.write("\n\n")
+    file.write("entity ControlUnit is\n")
+    file.write("\tPort (\n")
+    file.write("\t\tOpcode\t:\tin\tstd_logic_vector(6 downto 0);\t-- instruction to execute\n")
+    file.write("\t\tZ" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- zero\n")
+    file.write("\t\tN" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- negative\n")
+    file.write("\t\tV" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- overflow\n")
+    file.write("\t\tC" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- carry\n")
+    file.write("\t\tLPC" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- load pc\n")
+    file.write("\t\tLA" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- load A\n")
+    file.write("\t\tLB" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- load B\n")
+    file.write("\t\tSA" + "\t"*2 + ":\tout\tstd_logic_vector(1 downto 0);" + "\t"*1 + "-- mux A\n")
+    file.write("\t\tSB" + "\t"*2 + ":\tout\tstd_logic_vector(1 downto 0);" + "\t"*1 + "-- mux B\n")
+    file.write("\t\tSL" + "\t"*2 + ":\tout\tstd_logic_vector(2 downto 0);" + "\t"*1 + "-- ALU\n")
+    file.write("\t\tSAdd" + "\t"*1 + ":\tout\tstd_logic_vector(1 downto 0);" + "\t"*1 + "-- mux address\n")
+    file.write("\t\tSDin" + "\t"*1 + ":\tout\tstd_logic;" + "\t"*6 + "-- mux datain RAM\n")
+    file.write("\t\tSPC" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- mux PC\n")
+    file.write("\t\tW" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- write RAM\n")
+    file.write("\t\tIncSp" + "\t"*1 + ":\tout\tstd_logic;" + "\t"*6 + "-- increment stack pointer\n")
+    file.write("\t\tDecSp" + "\t"*1 + ":\tout\tstd_logic" + "\t"*6 + "-- decrement stack pointer\n")
+    file.write("\t);\n")
+    file.write("end ControlUnit;\n")
+    file.write("\n")
+    file.write("architecture Behavioral of ControlUnit is\n")
+    file.write("\n")
+    file.write("begin\n")
+    file.write("\n")
     for signal in signals_list:
         # print signal
         file.write("with Opcode select " + signal + " <=\n")
@@ -307,3 +336,5 @@ with open(cd2, "w") as file:
                        "'" + "\t" * signal_tab_number.get(signal, 1) +
                        'when others;\n')
         file.write("\n")
+    file.write("\n")
+    file.write("end Behavioral;")

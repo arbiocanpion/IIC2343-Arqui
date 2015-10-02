@@ -15,17 +15,6 @@ end Basys3;
 
 architecture Behavioral of Basys3 is
 
--- TODO: Eliminar, no se usa
---component Adder
---    Port ( 
---        A       :   in STD_LOGIC_VECTOR (15 downto 0);
---        B       :   in STD_LOGIC_VECTOR (15 downto 0);
---        Cin     :   in STD_LOGIC;
---        Cout    :   out STD_LOGIC;
---        S       :   out STD_LOGIC_VECTOR (15 downto 0)
---    );
---    end component;
-
 component ControlUnit is
     Port (
         Opcode  :   in std_logic_vector(6 downto 0);    -- instruction to execute
@@ -243,15 +232,6 @@ inst_RegB: Reg port map(
     dataout =>  valueB
     );
 
---inst_RegC: Reg port map(
---        clock => clock,
---        load => -- señal CU LC
---        up => '0',
---        down => '0',
---        datain => ramout,
---        dataout => valueC
---    );    
-
 inst_Status: Reg port map(
     clock   =>  clock
     
@@ -305,14 +285,6 @@ inst_ControlUnit: CU port map(
     IncSp   =>  IncSp,
     DecSp   =>  DecSp
     );
-    
--- TODO: Eliminar, PC tiene su sistema para ir aumentando
---inst_Adder: Adder port map(
---    A       =>  PCount,
---    B       =>  "0000000000000001",
---    Cin     =>  0',
---    Cout    =>  --conetarlo a nada
---    S       =>  PC1
---    );
+
     
 end Behavioral;

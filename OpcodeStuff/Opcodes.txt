@@ -51,61 +51,62 @@ XOR
 A B        0100111
 B A        0101000
 A Lit      0101001
-A Dir      0101010
-B Dir      0101011
-Dir        0101100
+B Lit      0101010
+A Dir      0101011
+B Dir      0101100
+Dir        0101101
 
 NOT
-A          0101101
-B A        0101110
-Dir A      0101111
+A          0101110
+B A        0101111
+Dir A      0110000
 
 SHL
-A          0110000
-B A        0110001
-Dir A      0110010
+A          0110001
+B A        0110010
+Dir A      0110011
 
 SHR
-A          0110011
-B A        0110100
-Dir A      0110101
+A          0110100
+B A        0110101
+Dir A      0110110
 
 INC
-A          0110110
-B          0110111
-Dir        0111000
+A          0110111
+B          0111000
+Dir        0111001
 
 DEC
-A          0111001
+A          0111010
 
 CMP
-A B        0111010
-A Lit      0111011
-A Dir      0111100
+A B        0111011
+A Lit      0111100
+A Dir      0111101
 
 JMP
-Dir        0111101
-
-JEQ
 Dir        0111110
 
-JNE
+JEQ
 Dir        0111111
 
-JGT
+JNE
 Dir        1000000
 
-JGE
+JGT
 Dir        1000001
 
-JLT
+JGE
 Dir        1000010
 
-JLE
+JLT
 Dir        1000011
 
-JCR
+JLE
 Dir        1000100
 
+JCR
+Dir        1000101
+
 NOP
-NOP        1000101
+NOP        1000110
