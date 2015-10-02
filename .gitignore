@@ -42,3 +42,5 @@ Thumbs.db
 *.hw
 *.runs
 *.sim
+*.jou
+*.log

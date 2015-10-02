@@ -100,9 +100,11 @@ component ALU
         a       :   in  std_logic_vector (15 downto 0);
         b       :   in  std_logic_vector (15 downto 0);
         sel     :   in  std_logic_vector (2 downto 0);
-        ci      :   in  std_logic;
         co      :   out std_logic;
-        result  :   out std_logic_vector (15 downto 0)
+        result  :   out std_logic_vector (15 downto 0);
+        z       :   out std_logic;
+        n       :   out std_logic;
+        c       :   out std_logic
     );
     end component;  
 
@@ -157,20 +159,12 @@ signal Cout     :   std_logic;  -- TODO: Eliminar, va a ser conexión de ALU con 
 -- SENAL RESULTADO OPERACION ALU
 signal Salu     :   std_logic_vector (15 downto 0);
 
--- SENAL CARRY IN
-signal ci       :   std_logic;
-
 begin
 
 -- MUX DATAIN DE LA RAM
 with SDin select ramin <=
     "0000" & PC1    when '1',  -- cuando el selector del mux es 1 se guarda el contador +1
     Salu            when others;       -- sino se guarda el resultado de la ALU
-
--- CARRY IN
-with sw select ci <=
-    '1' when "001",
-    '0' when others;
 
 -- AUMENTAR VALOR DE A y B
 upA <= btn(1) and btn(2);   -- A izquierdo
@@ -236,9 +230,11 @@ inst_ALU: ALU port map(
     A       =>  valueA,
     B       =>  valueB,
     sel     =>  SL,
-    ci      =>  ci,
-    co      =>  Cout,     -- TODO: Eliminar, va a ser conexión de ALU con Registro Status
-    result  =>  Salu
+    co      =>  Cout,     
+    result  =>  Salu,
+    z       =>  '0', --CONECTAR CON REGISTRO STATUS
+    n       =>  '0',
+    c       =>  '0'
     );
     
 inst_PC: PC port map(
@@ -265,7 +261,6 @@ inst_ControlUnit: ControlUnit port map(
     Opcode  =>  ramout(6 downto 0),
     Z       =>  '0',       -- Conectar a registro status
     N       =>  '0',       -- Conectar a registro status
-    V       =>  '0',       -- Conectar a registro status
     C       =>  '0',       -- Conectar a registro status
     LPC     =>  LPC,
     LA      =>  LA,

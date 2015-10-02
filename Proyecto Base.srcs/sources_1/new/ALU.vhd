@@ -7,9 +7,10 @@ entity ALU is
         a           :   in  std_logic_vector (15 downto 0);
         b           :   in  std_logic_vector (15 downto 0);
         sel         :   in  std_logic_vector (2 downto 0);
-        ci          :   in  std_logic;
-        co          :   out std_logic;
-        result      :   out std_logic_vector (15 downto 0)
+        result      :   out std_logic_vector (15 downto 0);
+        z           :   out std_logic;
+        n           :   out std_logic;
+        c           :   out std_logic
     );
 end ALU;
 
@@ -29,7 +30,6 @@ component Adder
 signal resultAdd    :   std_logic_vector (15 downto 0);
 signal resultSubs   :   std_logic_vector (15 downto 0);
 signal CoutAdd      :   std_logic;
-signal CoutSubs     :   std_logic;
 signal CoutShiftR   :   std_logic;
 signal CoutShiftL   :   std_logic;
 signal bMuxed       :   std_logic_vector(15 downto 0);
@@ -48,32 +48,39 @@ with sel select result <=
     '0' & a(15 downto 1)    when "110",
     a(14 downto 0) & '0'    when "111",
     "0000000000000000"      when others;
-
-with sel select co <=
-    CoutAdd                 when "000",
-    CoutSubs                when "001",
-    CoutShiftR              when "110",
-    CoutShiftL              when "111",
-    '0'                     when others;
     
 with sel select CoutShiftR <=
-        a(0)    when "110",
-        '0'     when others;
+    a(0)                when "110",
+    '0'                 when others;
 
 with sel select CoutShiftL <=
-        a(15)   when "111",
-        '0'     when others;
+    a(15)               when "111",
+    '0'                 when others;
 
-with ci select bMuxed <=
-        b xor "0000000000000000" when '0',
-        b xor "1111111111111111" when '1';
+with sel(0) select bMuxed <=
+    b                   when '0',
+    not(b)              when '1';
+
+with result select z <=
+    '1'                 when "0000000000000000",
+    '0'                 when others;
+
+with result(15) select n <=
+    '1'                 when '1',
+    '0'                 when others;
+
+with sel select c <=
+    CoutAdd                 when "000",
+--    CoutShiftR              when "110",
+--    CoutShiftL              when "111",
+    '0'                     when others;
 
 inst_Adder: Adder port map(
-        A       =>  a,
-        B       =>  bMuxed,
-        Cin     =>  ci,
-        Cout    =>  CoutAdd,
-        S       =>  resultAdd
+    A       =>  a,
+    B       =>  bMuxed,
+    Cin     =>  sel(0),
+    Cout    =>  CoutAdd,
+    S       =>  resultAdd
     );
    
 end Behavioral;

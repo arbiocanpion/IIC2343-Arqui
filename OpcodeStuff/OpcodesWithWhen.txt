@@ -7,7 +7,6 @@ entity ControlUnit is
 		Opcode	:	in	std_logic_vector(6 downto 0);	-- instruction to execute
 		Z		:	in	std_logic;						-- zero
 		N		:	in	std_logic;						-- negative
-		V		:	in	std_logic;						-- overflow
 		C		:	in	std_logic;						-- carry
 		LPC		:	out	std_logic;						-- load pc
 		LA		:	out	std_logic;						-- load A

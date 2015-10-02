@@ -293,7 +293,6 @@ with open(cd2, "w") as file:
     file.write("\t\tOpcode\t:\tin\tstd_logic_vector(6 downto 0);\t-- instruction to execute\n")
     file.write("\t\tZ" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- zero\n")
     file.write("\t\tN" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- negative\n")
-    file.write("\t\tV" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- overflow\n")
     file.write("\t\tC" + "\t"*2 + ":\tin\tstd_logic;" + "\t"*6 + "-- carry\n")
     file.write("\t\tLPC" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- load pc\n")
     file.write("\t\tLA" + "\t"*2 + ":\tout\tstd_logic;" + "\t"*6 + "-- load A\n")
