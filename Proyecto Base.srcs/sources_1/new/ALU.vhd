@@ -33,12 +33,15 @@ signal CoutAdd      :   std_logic;
 signal CoutShiftR   :   std_logic;
 signal CoutShiftL   :   std_logic;
 signal bMuxed       :   std_logic_vector(15 downto 0);
+signal resultALU    :   std_logic_vector(15 downto 0);
 
 begin
 
 -- MUXS
 
-with sel select result <=
+result <= resultALU;
+
+with sel select resultALU <=
     resultAdd               when "000",
     resultAdd               when "001",
     a and b                 when "010",
@@ -60,12 +63,11 @@ with sel select CoutShiftL <=
 with sel(0) select bMuxed <=
     b                   when '0',
     not(b)              when '1';
-
-with result select z <=
+with resultALU select z <=
     '1'                 when "0000000000000000",
     '0'                 when others;
 
-with result(15) select n <=
+with resultALU(15) select n <=
     '1'                 when '1',
     '0'                 when others;
 
