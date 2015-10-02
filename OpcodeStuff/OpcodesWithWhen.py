@@ -44,386 +44,183 @@ for i in lines:
 # DOING MAGIC
 
 
-def LPC(line):
+def create_string(value, n_tabs=7):
+    if (
+        signal == "SA" or
+        signal == "SB" or
+        signal == "SL" or
+        signal == "SAdd"
+    ):
+        n_tabs = 6
     if len(line) == 2:
-        if command == "JMP":
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JEQ":
-            string = ("\t" + "Z and '1'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JNE":
-            string = ("\t" + "Z xor '1'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JGT":
-            string = ("\t" + "(N xor '1') and (Z xor '1')" + "\t" * 1 +
-                      'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JLT":
-            string = ("\t" + "N and '1'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JGE":
-            string = ("\t" + "N xor '0'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JLE":
-            string = ("\t" + "(N and '1') or (Z and '1')" + "\t" * 1 +
-                      'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JCR":
-            string = ("\t" + "C and '1'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == "JOV":
-            string = ("\t" + "V and '1'" + "\t" * 5 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        else:
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
+        string = ("\t" + value + "\t" * n_tabs +
+                  'when "' + line[1] + '", -- ' +
+                  command + " " + line[0] + "\n")
+        return string
     elif len(line) == 3:
-        string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                  line[2] + '", -- ' + command + " " +
-                  line[0] + ", " + line[1] + "\n")
+        string = ("\t" + value + "\t" * n_tabs +
+                  'when "' + line[2] + '", -- ' +
+                  command + " " + line[0] + ", " +
+                  line[1] + "\n")
         return string
 
 
+def LPC(line):
+    if command == "JMP":
+        return create_string("'0'")
+    elif command == "JEQ":
+        return create_string("Z and '1'", 5)
+    elif command == "JNE":
+        return create_string("Z xor '1'", 5)
+    elif command == "JGT":
+        return create_string("(N xor '1') and (Z xor '1')", 1)
+    elif command == "JLT":
+        return create_string("N and '1'", 5)
+    elif command == "JGE":
+        return create_string("N xor '0'", 5)
+    elif command == "JLE":
+        return create_string("(N and '1') or (Z and '1')", 1)
+    elif command == "JCR":
+        return create_string("C and '1'", 5)
+    elif command == "JOV":
+        return create_string("V and '1'", 5)
+    else:
+        return create_string("'0'")
+
+
 def LA(line):
-    if len(line) == 2:
-        if line[0] != 'A':
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " + line[0] + "\n")
-            return string
-        elif line[0] == 'A':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " + line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if line[0] != 'A':
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif line[0] == 'A':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
+    if line[0] != 'A':
+        return create_string("'0'")
+    elif line[0] == 'A':
+        return create_string("'1'")
 
 
 def LB(line):
-    if len(line) == 2:
-        if line[0] != 'B':
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " + line[0] + "\n")
-            return string
-        elif line[0] == 'B':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " + line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if line[0] != 'B':
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif line[0] == 'B':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
+    if line[0] != 'B':
+        return create_string("'0'")
+    elif line[0] == 'B':
+        return create_string("'1'")
 
 
 def SA(line):
-    if len(line) == 2:
-        if command == "INC":
-            if line[0] == 'A':
-                string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                          line[1] + '", -- ' + command + " " +
-                          line[0] + "\n")
-                return string
-            elif line[0] == 'B' or line[0] == 'Dir':
-                string = ("\t" + "'10'" + "\t" * 6 + 'when "' +
-                          line[1] + '", -- ' + command + " " +
-                          line[0] + "\n")
-                return string
+    if command == "MOV":
+        if line[1] == 'A':
+            return create_string('"00"')
         else:
-            string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if command == "MOV":
-            if line[1] == 'A':
-                string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            else:
-                string = ("\t" + "'01'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-        else:
-            string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
+            return create_string('"01"')
+    elif command == "INC":
+        if line[0] == 'A':
+            return create_string('"00"')
+        elif line[0] == 'B' or line[0] == 'Dir':
+            return create_string('"10"')
+    else:
+        return create_string('"00"')
 
 
 def SB(line):
-    if len(line) == 2:
-        if command == "INC":
-            if line[0] == 'B':
-                string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                          line[1] + '", -- ' + command + " " +
-                          line[0] + "\n")
-                return string
-            elif line[0] == 'A' or line[0] == 'Dir':
-                string = ("\t" + "'10'" + "\t" * 6 + 'when "' +
-                          line[1] + '", -- ' + command + " " +
-                          line[0] + "\n")
-                return string
-        elif command == "DEC":
-            string = ("\t" + "'10'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
+    if command == "MOV":
+        if line[1] == 'B':
+            return create_string('"00"')
+        elif line[0] == 'B':
+            return create_string('"01"')
+        elif line[1] == 'Lit':
+            return create_string('"10"')
+        elif line[1] == 'Dir' or line[1] == 'DirB':
+            return create_string('"11"')
+        elif line[0] == 'Dir' or line[0] == 'DirB':
+            return create_string('"01"')
+    elif command == "INC":
+        if line[0] == 'B':
+            return create_string('"00"')
+        elif line[0] == 'A' or line[0] == 'Dir':
+            return create_string('"10"')
+    elif command == "DEC":
+        return create_string('"10"')
+    else:
+        if line[1] == 'Dir' or line[1] == 'DirB':
+            return create_string('"11"')
+        elif line[1] == 'Lit':
+            return create_string('"10"')
         else:
-            string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if command == "MOV":
-            if line[1] == 'B':
-                string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            elif line[0] == 'B':
-                string = ("\t" + "'01'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            elif line[1] == 'Lit':
-                string = ("\t" + "'10'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            elif line[1] == 'Dir' or line[1] == 'DirB':
-                string = ("\t" + "'11'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            elif line[0] == 'Dir' or line[0] == 'DirB':
-                string = ("\t" + "'01'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-        else:
-            if line[1] == 'Dir' or line[1] == 'DirB':
-                string = ("\t" + "'11'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            elif line[1] == 'Lit':
-                string = ("\t" + "'10'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
-            else:
-                string = ("\t" + "'00'" + "\t" * 6 + 'when "' +
-                          line[2] + '", -- ' + command + " " +
-                          line[0] + ", " + line[1] + "\n")
-                return string
+            return create_string('"00"')
 
 
 def SL(line):
-    if len(line) == 2:
-        if command == 'ADD':
-            string = ("\t" + "'000'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'SUB':
-            string = ("\t" + "'001'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'AND':
-            string = ("\t" + "'010'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'OR':
-            string = ("\t" + "'011'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'XOR':
-            string = ("\t" + "'100'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'NOT':
-            string = ("\t" + "'101'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'SHR':
-            string = ("\t" + "'110'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'SHL':
-            string = ("\t" + "'111'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'INC':
-            string = ("\t" + "'000'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        elif command == 'DEC':
-            string = ("\t" + "'001'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        else:
-            string = ("\t" + "'000'" + "\t" * 6 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if command == 'ADD':
-            string = ("\t" + "'000'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'SUB':
-            string = ("\t" + "'001'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'AND':
-            string = ("\t" + "'010'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'OR':
-            string = ("\t" + "'011'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'XOR':
-            string = ("\t" + "'100'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'NOT':
-            string = ("\t" + "'101'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'SHR':
-            string = ("\t" + "'110'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'SHL':
-            string = ("\t" + "'111'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        elif command == 'CMP':
-            string = ("\t" + "'001'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        else:
-            string = ("\t" + "'000'" + "\t" * 6 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
+    if command == 'ADD':
+        return create_string('"000"')
+    elif command == 'SUB':
+        return create_string('"001"')
+    elif command == 'AND':
+        return create_string('"010"')
+    elif command == 'OR':
+        return create_string('"011"')
+    elif command == 'XOR':
+        return create_string('"100"')
+    elif command == 'NOT':
+        return create_string('"101"')
+    elif command == 'SHR':
+        return create_string('"110"')
+    elif command == 'SHL':
+        return create_string('"111"')
+    elif command == 'INC':
+        return create_string('"000"')
+    elif command == 'DEC':
+        return create_string('"001"')
+    elif command == 'CMP':
+        return create_string('"001"')
+    else:
+        return create_string('"000"')
 
 
 def SAdd(line):
-    if len(line) == 2:
-        return "asd"
-    elif len(line) == 3:
-        return "asd"
+    if (
+        command == "CALL" or
+        command == "RET" or
+        command == "PUSH" or
+        command == "POP"
+    ):
+        return create_string('"10"')
+    elif (line[0] == "Dir" or (len(line) >= 2 and line[1] == "Dir")):
+        return create_string('"00"')
+    elif (line[0] == "DirB" or (len(line) >= 2 and line[1] == "DirB")):
+        return create_string('"01"')
+    else:
+        return create_string('"00"')
 
 
 def SDin(line):
-    if len(line) == 2:
-        return "asd"
-    elif len(line) == 3:
-        return "asd"
+    if command == "CALL":
+        return create_string("'1'")
+    else:
+        return create_string("'0'")
 
 
 def SPC(line):
-    if len(line) == 2:
-        return "asd"
-    elif len(line) == 3:
-        return "asd"
+    if command == "RET":
+        return create_string("'1'")
+    else:
+        return create_string("'0'")
 
 
 def W(line):
-    if len(line) == 2:
-        if line[0] == 'Dir':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-        else:
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[1] + '", -- ' + command + " " +
-                      line[0] + "\n")
-            return string
-    elif len(line) == 3:
-        if line[0] == 'Dir' or line[0] == 'DirB':
-            string = ("\t" + "'1'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
-        else:
-            string = ("\t" + "'0'" + "\t" * 7 + 'when "' +
-                      line[2] + '", -- ' + command + " " +
-                      line[0] + ", " + line[1] + "\n")
-            return string
+    if line[0] == 'Dir' or line[0] == 'DirB':
+        return create_string("'1'")
+    else:
+        return create_string("'0'")
 
 
 def IncSp(line):
-    if len(line) == 2:
-        return "NOT REQUIRED YET"
-    elif len(line) == 3:
-        return "NOT REQUIRED YET"
+    if command == "RET" or command == "POP":
+        return create_string("'1'")
+    else:
+        return create_string("'0'")
 
 
 def DecSp(line):
-    if len(line) == 2:
-        return "NOT REQUIRED YET"
-    elif len(line) == 3:
-        return "NOT REQUIRED YET"
+    if command == "CALL" or command == "PUSH":
+        return create_string("'1'")
+    else:
+        return create_string("'0'")
 
 
 signals = {
@@ -486,9 +283,7 @@ signal_tab_number = {
     'DecSp': 7
 }
 
-# print signals.get('LPC') # => 1
-# print signals.get('SL') # => 3
-
+# NOW LET'S DO IT
 with open(cd2, "w") as file:
     for signal in signals_list:
         # print signal
@@ -503,6 +298,12 @@ with open(cd2, "w") as file:
                 func = signals.get(signal)
                 to_print = func(line)
                 file.write(to_print)
-        file.write("\t" + "'" + "0" * signal_bit_lenght.get(signal, 1) + "'" +
-                   "\t" * signal_tab_number.get(signal, 1) + 'when others;\n')
+        if signal_bit_lenght.get(signal, 1) > 1:
+            file.write("\t" + '"' + "0" * signal_bit_lenght.get(signal, 1) +
+                       '"' + "\t" * signal_tab_number.get(signal, 1) +
+                       'when others;\n')
+        else:
+            file.write("\t" + "'" + "0" +
+                       "'" + "\t" * signal_tab_number.get(signal, 1) +
+                       'when others;\n')
         file.write("\n")
