@@ -21,7 +21,7 @@ component RegistroStatus is
         Z       :   in  std_logic;
         N       :   in  std_logic;
         C       :   in  std_logic;
-        Sout    :   out std_logic_vector (3 downto 0)
+        Sout    :   out std_logic_vector (2 downto 0)
     );
     end component;
 
@@ -109,7 +109,6 @@ component ALU
         a       :   in  std_logic_vector (15 downto 0);
         b       :   in  std_logic_vector (15 downto 0);
         sel     :   in  std_logic_vector (2 downto 0);
-        co      :   out std_logic;
         result  :   out std_logic_vector (15 downto 0);
         z       :   out std_logic;
         n       :   out std_logic;
@@ -183,7 +182,8 @@ begin
 with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
-    "0000000000000001"      when "10";
+    "0000000000000001"      when "10",
+    valueA                  when others;
 
 -- Mux B
 with SB select MuxBout <=
@@ -261,7 +261,6 @@ inst_ALU: ALU port map(
     A       =>  MuxAout,
     B       =>  MuxBout,
     sel     =>  SL,
-    co      =>  Cout,     
     result  =>  Salu,
     z       =>  Z,
     n       =>  N,

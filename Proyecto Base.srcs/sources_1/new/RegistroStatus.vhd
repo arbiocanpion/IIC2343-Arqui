@@ -37,7 +37,7 @@ entity RegistroStatus is
         Z       :   in  std_logic;
         N       :   in  std_logic;
         C       :   in  std_logic;
-        Sout    :   out std_logic_vector (3 downto 0)
+        Sout    :   out std_logic_vector (2 downto 0)
     );
 end RegistroStatus;
 
