@@ -215,6 +215,11 @@ with btn(0) select
 with btn(0) select
     dis_a <= Salu(15 downto 12) when '1',
     valueA (7 downto 4)         when others;
+    
+-- SENALES DE STATUS
+sw(0) <= Sout(0);
+sw(1) <= Sout(1);
+sw(1) <= Sout(1);
 
 inst_Clock_Divider: Clock_Divider port map(
     clk     =>  clk,
