@@ -191,11 +191,6 @@ with SB select MuxBout <=
     romout(32 downto 17)    when "10",
     ramout                  when "11";
 
--- MUX DATAIN DE LA RAM
-with SDin select ramin <=
-    "0000" & PC1            when '1',       -- cuando el selector del mux es 1 se guarda el contador +1
-    Salu                    when others;    -- sino se guarda el resultado de la ALU
-
 -- AUMENTAR VALOR DE A y B
 upA     <= btn(1)   and btn(2); -- A izquierdo
 upB     <= btn(1)   and btn(3); -- B derecho
@@ -287,7 +282,7 @@ inst_RAM: RAM port map(
     );
 
 inst_ControlUnit: ControlUnit port map(
-    Opcode  =>  ramout(6 downto 0),
+    Opcode  =>  romout(6 downto 0),
     Z       =>  Sout(2),
     N       =>  Sout(1),
     C       =>  Sout(0),

@@ -40,9 +40,7 @@ SDin 				<= OutSignal(4);
 SPC 				<= OutSignal(3);
 W 					<= OutSignal(2);
 IncSp 				<= OutSignal(1);
-DecSp 				<= OutSignal(0)
-
-
+DecSp 				<= OutSignal(0);
 
 -- LPC LA LB SA SB SL  SAdd SDin SPC W IncSp DecSp
 -- 0   0  0  00 00 000 00    0    0  0  0     0
@@ -110,7 +108,7 @@ with Opcode select OutSignal <=
 	"01000100010000000"									when "0111100", -- CMP A, Lit
 	"01000110010000000"									when "0111101", -- CMP A, Dir
 	"00000000000000100"									when "0111110", -- JMP Dir
-	(Z and '1') &					"0000000000000000"	when "0111111", -- JEQ Dir
+	(Z and '1')	&					"0000000000000000"	when "0111111", -- JEQ Dir
 	(Z xor '1') &					"0000000000000000"	when "1000000", -- JNE Dir
 	((N xor '1') and (Z xor '1')) &	"0000000000000000"	when "1000001", -- JGT Dir
 	(N xor '0') &					"0000000000000000"	when "1000010", -- JGE Dir
