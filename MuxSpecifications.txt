@@ -1,0 +1,37 @@
+# Esto es para que estemos de acuerdo en que valor debe dejar pasar cada mux
+
+SA:
+00 => A
+01 => 0
+10 => 1
+11 => UNNASIGNED
+
+SB:
+00 => B
+01 => 0
+10 => Lit
+11 => RAM
+
+SL:
+000 => Add
+001 => Substract
+010 => A and B
+011 => A or B
+100 => A xor B
+101 => not(A)
+110 => Shift right A
+111 => Shift left A
+
+SAdd:
+00 => Lit
+01 => B
+10 => SP
+11 => UNNASIGNED
+
+SDin:
+0 => ALU
+1 => Adder (PC)
+
+SPC:
+0 => Lit
+1 => RAM

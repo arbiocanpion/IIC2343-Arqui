@@ -4,14 +4,14 @@ use IEEE.std_logic_unsigned.all;
 
 entity Led_Driver is
     Port (
-        dis_a       : in   std_logic_vector (3 downto 0);
-        dis_b       : in   std_logic_vector (3 downto 0);
-        dis_c       : in   std_logic_vector (3 downto 0);
-        dis_d       : in   std_logic_vector (3 downto 0);
-        clk         : in   std_logic;
-        seg         : out  std_logic_vector (7 downto 0);
-        an          : out  std_logic_vector (3 downto 0)
-          );
+        dis_a   :   in   std_logic_vector (3 downto 0);
+        dis_b   :   in   std_logic_vector (3 downto 0);
+        dis_c   :   in   std_logic_vector (3 downto 0);
+        dis_d   :   in   std_logic_vector (3 downto 0);
+        clk     :   in   std_logic;
+        seg     :   out  std_logic_vector (7 downto 0);
+        an      :   out  std_logic_vector (3 downto 0)
+    );
 end Led_Driver;
 
 architecture Behavioral of Led_Driver is    

@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.str
 
 # Logs and databases #
 ######################
@@ -42,3 +43,6 @@ Thumbs.db
 *.hw
 *.runs
 *.sim
+*.jou
+*.log
+*.str

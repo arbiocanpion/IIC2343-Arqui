@@ -3,11 +3,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.std_logic_unsigned.all;
 
 entity Clock_Divider is
-    Port ( clk                  : in std_logic;
-           clk_up               : in std_logic;
-           slow                 : in std_logic;
-           clock                : out std_logic);
+    Port ( 
+        clk     :   in std_logic;
+        clk_up  :   in std_logic;
+        slow    :   in std_logic;
+        clock   :   out std_logic);
 end Clock_Divider;
+
 
 architecture Behavioral of Clock_Divider is
 

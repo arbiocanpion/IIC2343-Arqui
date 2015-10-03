@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 08/24/2015 05:39:47 PM
+-- Create Date: 02.10.2015 18:23:55
 -- Design Name: 
--- Module Name: HA - Behavioral
+-- Module Name: RegistroStatus - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,20 +31,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity HA is
+entity RegistroStatus is
     Port ( 
-    	A	:	in 	std_logic;
-        B	:	in 	std_logic;
-        S	:	out std_logic;
-        C	:	out std_logic
-	);
-end HA;
+        clock   :  in  std_logic;
+        Z       :   in  std_logic;
+        N       :   in  std_logic;
+        C       :   in  std_logic;
+        Sout    :   out std_logic_vector (2 downto 0)
+    );
+end RegistroStatus;
 
-architecture Behavioral of HA is
+architecture Behavioral of RegistroStatus is
 
 begin
 
-    S <= A xor B;
-    C <= A and B;
-
+reg_prosses : process (clock)
+        begin
+          if (rising_edge(clock)) then
+            Sout <= Z & N & C;
+          end if;
+        end process;
+        
 end Behavioral;

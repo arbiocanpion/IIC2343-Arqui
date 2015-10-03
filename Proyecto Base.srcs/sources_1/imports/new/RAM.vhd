@@ -5,12 +5,12 @@ USE IEEE.NUMERIC_STD.ALL;
 
 entity RAM is
     Port (
-        clock       : in   std_logic;
-        write       : in   std_logic;
-        address     : in   std_logic_vector (11 downto 0);
-        datain      : in   std_logic_vector (15 downto 0);
-        dataout     : out  std_logic_vector (15 downto 0)
-          );
+        clock       :   in  std_logic;
+        write       :   in  std_logic;
+        address     :   in  std_logic_vector (11 downto 0);
+        datain      :   in  std_logic_vector (15 downto 0);
+        dataout     :   out std_logic_vector (15 downto 0)
+    );
 end RAM;
 
 architecture Behavioral of RAM is

@@ -1,0 +1,13 @@
+DATA: //esto es un comentario, solo se permiten comentarios de una linea
+var1 3 //se declara la variable var1 cuyo valor inicial es 3
+var2 4 //se declara la variable var2 cuyo valor inicial es 4
+CODE: //para separar la zona de definicion de variables del codigo
+MOV A,(var1) //guarda un 3 en A
+MOV B,(var2) //guarda un 4 en B
+INC A //A=3+1=4
+SUB A,B //A=A-B=0
+ADD A,B //A=A+B=4
+JMP hola
+INC B
+hola:
+JMP hola //muestra 4 en A y 4 en B (si esta bueno) y 5 en B si esta malo

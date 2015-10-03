@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 09/11/2015 11:40:54 PM
+-- Create Date: 26.09.2015 19:33:18
 -- Design Name: 
--- Module Name: Shifter - Behavioral
+-- Module Name: RegS - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -31,16 +31,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ShiftRight is
-    Port ( value : in STD_LOGIC_VECTOR (15 downto 0);
-           result : out STD_LOGIC_VECTOR (15 downto 0);
-           co : out STD_LOGIC);
-end Shifter;
+entity RegS is
+    Port ( 
+    	Z 		: 	in std_logic;		-- zero: 		1 when result = "000..."
+        N 		: 	in std_logic;		-- negative:	the most significative bit (indicates if result is negative)
+        V 		: 	in std_logic;		-- overflow:	if ALU has overflow
+        C 		: 	in std_logic;		-- carry:		carry out of ALU
+        Stout	: 	out std_logic_vector (3 downto 0));
+end RegS;
 
-architecture Behavioral of Shifter is
+architecture Behavioral of RegS is
 
 begin
 
-result(0) <= value(1)
 
 end Behavioral;
