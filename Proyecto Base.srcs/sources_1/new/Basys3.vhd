@@ -217,9 +217,9 @@ with btn(0) select
     valueA (7 downto 4)         when others;
     
 -- SENALES DE STATUS
-sw(0) <= Sout(0);
-sw(1) <= Sout(1);
-sw(1) <= Sout(1);
+led(0) <= Sout(0);
+led(1) <= Sout(1);
+led(2) <= Sout(2);
 
 inst_Clock_Divider: Clock_Divider port map(
     clk     =>  clk,
