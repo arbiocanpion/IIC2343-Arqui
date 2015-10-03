@@ -4111,9 +4111,9 @@ signal memory : memory_array:= (
 	"000000000000000000000000000000000",
 	"000000000000000000000000000000000",
 	"000000000000000000000000000000000"
-        ); 
+    ); 
 begin
 
-   dataout <= memory(to_integer(unsigned(address))); 
+dataout <= memory(to_integer(unsigned(address))); 
 
 end Behavioral; 

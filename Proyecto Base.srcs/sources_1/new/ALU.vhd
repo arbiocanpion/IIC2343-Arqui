@@ -63,6 +63,7 @@ with sel select CoutShiftL <=
 with sel(0) select bMuxed <=
     b                   when '0',
     not(b)              when '1';
+
 with resultALU select z <=
     '1'                 when "0000000000000000",
     '0'                 when others;
@@ -72,10 +73,10 @@ with resultALU(15) select n <=
     '0'                 when others;
 
 with sel select c <=
-    CoutAdd                 when "000",
---    CoutShiftR              when "110",
---    CoutShiftL              when "111",
-    '0'                     when others;
+    CoutAdd             when "000",
+    --CoutShiftR          when "110",
+    --CoutShiftL          when "111",
+    '0'                 when others;
 
 inst_Adder: Adder port map(
     A       =>  a,

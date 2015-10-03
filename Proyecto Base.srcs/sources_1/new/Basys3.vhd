@@ -197,8 +197,8 @@ with SDin select ramin <=
     Salu                    when others;    -- sino se guarda el resultado de la ALU
 
 -- AUMENTAR VALOR DE A y B
-upA     <= btn(1)   and btn(2);   -- A izquierdo
-upB     <= btn(1)   and btn(3);   -- B derecho
+upA     <= btn(1)   and btn(2); -- A izquierdo
+upB     <= btn(1)   and btn(3); -- B derecho
 
 -- REDUCIR VALOR DE A y B
 downA   <= btn(4)   and btn(2); -- A izquierdo
