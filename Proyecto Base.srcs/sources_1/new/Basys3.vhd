@@ -269,7 +269,7 @@ inst_ALU: ALU port map(
 inst_PC: PC port map(
     clock   =>  clock,
     load    =>  LPC,
-    datain  =>  romout(28 downto 17), -- en realidad esto tiene que pasar antes por un mux
+    datain  =>  romout(28 downto 17),
     dataout =>  PCount
     );
     
@@ -281,7 +281,7 @@ inst_ROM: ROM port map(
 inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
-    address =>  "000000000000",     -- Hacer conexion
+    address =>  romout(28 downto 17),
     datain  =>  Salu,
     dataout =>  ramout
     );
