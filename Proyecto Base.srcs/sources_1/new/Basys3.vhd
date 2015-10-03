@@ -36,7 +36,7 @@ component ControlUnit is
         LB      :   out std_logic;                      -- load B
         SA      :   out std_logic_vector(1 downto 0);   -- mux A
         SB      :   out std_logic_vector(1 downto 0);   -- mux B
-        SL      :   out std_logic_vector(2 downto 0);    -- ALU
+        SL      :   out std_logic_vector(2 downto 0);   -- ALU
         SAdd    :   out std_logic_vector(1 downto 0);   -- mux address
         SDin    :   out std_logic;                      -- mux datain RAM
         SPC     :   out std_logic;                      -- mux PC
@@ -124,7 +124,6 @@ signal romout   :   std_logic_vector(32 downto 0);
 
 --SENAL Conteo PC
 signal PCount   :   std_logic_vector(11 downto 0);
-signal PC1      :   std_logic_vector(11 downto 0);
 
 --SENAl RAM 
 signal ramout   :   std_logic_vector(15 downto 0);
@@ -194,16 +193,16 @@ with SB select MuxBout <=
 
 -- MUX DATAIN DE LA RAM
 with SDin select ramin <=
-    "0000" & PC1    when '1',  -- cuando el selector del mux es 1 se guarda el contador +1
-    Salu            when others;       -- sino se guarda el resultado de la ALU
+    "0000" & PC1            when '1',       -- cuando el selector del mux es 1 se guarda el contador +1
+    Salu                    when others;    -- sino se guarda el resultado de la ALU
 
 -- AUMENTAR VALOR DE A y B
-upA <= btn(1) and btn(2);   -- A izquierdo
-upB <= btn(1) and btn(3);   -- B derecho
+upA     <= btn(1)   and btn(2);   -- A izquierdo
+upB     <= btn(1)   and btn(3);   -- B derecho
 
 -- REDUCIR VALOR DE A y B
-downA <= btn(4) and btn(2); -- A izquierdo
-downB <= btn(4) and btn(3); -- B derecho
+downA   <= btn(4)   and btn(2); -- A izquierdo
+downB   <= btn(4)   and btn(3); -- B derecho
 
 -- MOSTRAR RESULTADO OPERACION DE A y B
 with btn(0) select
