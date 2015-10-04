@@ -46,7 +46,14 @@ namespace Assembler.Instructions
             }
             else if (parts[0].Equals("INC"))
             {
-                return new IncInstruction(param1, param2);
+                if (param1.Equals("A"))
+                {
+                    return new IncInstruction(param1, "1");
+                }
+                else
+                {
+                    return new IncInstruction(param1, "0");
+                }
             }
             else if (parts[0].Equals("JCR"))
             {

@@ -10,6 +10,7 @@ namespace Assembler
 
         public Parameter(String expression)
         {
+            expression = expression.Replace(" ", "");
             DetermineType(expression);
         }
 

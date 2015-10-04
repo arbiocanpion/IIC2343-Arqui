@@ -20,6 +20,7 @@ namespace Assembler.Parser
         public string Interpret(string code)
         {
             code = code.Replace("\r\n", "\n");
+            code = code.Replace("\t", "");
             assemblyCode = new AssemblyCode(code);
             labelManager = new LabelManager();
             variableManager = new VariableManager();
@@ -60,7 +61,7 @@ namespace Assembler.Parser
                 {
                     labelManager.addLabel(line, instructionCounter);
                 }
-                else
+                else if (!LineFormatter.ReservedWord(line))
                 {
                     instructionCounter++;
                 }
@@ -73,7 +74,7 @@ namespace Assembler.Parser
 
             for (int i = 0; i < dataLines.Length; i++)
             {
-                string line = LineFormatter.DeleteComments(dataLines[i]);
+                string line = LineFormatter.FormatDataLine(dataLines[i]);
                 if (VariableManager.IsVariable(line))
                 {
                     string[] pair = line.Split(' ');

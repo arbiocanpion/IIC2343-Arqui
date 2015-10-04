@@ -22,7 +22,7 @@ namespace Assembler.Parser
         public void addLabel(string lineContent, int romInstructionNumber)
         {
             lineContent = lineContent.Replace(":", "");
-            labels.Add(lineContent, romInstructionNumber + 1);
+            labels.Add(lineContent, romInstructionNumber);
         }
 
         public bool IsLabelDeclaration(string line)
