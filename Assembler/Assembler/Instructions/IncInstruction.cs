@@ -12,7 +12,7 @@ namespace Assembler
             new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
                 { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit),   "0110111"},
                 { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Lit),   "0111000"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "0111001"}
+                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.Lit), "0111001"}
             };
 
         public IncInstruction(String param1, String param2) : base(param1, param2){ }
