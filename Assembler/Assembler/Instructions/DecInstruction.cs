@@ -10,7 +10,7 @@ namespace Assembler.Instructions
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
             new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.None),   "0111010"}
+                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit),   "0111010"}
             };
 
         public DecInstruction(String param1, String param2) : base(param1, param2){ }

@@ -42,7 +42,14 @@ namespace Assembler.Instructions
             }
             else if (parts[0].Equals("DEC"))
             {
-                return new DecInstruction(param1, param2);
+                if (param1.Equals("A"))
+                {
+                    return new DecInstruction(param1, "1");
+                }
+                else
+                {
+                    return new DecInstruction(param1, "0");
+                }
             }
             else if (parts[0].Equals("INC"))
             {
