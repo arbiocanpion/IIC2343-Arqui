@@ -9,8 +9,8 @@ namespace Assembler
         static void Main(string[] args)
         {
             AssemblyInterpreter interpreter = new AssemblyInterpreter();
-            //string text = File.ReadAllText(args[0]);
-            string text = File.ReadAllText("./Ejemplo5.txt");
+            string text = File.ReadAllText(args[0]);
+            //string text = File.ReadAllText("./Ejemplo3.txt");
             interpreter.Interpret(text);
             string output = DocumentBuilder.GenerateFinalDocument(interpreter.GetInstructions());
             File.WriteAllText(@"./output.txt", output);

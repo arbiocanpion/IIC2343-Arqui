@@ -54,7 +54,7 @@ end Behavioral;";
                 builder.Append(',');
                 builder.Append('\t');
                 builder.Append("-- instrucción ");
-                builder.Append(i+1);
+                builder.Append(i);
                 builder.Append("\r\n");
             }
             for (; i < 4095; i++)
@@ -66,7 +66,7 @@ end Behavioral;";
                 builder.Append(',');
                 builder.Append('\t');
                 builder.Append("-- instrucción ");
-                builder.Append(i+1);
+                builder.Append(i);
                 builder.Append("\r\n");
             }
             builder.Append('\t');
