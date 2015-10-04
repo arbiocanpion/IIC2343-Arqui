@@ -44,4 +44,7 @@ Thumbs.db
 *.sim
 *.jou
 *.log
+
+# TXT #
+output.txt
 *.str
