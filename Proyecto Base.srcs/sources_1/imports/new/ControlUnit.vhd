@@ -39,8 +39,8 @@ Sadd 				<= OutSignal(6 downto 5);
 SDin 				<= OutSignal(4);
 SPC 				<= OutSignal(3);
 W 					<= OutSignal(2);
-IncSp 				<= OutSignal(1);
-DecSp 				<= OutSignal(0);
+IncSp				<= OutSignal(1);
+DecSp				<= OutSignal(0);
 
 -- LPC LA LB SA SB SL  SAdd SDin SPC W IncSp DecSp
 -- 0   0  0  00 00 000 00    0    0  0  0     0
@@ -50,7 +50,7 @@ with Opcode select OutSignal <=
 	"01001100000000000"									when "0000010", -- MOV A, Lit
 	"00101010000000000"									when "0000011", -- MOV B, Lit
 	"01001110000000000"									when "0000100", -- MOV A, Dir
-	"00101010000000000"									when "0000101", -- MOV B, Dir
+	"00101110000000000"									when "0000101", -- MOV B, Dir
 	"00000010000000100"									when "0000110", -- MOV Dir, A
 	"00001000000000100"									when "0000111", -- MOV Dir, B
 	"01001110000100000"									when "0001000", -- MOV A, DirB
