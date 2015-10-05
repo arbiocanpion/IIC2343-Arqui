@@ -3,7 +3,6 @@
 *.com
 *.class
 *.dll
-*.exe
 *.o
 *.so
 
@@ -19,6 +18,7 @@
 *.rar
 *.tar
 *.zip
+*.str
 
 # Logs and databases #
 ######################
@@ -42,3 +42,9 @@ Thumbs.db
 *.hw
 *.runs
 *.sim
+*.jou
+*.log
+
+# TXT #
+output.txt
+*.str

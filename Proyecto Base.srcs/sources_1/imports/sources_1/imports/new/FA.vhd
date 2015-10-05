@@ -32,25 +32,29 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity FA is
-    Port ( A : in STD_LOGIC;
-           B : in STD_LOGIC;
-           Cin : in STD_LOGIC;
-           Cout : out STD_LOGIC;
-           S : out STD_LOGIC);
+    Port ( 
+        A       :   in  std_logic;
+        B       :   in  std_logic;
+        Cin     :   in  std_logic;
+        Cout    :   out std_logic;
+        S       :   out std_logic
+    );
 end FA;
 
 architecture Behavioral of FA is
 
-    component HA
-        Port (  A: in std_logic;
-                B: in std_logic;
-                C: out std_logic;
-                S: out std_logic);
-        end component;
-        
-        signal S1 : std_logic;
-        signal C1 : std_logic;
-        signal C2 : std_logic;
+component HA
+    Port (  
+        A       :   in  std_logic;
+        B       :   in  std_logic;
+        C       :   out std_logic;
+        S       :   out std_logic
+    );
+    end component;
+    
+signal S1       :   std_logic;
+signal C1       :   std_logic;
+signal C2       :   std_logic;
         
 begin
 

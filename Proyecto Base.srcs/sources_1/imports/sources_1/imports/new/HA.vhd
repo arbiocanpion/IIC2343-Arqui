@@ -32,10 +32,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity HA is
-    Port ( A : in STD_LOGIC;
-           B : in STD_LOGIC;
-           S : out STD_LOGIC;
-           C : out STD_LOGIC);
+    Port ( 
+    	A	:	in 	std_logic;
+        B	:	in 	std_logic;
+        S	:	out std_logic;
+        C	:	out std_logic
+	);
 end HA;
 
 architecture Behavioral of HA is

@@ -3,10 +3,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.std_logic_unsigned.all;
 
 entity PC is
-    Port ( clock    : in  std_logic;
-           load     : in  std_logic;
-           datain   : in  std_logic_vector (11 downto 0);
-           dataout  : out std_logic_vector (11 downto 0));
+    Port ( 
+        clock    : in  std_logic;
+        load     : in  std_logic;
+        datain   : in  std_logic_vector (11 downto 0);
+        dataout  : out std_logic_vector (11 downto 0)
+    );
 end PC;
 
 architecture Behavioral of PC is
