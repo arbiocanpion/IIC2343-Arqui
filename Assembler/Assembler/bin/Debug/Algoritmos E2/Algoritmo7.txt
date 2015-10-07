@@ -1,0 +1,40 @@
+DATA:
+  a 3h  // base
+  b 11b // exponente
+  i 0   // iterador sumas
+  j 0   // iterador multiplicaciones
+  r 1d  // acumulador multiplicaciones // neutro multiplicativo
+  s 0   // acumulador sumas // neutro aditivo
+
+CODE:
+
+nextmult: // a^b
+  MOV A,(b)
+  CMP A,(j)
+  JEQ end
+
+  nextsum: //r*a
+    MOV B,(a)
+    MOV A,(i)
+    CMP A,B
+    JEQ next
+    MOV A,(s)
+    MOV B,(r)
+    ADD (s)
+    INC (i)
+    JMP nextsum
+
+  next:
+  MOV A,(s)
+  MOV (r),A
+  MOV A,0
+  MOV (s),A
+  MOV (i),A
+  INC (j)
+  JMP nextmult
+
+end:
+  MOV A,(r)
+JMP end
+
+

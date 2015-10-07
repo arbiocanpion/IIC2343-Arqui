@@ -1,0 +1,50 @@
+DATA:
+   
+vd 0002d
+
+   vd2 0001d
+
+CODE:
+
+   MOV A,Ah
+
+   MOV B,0010d
+
+   ADD A,0
+
+   AND B,A
+
+
+   MOV A,(vd2)
+
+   MOV B,(vd)
+   CMP A,B
+   JGT paso2
+
+   JMP mal
+
+
+
+   mal:
+   MOV A,Fh
+   MOV B,A
+   JMP mal
+
+
+
+   paso2:
+
+   INC B
+
+   INC B
+   CMP A,B
+
+   JLT fin
+
+   JMP mal
+
+
+
+   fin:
+
+   JMP fin

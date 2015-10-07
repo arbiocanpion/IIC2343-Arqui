@@ -74,8 +74,8 @@ with resultALU(15) select n <=
 
 with sel select c <=
     CoutAdd             when "000",
-    --CoutShiftR          when "110",
-    --CoutShiftL          when "111",
+    CoutShiftR          when "110",
+    CoutShiftL          when "111",
     '0'                 when others;
 
 inst_Adder: Adder port map(
