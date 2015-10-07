@@ -1,0 +1,30 @@
+DATA:
+  a 1
+  b 2
+  c 3
+CODE:
+MOV A,3
+loop:
+DEC A
+CMP A,B
+JLE loop2
+JMP loop
+loop2:
+INC B
+CMP A,B
+JLE loop3 
+error:
+MOV A,Fh
+JMP error
+loop3:
+INC (a)
+MOV A,(c)
+CMP A,(a)
+JGE loop3
+ADD A,(a)
+SUB B,(b)
+
+
+
+
+		

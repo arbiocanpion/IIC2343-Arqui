@@ -1,0 +1,21 @@
+DATA:
+var1 3
+var2 8
+CODE:
+MOV A,(var1)
+NOT (var1),A
+INC (var1)
+suma:
+MOV A,(var1)
+MOV B,(var2)
+XOR (var1)
+AND A,B
+SHL A
+MOV (var2),A
+CMP A,0
+JNE suma
+MOV A,(var1)
+end:
+NOP
+JMP end
+
