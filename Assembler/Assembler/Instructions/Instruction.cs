@@ -37,13 +37,14 @@ namespace Assembler
         {
             _instruction = "";
 
-            if (hasLiteral())
-            {
-                addLiteral();
-            }
-            else if (hasDirection())
+
+            if (hasDirection())
             {
                 addDirection();
+            }
+            else if (hasLiteral())
+            {
+                addLiteral();
             }
             else
             {
