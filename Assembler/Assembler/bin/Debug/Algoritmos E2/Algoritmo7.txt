@@ -36,5 +36,3 @@ nextmult: // a^b
 end:
   MOV A,(r)
 JMP end
-
-

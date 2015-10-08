@@ -23,8 +23,3 @@ CMP A,(a)
 JGE loop3
 ADD A,(a)
 SUB B,(b)
-
-
-
-
-		

@@ -1,0 +1,19 @@
+ DATA:
+Fib 5h
+n0 0
+n1 1
+i 0
+CODE:
+loop:
+MOV A,(i)
+CMP A,(Fib)
+JGE end
+MOV B,(n1)
+MOV A,(n0)
+ADD (n1)
+MOV (n0),B
+INC (i)
+JMP loop
+end:
+MOV A,(n1)
+JMP end
