@@ -1,0 +1,25 @@
+DATA:   
+   a 15
+   b 16
+   s 0
+CODE: // multiplicación rusa!
+
+next:
+MOV A,(a)
+AND A,1
+CMP A,0
+JEQ even
+MOV B,(b)
+MOV A,(s)
+ADD (s)
+even:
+MOV A,(b)
+SHL (b),A
+MOV A,(a)
+CMP A,0
+JEQ end
+SHR (a),A
+JMP next
+end:
+MOV A,(s)
+JMP end

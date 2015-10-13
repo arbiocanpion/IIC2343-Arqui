@@ -1,0 +1,12 @@
+DATA:			//Esto es un comentario porque tiene "//"
+bits 3 		//Con un par de espacios y tabulaciones se ve mas ordenado
+CODE: 			//Empieza el codigo 
+MOV A, (bits) 	//Algunos espacios de mas
+JMP shift  
+carry: //Otros espacios
+INC A //Recuperemos el bit perdido
+shift:
+SHL B, A	//Aparecio una tabulacion salvaje				
+SHL A //Todos a la izquieda!
+JCR carry	 	//Ups perdimos un bit!
+JMP shift 		//No paso nada, next!

@@ -178,11 +178,10 @@ namespace Assembler
                 int i = reversedBits.Length;
                 while (reversedBits.Length < 16)
                 {
-                    reversedBits = reversedBits + "0";
+                    reversedBits = "0" + reversedBits;
                 }
             }
             char[] reversedBitsArray = reversedBits.ToCharArray();
-            Array.Reverse(reversedBitsArray);
             return new string(reversedBitsArray);
         }
 

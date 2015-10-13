@@ -26,9 +26,10 @@ component Adder
     );
     end component;
 
+signal Cin          :   std_logic;
+
 -- SENALES DE RESULTADO DE OPERACIONES
 signal resultAdd    :   std_logic_vector (15 downto 0);
-signal resultSubs   :   std_logic_vector (15 downto 0);
 signal CoutAdd      :   std_logic;
 signal CoutShiftR   :   std_logic;
 signal CoutShiftL   :   std_logic;
@@ -40,6 +41,8 @@ begin
 -- MUXS
 
 result <= resultALU;
+
+Cin <= sel(0) and (not sel(1)) and (not sel(2));
 
 with sel select resultALU <=
     resultAdd               when "000",
@@ -68,20 +71,19 @@ with resultALU select z <=
     '1'                 when "0000000000000000",
     '0'                 when others;
 
-with resultALU(15) select n <=
-    '1'                 when '1',
-    '0'                 when others;
+n <= Cin and (not CoutAdd);
 
 with sel select c <=
     CoutAdd             when "000",
-    --CoutShiftR          when "110",
-    --CoutShiftL          when "111",
+    CoutAdd             when "001",
+    CoutShiftR          when "110",
+    CoutShiftL          when "111",
     '0'                 when others;
 
 inst_Adder: Adder port map(
     A       =>  a,
     B       =>  bMuxed,
-    Cin     =>  sel(0),
+    Cin     =>  Cin,
     Cout    =>  CoutAdd,
     S       =>  resultAdd
     );
