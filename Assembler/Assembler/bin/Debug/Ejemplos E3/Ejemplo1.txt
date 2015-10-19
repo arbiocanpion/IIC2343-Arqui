@@ -1,0 +1,17 @@
+DATA:
+
+CODE:
+
+ MOV A,2   		//A=2
+ MOV B,5   		//B=5
+ MOV (2),A 		//Mem[2]=2
+ MOV (3),B 		//Mem[3]=5
+ MOV (B),A 		//Mem[5]=2
+ 			// espacio en blanco
+ MOV A,(2) 		//A=2
+ MOV B,(5) 		//B=2
+ ADD B,A 		//B=4
+ MOV A,(3) 		//A=5
+
+ fin:
+ JMP fin

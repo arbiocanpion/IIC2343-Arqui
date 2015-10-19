@@ -1,0 +1,20 @@
+DATA:
+
+CODE:
+
+ MOV A,2
+ MOV B,A
+ CALL add
+ SUB A,5
+
+ fin:
+  JMP fin
+
+ add:
+  ADD A,B
+  CALL add1
+ RET
+
+ add1:
+  ADD A,1
+ RET

@@ -1,0 +1,42 @@
+DATA:
+
+CODE:
+ 
+ JMP start 
+
+ shl_r:
+  PUSH A
+  MOV A,0
+  OR A,(B)
+  SHL (B),A
+  JCR shl_r_carry
+  JMP shl_r_end
+  shl_r_carry:
+  INC (B)
+  shl_r_end:
+  POP A
+ RET 
+
+ start:
+  MOV A,6h
+  MOV (B), 8001h
+  CALL shl_r
+  PUSH B
+  INC B
+  CALL shl_r
+  POP B
+  CALL shl_r
+  CMP A,(B)
+  JEQ end
+  JMP start
+
+ end:
+  MOV B,(B)
+  JMP end
+
+
+
+
+
+
+

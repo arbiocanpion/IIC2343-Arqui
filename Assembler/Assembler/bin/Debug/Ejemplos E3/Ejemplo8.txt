@@ -1,0 +1,55 @@
+DATA:
+
+CODE:
+
+ CALL button // esperar a que se aprete un boton
+ IN (B),0    // Ingresar operador 1
+ PUSH B
+ INC B
+ CALL button // esperar a que se aprete un boton
+ IN (B),0    // Ingresar operador 2
+
+ MOV A,(B)   // complemento a 2
+ NOT (B),A
+ INC (B)
+
+ suma:       // sumar
+  POP B
+  PUSH B
+  MOV A,(B)
+  INC B
+  XOR A,(B)
+  INC B
+  MOV (B),A
+  POP B
+  PUSH B
+  MOV A,(B)
+  INC B
+  AND A,(B)
+  SHL (B),A
+  INC B
+  MOV A,(B)
+  POP B
+  MOV (B),A
+  PUSH B
+  INC B
+  MOV A,0
+  CMP A,(B)
+  JNE suma
+ POP B
+ end:
+  MOV A,(B) // Resultado en A, Address en B
+ JMP end
+
+
+
+
+button:
+ PUSH B
+ IN A,1
+ button_loop:
+ IN B,1
+ CMP A,B
+ JEQ button_loop
+ POP B
+RET

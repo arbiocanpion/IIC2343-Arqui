@@ -1,0 +1,20 @@
+DATA:
+
+ var1 5
+ var2 3
+
+CODE:
+
+ MOV A,(var1)	//A=5
+ INC A		//A=6
+ PUSH A
+ MOV A,2	//A=2
+ MOV (var2),A	//Mem[3]=2
+ POP A		//A=6
+
+ fin:
+  JMP fin
+
+ malfin:
+  MOV A,(3)	//A=2
+  JMP malfin

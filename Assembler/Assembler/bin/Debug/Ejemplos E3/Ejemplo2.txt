@@ -1,0 +1,13 @@
+DATA:
+vector	7
+	5
+	6
+	4
+CODE:
+
+MOV B, vector	// guarda el puntero del arreglo vector en B
+INC B
+INC B
+MOV A, (B) 	// muestra un 6 en A
+INC B
+MOV A, (B) 	// muestra un 4 en A
