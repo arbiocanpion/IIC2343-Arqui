@@ -38,7 +38,7 @@ dataout <= memory(to_integer(unsigned(address)));
 
 end Behavioral;";
 
-        public static string emptyMessage = "000000000000000000000000001000110";
+        public static string emptyMessage = "000000000000000000000000001011111";
 
         public static string GenerateFinalDocument(List<Instruction> instructions)
         {
