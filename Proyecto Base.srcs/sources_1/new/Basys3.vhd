@@ -213,7 +213,7 @@ with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
     "0000000000000001"      when "10",
-    MuxINOut                when "11",
+    MuxINOut                when "11";
 
 -- Mux B
 with SB select MuxBout <=

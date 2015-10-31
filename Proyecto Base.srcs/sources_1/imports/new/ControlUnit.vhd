@@ -40,7 +40,7 @@ SDin 				<= OutSignal(4);
 SPC 				<= OutSignal(3);
 W 					<= OutSignal(2);
 IncSp				<= OutSignal(1);
-DecSp				<= OutSignal(0);			<= OutSignal(0);
+DecSp				<= OutSignal(0);
 
 -- LPC LA LB SA SB SL  SAdd SDin SPC W IncSp DecSp
 --  0   0  0  00 00 000 00    0    0  0  0     0
