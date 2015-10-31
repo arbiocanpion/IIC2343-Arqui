@@ -8,12 +8,14 @@ namespace Assembler
 {
     class CmpInstruction : Instruction
     {
+
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B),      "0111011"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit),    "0111100"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir),    "0111101"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B), "1001010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit), "1001011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir), "1001100"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.DirB), "1001101"}
+        };
 
         public CmpInstruction(String param1, String param2) : base(param1, param2){ }
 

@@ -1,0 +1,22 @@
+DATA:
+ a E5h	// 11100101b
+ b B3h	// 10110011b
+ bits 0b
+
+CODE:	// contemos cuantos bit en común están en 1 ofuscando las direciones
+ MOV A, ( a) 	// A=Mem[a]=E5h
+ AND A , ( 1d )	// A = A and MEM[b]=A1h 
+ JMP loop
+ bit:
+ INC  (2h)	// Mem[bits]=Mem[bits]+1
+ loop:
+ CMP A ,0b
+ JEQ  end
+ SHR A		// A=A>>1
+ JCR  bit
+ JMP  loop
+end:
+  MOV A,(10b)	// A=Mem[bits]=3
+JMP end
+
+

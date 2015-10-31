@@ -9,16 +9,17 @@ namespace Assembler.Parser
 {
     class VariableManager
     {
-        public Dictionary<string, string> variables { get; }
+        public Dictionary<string, string> variablesValues { get; }
+        
 
         public VariableManager()
         {
-            variables = new Dictionary<string, string>();
+            variablesValues = new Dictionary<string, string>();
         }
 
         public static bool IsVariable(string line)
         {
-            if (!LineFormatter.ReservedWord(line) && line.Split(' ').Length == 2)
+            if (!LineFormatter.ReservedWord(line) && line.Split(' ').Length <= 2)
             {
                 return true;
             }
@@ -26,7 +27,7 @@ namespace Assembler.Parser
         }
         public void AddVariable(string name, string value) 
         {
-            variables.Add(name, value);
+            variablesValues.Add(name, value);
         }
     }
 }

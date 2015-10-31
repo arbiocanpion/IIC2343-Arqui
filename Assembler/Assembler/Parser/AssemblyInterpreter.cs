@@ -44,7 +44,7 @@ namespace Assembler.Parser
                 {
                     string line = LineFormatter.FormatCodeLine(codeLines[i]);
                     Instruction instruction = InstructionFactory
-                        .createInstruction(line, labelManager.labels, variableManager.variables);
+                        .createInstruction(line, labelManager.labels, variableManager.variablesValues);
                     instructions.Add(instruction);
                     instructionCounter++;
                 }
@@ -71,15 +71,24 @@ namespace Assembler.Parser
         private void GetVariables()
         {
             string[] dataLines = assemblyCode.GetDataLines();
-
             for (int i = 0; i < dataLines.Length; i++)
             {
                 string line = LineFormatter.FormatDataLine(dataLines[i]);
                 if (VariableManager.IsVariable(line))
                 {
+                    // TODO: cambiar esto, ahora las lineas de variables pueden tener solo uno de largo.
                     string[] pair = line.Split(' ');
-                    variableManager.AddVariable(pair[0], memoryCounter.ToString());
-                    AddInitVariableInstruction(pair[1]);
+                    string value;
+                    if (pair.Length == 1)
+                    {
+                        value = pair[0];
+                    }
+                    else
+                    {
+                        variableManager.AddVariable(pair[0], memoryCounter.ToString());
+                        value = pair[1];
+                    }
+                    AddInitVariableInstruction(value);
                 }
             }
         }
@@ -87,9 +96,9 @@ namespace Assembler.Parser
         private void AddInitVariableInstruction(string val)
         {
             Instruction mov1 = InstructionFactory.createInstruction(
-                "MOV A "+val, labelManager.labels, variableManager.variables);
+                "MOV A "+val, labelManager.labels, variableManager.variablesValues);
             Instruction mov2 = InstructionFactory.createInstruction(
-                "MOV ("+ memoryCounter + ") A", labelManager.labels, variableManager.variables);
+                "MOV ("+ memoryCounter + ") A", labelManager.labels, variableManager.variablesValues);
             instructions.Add(mov1);
             instructionCounter++;
             instructions.Add(mov2);

@@ -9,10 +9,10 @@ namespace Assembler.Instructions
     class JgeInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None),  "1000010"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Lit, ParameterType.None),  "1000010"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "1011011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Lit , ParameterType.None), "1011011"}
+        };
 
         public JgeInstruction(String param1, String param2) : base(param1, param2){ }
 

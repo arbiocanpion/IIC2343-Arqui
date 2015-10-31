@@ -9,11 +9,12 @@ namespace Assembler
     class ShrInstruction: Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.None),    "0110100"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A),      "0110101"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A),    "0110110"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.None), "1000001"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A), "1000010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A), "1000011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.DirB , ParameterType.A), "1000100"}
+        };
 
         public ShrInstruction(String param1, String param2) : base(param1, param2){ }
 

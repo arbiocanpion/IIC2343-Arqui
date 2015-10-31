@@ -1,4 +1,5 @@
 ﻿using Assembler.Parser;
+using Assembler.Util;
 using System;
 using System.IO;
 
@@ -17,7 +18,8 @@ namespace Assembler
                 return;
             }
             string text = File.ReadAllText(args[0]);
-            //string text = File.ReadAllText("./Ejemplo7.txt");
+            //string text = File.ReadAllText("Ejemplo14.txt");
+
             interpreter.Interpret(text);
             string output = DocumentBuilder.GenerateFinalDocument(interpreter.GetInstructions());
             File.WriteAllText(@"./output.txt", output);

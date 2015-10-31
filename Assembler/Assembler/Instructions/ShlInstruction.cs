@@ -9,11 +9,12 @@ namespace Assembler
     class ShlInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.None),   "0110001"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A),     "0110010"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A),   "0110011"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.None), "0111101"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A), "0111110"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A), "0111111"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.DirB , ParameterType.A), "1000000"}
+        };
 
         public ShlInstruction(String param1, String param2) : base(param1, param2){ }
 

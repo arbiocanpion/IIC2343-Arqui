@@ -106,6 +106,10 @@ namespace Assembler.Instructions
             {
                 return new OrInstruction(param1, param2);
             }
+            else if (parts[0].Equals("IN"))
+            {
+                return new InInstruction(param1, param2);
+            }
             else if (parts[0].Equals("SHL"))
             {
                 return new ShlInstruction(param1, param2);
@@ -121,6 +125,22 @@ namespace Assembler.Instructions
             else if (parts[0].Equals("XOR"))
             {
                 return new XorInstruction(param1, param2);
+            }
+            else if (parts[0].Equals("CALL"))
+            {
+                return new CallInstruction(param1, param2);
+            }
+            else if (parts[0].Equals("RET"))
+            {
+                return new RetInstruction(param1, param2);
+            }
+            else if (parts[0].Equals("PUSH"))
+            {
+                return new PushInstruction(param1, param2);
+            }
+            else if (parts[0].Equals("POP"))
+            {
+                return new PopInstruction(param1, param2);
             }
             return null;
         }

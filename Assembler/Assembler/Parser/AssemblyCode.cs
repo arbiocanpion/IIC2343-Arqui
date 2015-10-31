@@ -24,7 +24,6 @@ namespace Assembler.Parser
             int reducedLineCounter = 0;
             while (originalLineCounter < lines.Length)
             {
-                
                 string line = LineFormatter.DeleteComments(lines[originalLineCounter]);
                 if (line.Replace(" ","").Equals(""))
                 {

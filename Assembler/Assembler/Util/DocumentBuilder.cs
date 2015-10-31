@@ -54,7 +54,7 @@ end Behavioral;";
                 builder.Append(',');
                 builder.Append('\t');
                 builder.Append("-- instrucción ");
-                builder.Append(i);
+                builder.Append(i + 1);
                 builder.Append("\r\n");
             }
             for (; i < 4095; i++)
@@ -66,7 +66,7 @@ end Behavioral;";
                 builder.Append(',');
                 builder.Append('\t');
                 builder.Append("-- instrucción ");
-                builder.Append(i);
+                builder.Append(i + 1);
                 builder.Append("\r\n");
             }
             builder.Append('\t');
@@ -145,7 +145,7 @@ end Behavioral;";
                     }
                 }
                 Array.Reverse(bits, 0, i);
-                val = instructions[k] + val + new string(bits) + '\n';
+                val = instructions[k] + " " + val + new string(bits) + '\n';
                 Console.WriteLine(val);
                 count++;
             }
