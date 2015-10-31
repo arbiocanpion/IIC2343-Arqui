@@ -1,13 +1,13 @@
 DATA:
 
 CODE:
- MOV A,2
- MOV B,A
- CALL add
- SUB A,4
-
+ MOV A,2   // A = 2
+ MOV B,A   // B = A = 2
+ CALL add  // A = A + B = 4
+ SUB A,4   // A = 0
+ 
  fin:
-  JMP fin
+  JMP fin  // A = 0, B = 2
 
  add:
   ADD A,B
