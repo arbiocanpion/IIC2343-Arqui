@@ -42,8 +42,7 @@ component ControlUnit is
         SPC     :   out std_logic;                      -- mux PC
         W       :   out std_logic;                      -- write RAM
         IncSp   :   out std_logic;                      -- increment stack pointer
-        DecSp   :   out std_logic;                      -- decrement stack pointer
-        SIN     :   std_logic                           -- mux input data
+        DecSp   :   out std_logic                       -- decrement stack pointer
     );
     end component;
 
@@ -115,7 +114,26 @@ component ALU
         n       :   out std_logic;
         c       :   out std_logic
     );
-    end component;  
+    end component;
+
+
+component RegSP
+    Port ( 
+        IncSp   :   in  STD_LOGIC;
+        DecSP   :   in  STD_LOGIC;
+        SPout   :   out STD_LOGIC_VECTOR (11 downto 0)
+    );
+    end component;
+
+component Adder
+    Port ( 
+        A       :   in  std_logic_vector (15 downto 0);
+        B       :   in  std_logic_vector (15 downto 0);
+        Cin     :   in  std_logic;
+        Cout    :   out std_logic;
+        S       :   out std_logic_vector (15 downto 0)
+    );
+    end component;
 
 -- SENAL CLOCK
 signal clock        :   std_logic;   
@@ -124,7 +142,7 @@ signal clock        :   std_logic;
 signal romout       :   std_logic_vector(32 downto 0);
 
 --SENAL Conteo PC
-signal PCount       :   std_logic_vector(11 downto 0);
+signal PCout       :   std_logic_vector(11 downto 0);
 
 --SENAl RAM 
 signal ramout       :   std_logic_vector(15 downto 0);
@@ -157,9 +175,10 @@ signal upB          :   std_logic;
 signal downA        :   std_logic;
 signal downB        :   std_logic;
 
--- SENALES VALORES A, B y C
+-- SENALES VALORES A, B, SP
 signal valueA       :   std_logic_vector(15 downto 0);
 signal valueB       :   std_logic_vector(15 downto 0);
+signal valueSP      :   std_logic_vector(11 downto 0);
 
 -- SENAL RESULTADO OPERACION ALU
 signal Salu         :   std_logic_vector (15 downto 0);
@@ -175,7 +194,17 @@ signal MuxAout      :   std_logic_vector(15 downto 0);
 signal MuxBout      :   std_logic_vector(15 downto 0);
 
 -- SENAL MUX INPUT
-signal MuxINOut    :   std_logic_vector(15 downto 0);
+signal MuxINOut     :   std_logic_vector(15 downto 0);
+
+-- SENAL MUX ADDRESS
+signal MuxSOut      :   std_logic_vector(11 downto 0);
+
+-- SENAL MUX DATAIN
+signal MuxSDinOut   :   std_logic_vector(15 downto 0);
+signal SadderPC     :   std_logic_vector(11 downto 0);
+
+-- SENAL MUX PC
+signal MuxSPout     :   std_logic_vector(11 downto 0);
 
 begin
 
@@ -184,8 +213,7 @@ with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
     "0000000000000001"      when "10",
-    MuxINOut               when "11",
-    valueA                  when others;
+    MuxINOut                when "11";
 
 -- Mux B
 with SB select MuxBout <=
@@ -198,6 +226,22 @@ with SB select MuxBout <=
 with romout(32 downto 17) select MuxINOut <=
     sw                      when "0000000000000000",
     "00000000000" & btn     when "0000000000000001";
+
+-- Mux Address in
+with SAdd select address <=
+    romout(28 downto 17)    when "00",
+    valueB(11 downto 0)     when "01",
+    valueSP                 when "10";
+
+-- Mux Data in (RAM)
+with SDin select MuxSDinOut <=
+    Salu                    when "00",
+    SadderPC                when "01";
+
+-- Mux PC
+with SPC select MuxSPout <=
+    romout(28 downto 17)    when '0',
+    ramout(11 downto 0)     when '1';
 
 -- AUMENTAR VALOR DE A y B
 upA     <= btn(1)   and btn(2); -- A izquierdo
@@ -277,20 +321,20 @@ inst_ALU: ALU port map(
 inst_PC: PC port map(
     clock   =>  clock,
     load    =>  LPC,
-    datain  =>  romout(28 downto 17),
-    dataout =>  PCount
+    datain  =>  MuxSPout,
+    dataout =>  PCout
     );
     
 inst_ROM: ROM port map(
-    address =>  PCount,
+    address =>  PCout,
     dataout =>  romout
     );
     
 inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
-    address =>  romout(28 downto 17),
-    datain  =>  Salu,
+    address =>  address,
+    datain  =>  MuxSDinOut,
     dataout =>  ramout
     );
 
@@ -310,8 +354,7 @@ inst_ControlUnit: ControlUnit port map(
     SPC     =>  SPC,
     W       =>  W,
     IncSp   =>  IncSp,
-    DecSp   =>  DecSp,
-    SIN     =>  SIN
+    DecSp   =>  DecSp
     );
 
 inst_Status: RegistroStatus port map(
@@ -320,6 +363,20 @@ inst_Status: RegistroStatus port map(
     N       =>  N,
     C       =>  C,
     Sout    =>  Sout
+    );
+
+inst_RegSP: RegSP port map(
+    IncSp   =>  IncSp,
+    DecSP   =>  DecSp,
+    SPout   =>  valueSP
+    );
+
+inst_Adder: AdderPC port map(
+    A       =>  "000000000001",
+    B       =>  PCout,
+    Cin     =>  '0',
+    Cout    =>  '0',
+    S       =>  SadderPC
     );
     
 end Behavioral;
