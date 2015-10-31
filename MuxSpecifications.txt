@@ -1,10 +1,10 @@
-# Esto es para que estemos de acuerdo en que valor debe dejar pasar cada mux
+	# Esto es para que estemos de acuerdo en que valor debe dejar pasar cada mux
 
 SA:
 00 => A
 01 => 0
 10 => 1
-11 => UNNASIGNED
+11 => SIN
 
 SB:
 00 => B
@@ -35,3 +35,7 @@ SDin:
 SPC:
 0 => Lit
 1 => RAM
+
+SIN
+0 => Buttons
+1 => Switches
