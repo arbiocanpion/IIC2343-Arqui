@@ -42,7 +42,8 @@ component ControlUnit is
         SPC     :   out std_logic;                      -- mux PC
         W       :   out std_logic;                      -- write RAM
         IncSp   :   out std_logic;                      -- increment stack pointer
-        DecSp   :   out std_logic                       -- decrement stack pointer
+        DecSp   :   out std_logic;                      -- decrement stack pointer
+        SIN     :   std_logic                           -- mux input data
     );
     end component;
 
@@ -130,18 +131,19 @@ signal ramout   :   std_logic_vector(15 downto 0);
 signal ramin    :   std_logic_vector(15 downto 0);
 
 -- SEÑALES Control Unit 
-signal LPC      :   std_logic;                     -- load pc
-signal LA       :   std_logic;                     -- load A
-signal LB       :   std_logic;                     -- load B
-signal SA       :   std_logic_vector(1 downto 0);  -- mux A
-signal SB       :   std_logic_vector(1 downto 0);  -- mux B
+signal LPC      :   std_logic;                      -- load pc
+signal LA       :   std_logic;                      -- load A
+signal LB       :   std_logic;                      -- load B
+signal SA       :   std_logic_vector(1 downto 0);   -- mux A
+signal SB       :   std_logic_vector(1 downto 0);   -- mux B
 signal SL       :   std_logic_vector(2 downto 0);   -- ALU
-signal SAdd     :   std_logic_vector(1 downto 0);  -- mux address
-signal SDin     :   std_logic;                     -- mux datain RAM
-signal SPC      :   std_logic;                     -- mux PC
-signal W        :   std_logic;                     -- write RAM
-signal IncSp    :   std_logic;                     -- increment stack pointer
-signal DecSp    :   std_logic;                     -- decrement stack pointer
+signal SAdd     :   std_logic_vector(1 downto 0);   -- mux address
+signal SDin     :   std_logic;                      -- mux datain RAM
+signal SPC      :   std_logic;                      -- mux PC
+signal W        :   std_logic;                      -- write RAM
+signal IncSp    :   std_logic;                      -- increment stack pointer
+signal DecSp    :   std_logic;                      -- decrement stack pointer
+signal SIN      :   std_logic;                      -- mux input data
             
 -- SENALES DISPLAY
 signal dis_a    :   std_logic_vector(3 downto 0);
@@ -174,6 +176,9 @@ signal Sout     :   std_logic_vector (2 downto 0);
 -- SENALES MUX A, MUX B    -(Pongan las otras salidas de MUX aquí)
 signal MuxAout  :   std_logic_vector(15 downto 0);
 signal MuxBout  :   std_logic_vector(15 downto 0);
+
+-- SENAL MUX IN
+
 
 begin
 
@@ -302,7 +307,8 @@ inst_ControlUnit: ControlUnit port map(
     SPC     =>  SPC,
     W       =>  W,
     IncSp   =>  IncSp,
-    DecSp   =>  DecSp
+    DecSp   =>  DecSp,
+    SIN     =>  SIN
     );
 
 inst_Status: RegistroStatus port map(
