@@ -19,16 +19,18 @@ entity ControlUnit is
 		SPC		:	out	std_logic;						-- mux PC
 		W		:	out	std_logic;						-- write RAM
 		IncSp	:	out	std_logic;						-- increment stack pointer
-		DecSp	:	out	std_logic						-- decrement stack pointer
+		DecSp	:	out	std_logic;						-- decrement stack pointer
+		SIN     :   std_logic                           -- mux input data
 	);
 end ControlUnit;
 
 architecture Behavioral of ControlUnit is
 
-signal OutSignal : std_logic_vector(16 downto 0);
+signal OutSignal : std_logic_vector(17 downto 0);
 
 begin
 
+SIN 				<= OutSignal(17);
 LPC					<= OutSignal(16);
 LA 					<= OutSignal(15);
 LB 					<= OutSignal(14);
@@ -42,8 +44,8 @@ W 					<= OutSignal(2);
 IncSp				<= OutSignal(1);
 DecSp				<= OutSignal(0);
 
--- LPC LA LB SA SB SL  SAdd SDin SPC W IncSp DecSp
--- 0   0  0  00 00 000 00    0    0  0  0     0
+-- SIN LPC LA LB SA SB SL  SAdd SDin SPC W IncSp DecSp
+-- 0   0   0  0  00 00 000 00    0    0  0  0     0
 with Opcode select OutSignal <=
 	"01001000000000000"									when "0000000", -- MOV A, B
 	"00100010000000000"									when "0000001", -- MOV B, A

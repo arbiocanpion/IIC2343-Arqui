@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Basys3 is
     Port (
-        sw      :   in  std_logic_vector (2 downto 0);
+        sw      :   in  std_logic_vector (15 downto 0);
         btn     :   in  std_logic_vector (4 downto 0);  -- 0 Center, 1 Up, 2 Left, 3 Right, 4 Down
         led     :   out std_logic_vector (2 downto 0);
         clk     :   in  std_logic;
@@ -42,7 +42,8 @@ component ControlUnit is
         SPC     :   out std_logic;                      -- mux PC
         W       :   out std_logic;                      -- write RAM
         IncSp   :   out std_logic;                      -- increment stack pointer
-        DecSp   :   out std_logic                       -- decrement stack pointer
+        DecSp   :   out std_logic;                      -- decrement stack pointer
+        SIN     :   std_logic                           -- mux input data
     );
     end component;
 
@@ -117,63 +118,64 @@ component ALU
     end component;  
 
 -- SENAL CLOCK
-signal clock    :   std_logic;   
+signal clock        :   std_logic;   
 
 --SENAL instrucciones rom
-signal romout   :   std_logic_vector(32 downto 0);
+signal romout       :   std_logic_vector(32 downto 0);
 
 --SENAL Conteo PC
-signal PCount   :   std_logic_vector(11 downto 0);
+signal PCount       :   std_logic_vector(11 downto 0);
 
 --SENAl RAM 
-signal ramout   :   std_logic_vector(15 downto 0);
-signal ramin    :   std_logic_vector(15 downto 0);
+signal ramout       :   std_logic_vector(15 downto 0);
+signal ramin        :   std_logic_vector(15 downto 0);
 
 -- SEÑALES Control Unit 
-signal LPC      :   std_logic;                     -- load pc
-signal LA       :   std_logic;                     -- load A
-signal LB       :   std_logic;                     -- load B
-signal SA       :   std_logic_vector(1 downto 0);  -- mux A
-signal SB       :   std_logic_vector(1 downto 0);  -- mux B
-signal SL       :   std_logic_vector(2 downto 0);   -- ALU
-signal SAdd     :   std_logic_vector(1 downto 0);  -- mux address
-signal SDin     :   std_logic;                     -- mux datain RAM
-signal SPC      :   std_logic;                     -- mux PC
-signal W        :   std_logic;                     -- write RAM
-signal IncSp    :   std_logic;                     -- increment stack pointer
-signal DecSp    :   std_logic;                     -- decrement stack pointer
+signal LPC          :   std_logic;                      -- load pc
+signal LA           :   std_logic;                      -- load A
+signal LB           :   std_logic;                      -- load B
+signal SA           :   std_logic_vector(1 downto 0);   -- mux A
+signal SB           :   std_logic_vector(1 downto 0);   -- mux B
+signal SL           :   std_logic_vector(2 downto 0);   -- ALU
+signal SAdd         :   std_logic_vector(1 downto 0);   -- mux address
+signal SDin         :   std_logic;                      -- mux datain RAM
+signal SPC          :   std_logic;                      -- mux PC
+signal W            :   std_logic;                      -- write RAM
+signal IncSp        :   std_logic;                      -- increment stack pointer
+signal DecSp        :   std_logic;                      -- decrement stack pointer
+signal SIN          :   std_logic;                      -- mux input data
             
 -- SENALES DISPLAY
-signal dis_a    :   std_logic_vector(3 downto 0);
-signal dis_b    :   std_logic_vector(3 downto 0);
-signal dis_c    :   std_logic_vector(3 downto 0);
-signal dis_d    :   std_logic_vector(3 downto 0);
+signal dis_a        :   std_logic_vector(3 downto 0);
+signal dis_b        :   std_logic_vector(3 downto 0);
+signal dis_c        :   std_logic_vector(3 downto 0);
+signal dis_d        :   std_logic_vector(3 downto 0);
 
 -- SENALES BOTONES
-signal upA      :   std_logic;
-signal upB      :   std_logic;
-signal downA    :   std_logic;
-signal downB    :   std_logic;
+signal upA          :   std_logic;
+signal upB          :   std_logic;
+signal downA        :   std_logic;
+signal downB        :   std_logic;
 
 -- SENALES VALORES A, B y C
-signal valueA   :   std_logic_vector(15 downto 0);
-signal valueB   :   std_logic_vector(15 downto 0);
-
--- SENAL CARRY OUT ALU
-signal Cout     :   std_logic;  -- TODO: Eliminar, va a ser conexión de ALU con Registro Status
+signal valueA       :   std_logic_vector(15 downto 0);
+signal valueB       :   std_logic_vector(15 downto 0);
 
 -- SENAL RESULTADO OPERACION ALU
-signal Salu     :   std_logic_vector (15 downto 0);
+signal Salu         :   std_logic_vector (15 downto 0);
 
 -- SENAL STATUS
-signal Z        :   std_logic;
-signal N        :   std_logic;
-signal C        :   std_logic;
-signal Sout     :   std_logic_vector (2 downto 0);
+signal Z            :   std_logic;
+signal N            :   std_logic;
+signal C            :   std_logic;
+signal Sout         :   std_logic_vector (2 downto 0);
 
 -- SENALES MUX A, MUX B    -(Pongan las otras salidas de MUX aquí)
-signal MuxAout  :   std_logic_vector(15 downto 0);
-signal MuxBout  :   std_logic_vector(15 downto 0);
+signal MuxAout      :   std_logic_vector(15 downto 0);
+signal MuxBout      :   std_logic_vector(15 downto 0);
+
+-- SENAL MUX INPUT
+signal MuxINOut    :   std_logic_vector(15 downto 0);
 
 begin
 
@@ -182,6 +184,7 @@ with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
     "0000000000000001"      when "10",
+    MuxINOut               when "11",
     valueA                  when others;
 
 -- Mux B
@@ -190,6 +193,11 @@ with SB select MuxBout <=
     "0000000000000000"      when "01",
     romout(32 downto 17)    when "10",
     ramout                  when "11";
+
+-- Mux Input data in
+with romout(32 downto 17) select MuxINOut <=
+    sw                      when "0000000000000000",
+    "00000000000" & btn     when "0000000000000001";
 
 -- AUMENTAR VALOR DE A y B
 upA     <= btn(1)   and btn(2); -- A izquierdo
@@ -302,7 +310,8 @@ inst_ControlUnit: ControlUnit port map(
     SPC     =>  SPC,
     W       =>  W,
     IncSp   =>  IncSp,
-    DecSp   =>  DecSp
+    DecSp   =>  DecSp,
+    SIN     =>  SIN
     );
 
 inst_Status: RegistroStatus port map(
