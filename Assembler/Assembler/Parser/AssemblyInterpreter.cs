@@ -47,6 +47,20 @@ namespace Assembler.Parser
                         .createInstruction(line, labelManager.labels, variableManager.variablesValues);
                     instructions.Add(instruction);
                     instructionCounter++;
+                    if (instruction.GetType() == typeof(Pop1Instruction))
+                    {
+                        instructions.Add(
+                            InstructionFactory.createInstruction(
+                                "2"+line, labelManager.labels, variableManager.variablesValues));
+                        instructionCounter++;
+                    }
+                    else if (instruction.GetType() == typeof(Ret1Instruction))
+                    {
+                        instructions.Add(
+                            InstructionFactory.createInstruction(
+                                "2"+line, labelManager.labels, variableManager.variablesValues));
+                        instructionCounter++;
+                    }
                 }
             }
         }
