@@ -2,7 +2,7 @@
 
 namespace Assembler
 {
-    class Parameter
+    public class Parameter
     {
         private ParameterType _type;
         private int _value;

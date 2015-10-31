@@ -16,7 +16,7 @@ namespace Assembler.Parser
         public AssemblyCode(string assemblyCode)
         {
             StringBuilder builder = new StringBuilder();
-            assemblyCode.Replace("\t", "");
+            assemblyCode.Replace("\t", " ");
             string[] lines = assemblyCode.Split('\n');
             dataStart = 0;
             codeStart = 0;

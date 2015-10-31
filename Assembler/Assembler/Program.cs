@@ -18,9 +18,9 @@ namespace Assembler
                 return;
             }
             string text = File.ReadAllText(args[0]);
-            //string text = File.ReadAllText("./Ejemplo12.txt");
+            //string text = File.ReadAllText("./Ejemplo10.txt");
             interpreter.Interpret(text);
-            string output = DocumentBuilder.GenerateFinalDocument(interpreter.GetInstructions());
+            string output = DocumentBuilder.GenerateFinalDocument(interpreter.Instructions);
             File.WriteAllText(@"./output.txt", output);
         }
     }

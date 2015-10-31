@@ -13,14 +13,18 @@ namespace Assembler.Parser
         LabelManager labelManager;
         VariableManager variableManager;
         AssemblyCode assemblyCode;
-        List<Instruction> instructions;
+        private List<Instruction> instructions;
+        public List<Instruction> Instructions
+        {
+            get { return instructions; }
+        }
         int instructionCounter;
         int memoryCounter;
 
         public string Interpret(string code)
         {
             code = code.Replace("\r\n", "\n");
-            code = code.Replace("\t", "");
+            code = code.Replace("\t", " ");
             assemblyCode = new AssemblyCode(code);
             labelManager = new LabelManager();
             variableManager = new VariableManager();
@@ -126,16 +130,6 @@ namespace Assembler.Parser
             {
                 Console.WriteLine(instructions[i].ToString());
             }
-        }
-
-        public string[] GetInstructions()
-        {
-            string[] stringInstructions = new string[instructions.Count];
-            for (int i = 0; i < instructions.Count; i++)
-            {
-                stringInstructions[i] = instructions[i].ToString();
-            }
-            return stringInstructions;
         }
     }
 }

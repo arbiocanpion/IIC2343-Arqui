@@ -40,21 +40,27 @@ end Behavioral;";
 
         public static string emptyMessage = "000000000000000000000000001000110";
 
-        public static string GenerateFinalDocument(string[] instructions)
+        public static string GenerateFinalDocument(List<Instruction> instructions)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(documentBegin);
             int i = 1;
-            for (i = 0; i < instructions.Length; i++)
+            for (i = 0; i < instructions.Count; i++)
             {
                 builder.Append('\t');
                 builder.Append('"');
-                builder.Append(instructions[i]);
+                builder.Append(instructions[i].ToString());
                 builder.Append('"');
                 builder.Append(',');
                 builder.Append('\t');
                 builder.Append("-- instrucción ");
                 builder.Append(i + 1);
+                builder.Append(" - ");
+                builder.Append(instructions[i].GetType());
+                builder.Append(" ");
+                builder.Append(instructions[i]._param1.GetType());
+                builder.Append(", ");
+                builder.Append(instructions[i]._param2.GetType());
                 builder.Append("\r\n");
             }
             for (; i < 4095; i++)
