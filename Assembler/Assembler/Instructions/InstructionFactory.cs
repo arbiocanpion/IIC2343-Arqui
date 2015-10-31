@@ -132,7 +132,7 @@ namespace Assembler.Instructions
             }
             else if (parts[0].Equals("RET"))
             {
-                return new RetInstruction(param1, param2);
+                return new Ret1Instruction("1", param2);
             }
             else if (parts[0].Equals("PUSH"))
             {
@@ -140,7 +140,15 @@ namespace Assembler.Instructions
             }
             else if (parts[0].Equals("POP"))
             {
-                return new PopInstruction(param1, param2);
+                return new Pop1Instruction("1", param2);
+            }
+            else if (parts[0].Equals("2POP"))
+            {
+                return new Pop2Instruction(param1, param2);
+            }
+            else if (parts[0].Equals("2RET"))
+            {
+                return new Ret2Instruction(param2, param2);
             }
             return null;
         }

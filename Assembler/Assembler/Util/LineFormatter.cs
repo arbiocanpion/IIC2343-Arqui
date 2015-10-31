@@ -24,7 +24,8 @@ namespace Assembler.Util
             {
                 line = line.Insert(2, " ");
             }
-            else if (line.Length > 3 && (line.Substring(0, 4).Equals("CALL") || line.Substring(0, 4).Equals("PUSH")))
+            else if (line.Length > 3 && (line.Substring(0, 4).Equals("CALL") || line.Substring(0, 4).Equals("PUSH") ||
+                line.Substring(0, 4).Equals("POP2") || line.Substring(0, 4).Equals("RET2")))
             {
                 line = line.Insert(4, " ");
             }
