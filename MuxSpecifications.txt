@@ -36,6 +36,6 @@ SPC:
 0 => Lit
 1 => RAM
 
-SIN
+SIN (romout(32 downto 17) Lit)
 "0000000000000000" => Switches
 "0000000000000001" => Buttons

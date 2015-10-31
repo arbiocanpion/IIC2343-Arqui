@@ -175,7 +175,7 @@ signal MuxAout      :   std_logic_vector(15 downto 0);
 signal MuxBout      :   std_logic_vector(15 downto 0);
 
 -- SENAL MUX INPUT
-signal InputData    :   std_logic_vector(15 downto 0);
+signal MuxINOut    :   std_logic_vector(15 downto 0);
 
 begin
 
@@ -184,7 +184,7 @@ with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
     "0000000000000001"      when "10",
-    InputData               when "11",
+    MuxINOut               when "11",
     valueA                  when others;
 
 -- Mux B
@@ -195,7 +195,7 @@ with SB select MuxBout <=
     ramout                  when "11";
 
 -- Mux Input data in
-with romout(32 downto 17) select InputData <=
+with romout(32 downto 17) select MuxINOut <=
     sw                      when "0000000000000000",
     "00000000000" & btn     when "0000000000000001";
 
