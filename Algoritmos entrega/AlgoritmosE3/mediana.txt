@@ -17,4 +17,5 @@ CODE:
 	DEC A
 	SHR A
 	INC A
-	MOV A,(A)	
+	MOV B,A
+	MOV A,(B)	
