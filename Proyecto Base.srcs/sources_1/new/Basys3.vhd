@@ -3,7 +3,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Basys3 is
     Port (
-        sw      :   in  std_logic_vector (2 downto 0);
+        sw      :   in  std_logic_vector (15 downto 0);
         btn     :   in  std_logic_vector (4 downto 0);  -- 0 Center, 1 Up, 2 Left, 3 Right, 4 Down
         led     :   out std_logic_vector (2 downto 0);
         clk     :   in  std_logic;
