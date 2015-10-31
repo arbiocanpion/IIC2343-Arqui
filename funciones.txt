@@ -1,0 +1,175 @@
+division A:B guarda entero en A y resto en B
+variables:
+i (iteraciones)
+n (numerador)
+div (divisor)
+
+MOV (n),A
+MOV (div),B
+MOV (i),0
+
+while:
+MOV A,(n)
+CMP A,B
+JLT endwhile
+INC (i)
+MOV A,(div)
+ADD B,A
+JMP while
+
+endwhile:
+MOV A,B
+SUB B,(div)
+MOV A,(n)
+SUB B,A
+MOV A,(i)
+
+
+
+ordenar arreglos de menor a mayor
+argumentos: inicio, largo
+variables: i, j, min, imin
+
+MOV A,(largo)
+CMP A,1
+JEQ end
+
+MOV A,(inicio)
+DEC A  //esto es solo para que funcione el while desde el principio
+MOV (i),A
+
+while1:
+INC (i)
+MOV A,(i)
+MOV (j),A //se pone i en j
+MOV (imin),A //se pone i como indice del minimo
+MOV A,(A)
+MOV (min),A  //se pone el valor de i en el valor del minimo
+
+while2:
+INC (j)
+MOV A,(min)  //aca se compara el valor minimo actual con el valor de J
+MOV B,(j)
+MOV B,(B)
+CMP A,B
+JLT endcomp //si el minimo es menor, nos saltamos lo siguiente
+MOV (min),B  //aca se cambia el valor del minimo y su indice por el de J
+MOV A,(j)
+MOV (imin),A
+endcomp:
+MOV B,(largo)   //esto es para ver si J todavia no se sale del arreglo, osea ver si seguimos con el while2
+MOV A,(inicio)
+ADD A,B
+DEC A
+CMP A,(j)  //
+JGT while2
+MOV B,(imin)  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+MOV A,(i)
+MOV A,(A)
+MOV (B),A
+MOV B,(i)
+MOV A,(min)
+MOV (B),A  //
+MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
+MOV A,(inicio)
+ADD A,B
+DEC A
+DEC A
+CMP A,(i)  //
+JGT while1
+end:
+
+
+
+sacar la mediana de un arreglo y entregarla en el registro A
+argumentos: inicio, largo
+ordenar(inicio,largo)
+
+MOV A,(largo)
+MOV B,2
+dividir //divide A:B
+MOV A,B
+CMP A,1
+JEQ impar
+MOV A,(largo)
+SHR A
+MOV A,(A)
+impar:
+MOV A,(largo)
+DEC A
+SHR A
+INC A
+MOV A,(A)
+
+
+promedio que se entrega en registro A
+argumentos: inicio, largo
+variables: i, suma
+
+MOV (suma),0
+MOV (i),0
+
+while:
+MOV A,(i)
+CMP A,(largo)
+JGE endwhile
+MOV A,(inicio)
+MOV B,(i)
+ADD A,B
+MOV B,(suma)
+MOV A,(A)
+ADD A,B
+MOV (suma),A
+INC (i)
+JMP hile
+endwhile
+MOV A,(suma)
+MOV B,(largo)
+dividir
+
+
+
+moda de un arreglo
+parametros: inicio, largo
+variables: actual, moda, t, ractual, rmoda
+
+ordanar(inicio,largo)
+MOV (t),0
+MOV A,(inicio)
+MOV A,(A)  //se carga el primer valor en actual, y por defecto la moda es el primer valor, con una repeticion
+MOV (actal),A
+MOV (moda),A
+MOV (ractual),1
+MOV (rmoda),1
+
+while:
+INC (t)
+MOV A,(t)
+CMP A,(largo)   //se compara que el siguiente valor este en el arreglo
+JGE endwhile
+MOV B,(t)
+MOV A,(inicio)
+ADD A,B
+MOV B,(A)  //se carga el siguiente valor del arreglo en B
+MOV A,(actual)
+CMP A,B  //se compara el valor actual con el de B
+JNE else
+INC(ractual)  //si son iguales se aumenta el conteo y se sigue con el siguiente
+JMP while
+else:
+MOV A,(ractual)
+CMP A,(rmoda)
+JLE not  //si no son iguales, se compara el conteo del valor actual con el de la moda
+MOV A,(actual)   //si el actual es mayor al de la moda, lo cambiamos
+MOV (moda),A
+MOV A,(ractual)
+MOV (rmoda),A
+not:
+MOV (ractual),1  //se resetea el valor actual y el conteo
+MOV B,(t)
+MOV A,(inicio)
+ADD A,B
+MOV B,(A)
+MOV (actual),B
+JMP while
+endwhile
