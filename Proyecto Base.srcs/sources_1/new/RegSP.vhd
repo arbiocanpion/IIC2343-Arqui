@@ -39,7 +39,21 @@ end RegSP;
 
 architecture Behavioral of RegSP is
 
+signal dir : std_logic_vector(11 downto 0) := (others => '1');
+
 begin
 
-
+dir_prosses : process (clock)
+        begin
+          if (rising_edge(clock)) then
+            if (IncSp = '1') then
+                dir <= dir + 1;
+            elsif (DecSP = '1') then
+                dir <= dir - 1;            
+            end if;
+          end if;
+        end process;
+        
+SPout <= dir;
+        
 end Behavioral;
