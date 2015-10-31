@@ -37,5 +37,5 @@ SPC:
 1 => RAM
 
 SIN
-0 => Buttons
-1 => Switches
+"0000000000000000" => Switches
+"0000000000000001" => Buttons
