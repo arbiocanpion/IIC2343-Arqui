@@ -10,8 +10,8 @@ CODE:
 	CMP A,1
 	JEQ impar
 	MOV A,(largo)
-	SHR A
-	MOV A,(A)
+	SHR B,A
+	MOV A,(B)
 	impar:
 	MOV A,(largo)
 	DEC A
