@@ -119,6 +119,7 @@ component ALU
 
 component RegSP
     Port ( 
+        clock   :  in  std_logic;
         IncSp   :   in  STD_LOGIC;
         DecSP   :   in  STD_LOGIC;
         SPout   :   out STD_LOGIC_VECTOR (11 downto 0)
@@ -142,7 +143,7 @@ signal clock        :   std_logic;
 signal romout       :   std_logic_vector(32 downto 0);
 
 --SENAL Conteo PC
-signal PCout       :   std_logic_vector(11 downto 0);
+signal PCout       :   std_logic_vector(15 downto 0);
 
 --SENAl RAM 
 signal ramout       :   std_logic_vector(15 downto 0);
@@ -201,10 +202,11 @@ signal MuxSOut      :   std_logic_vector(11 downto 0);
 
 -- SENAL MUX DATAIN
 signal MuxSDinOut   :   std_logic_vector(15 downto 0);
-signal SadderPC     :   std_logic_vector(11 downto 0);
+signal SadderPC     :   std_logic_vector(15 downto 0);
 
 -- SENAL MUX PC
 signal MuxSPout     :   std_logic_vector(11 downto 0);
+signal CoutAdderPC  :   std_logic;
 
 begin
 
@@ -225,18 +227,20 @@ with SB select MuxBout <=
 -- Mux Input data in
 with romout(32 downto 17) select MuxINOut <=
     sw                      when "0000000000000000",
-    "00000000000" & btn     when "0000000000000001";
+    "00000000000" & btn     when "0000000000000001",
+    "0000000000000000"      when others;
 
 -- Mux Address in
-with SAdd select address <=
+with SAdd select MuxSOut <=
     romout(28 downto 17)    when "00",
     valueB(11 downto 0)     when "01",
-    valueSP                 when "10";
+    valueSP                 when "10",
+    "000000000000"          when "11";
 
 -- Mux Data in (RAM)
 with SDin select MuxSDinOut <=
-    Salu                    when "00",
-    SadderPC                when "01";
+    Salu                    when '0',
+    SadderPC                when '1';
 
 -- Mux PC
 with SPC select MuxSPout <=
@@ -322,18 +326,18 @@ inst_PC: PC port map(
     clock   =>  clock,
     load    =>  LPC,
     datain  =>  MuxSPout,
-    dataout =>  PCout
+    dataout =>  PCout(11 downto 0)
     );
     
 inst_ROM: ROM port map(
-    address =>  PCout,
+    address =>  PCout(11 downto 0),
     dataout =>  romout
     );
     
 inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
-    address =>  address,
+    address =>  MuxSOut,
     datain  =>  MuxSDinOut,
     dataout =>  ramout
     );
@@ -366,16 +370,17 @@ inst_Status: RegistroStatus port map(
     );
 
 inst_RegSP: RegSP port map(
+    clock   =>  clock,
     IncSp   =>  IncSp,
     DecSP   =>  DecSp,
     SPout   =>  valueSP
     );
 
-inst_Adder: AdderPC port map(
-    A       =>  "000000000001",
+inst_AdderPC: Adder port map(
+    A       =>  "0000000000000001",
     B       =>  PCout,
     Cin     =>  '0',
-    Cout    =>  '0',
+    Cout    =>  CoutAdderPC,
     S       =>  SadderPC
     );
     
