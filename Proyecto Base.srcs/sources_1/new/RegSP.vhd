@@ -21,6 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_unsigned.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -32,9 +33,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity RegSP is
-    Port ( IncSp : in STD_LOGIC;
-           DecSP : in STD_LOGIC;
-           SPout : out STD_LOGIC_VECTOR (11 downto 0));
+    Port (
+        clock :  in  std_logic;
+        IncSp : in STD_LOGIC;
+        DecSP : in STD_LOGIC;
+        SPout : out STD_LOGIC_VECTOR (11 downto 0));
 end RegSP;
 
 architecture Behavioral of RegSP is
