@@ -9,15 +9,17 @@ namespace Assembler
     class XorInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B),     "0100111"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A),     "0101000"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit),   "0101001"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Lit),   "0101010"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir),   "0101011"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Dir),   "0101100"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None), "0101101"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B), "0110000"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A), "0110001"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit), "0110010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Lit), "0110011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir), "0110100"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Dir), "0110101"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "0110110"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.DirB), "0110111"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.DirB), "0111000"}
+        };
 
         public XorInstruction(String param1, String param2) : base(param1, param2){ }
 

@@ -20,6 +20,15 @@ namespace Assembler.Util
             {
                 line = line.Insert(2, " ");
             }
+            else if (line.Substring(0, 2).Equals("IN") && !line.Substring(0, 3).Equals("INC"))
+            {
+                line = line.Insert(2, " ");
+            }
+            else if (line.Length > 3 && (line.Substring(0, 4).Equals("CALL") || line.Substring(0, 4).Equals("PUSH") ||
+                line.Substring(0, 4).Equals("POP2") || line.Substring(0, 4).Equals("RET2")))
+            {
+                line = line.Insert(4, " ");
+            }
             else
             {
                 line = line.Insert(3, " ");
@@ -30,42 +39,19 @@ namespace Assembler.Util
         public static string FormatDataLine(string line)
         {
             line = DeleteComments(line);
-
             line = Regex.Replace(line, " (?=[^(]*\\))", "");
-
-            int endIndex = line.Length;
-            while (line[endIndex - 1].Equals(' '))
-            {
-                endIndex--;
-            }
-            int startIndex = 0;
-            while (line[startIndex].Equals(' '))
-            {
-                startIndex++;
-            }
-            return line.Substring(startIndex, endIndex-startIndex);
+            line = line.Trim();
+            return line;
         }
 
         public static string DeleteComments(string line)
         {
             line = Regex.Replace(line, " (?=[^(]*\\))", "");
             if (line.Replace(" ", "").Equals("")) return line;
-            int startIndex = 0;
-            while (line[startIndex].Equals(' '))
-            {
-                startIndex++;
-            }
             int endIndex = line.IndexOf("//");
             if (endIndex == 0) return "";
-            if (endIndex < 0)
-            {
-                endIndex = line.Length;
-            }
-            while (line[endIndex-1].Equals(' '))
-            {
-                endIndex--;
-            }
-            return line.Substring(startIndex, endIndex-startIndex);
+            if (endIndex < 0) return line.Trim();
+            return line.Substring(0, endIndex).Trim();
         }
 
         public static bool ReservedWord(string line)

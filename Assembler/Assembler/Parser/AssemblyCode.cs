@@ -16,7 +16,7 @@ namespace Assembler.Parser
         public AssemblyCode(string assemblyCode)
         {
             StringBuilder builder = new StringBuilder();
-            assemblyCode.Replace("\t", "");
+            assemblyCode.Replace("\t", " ");
             string[] lines = assemblyCode.Split('\n');
             dataStart = 0;
             codeStart = 0;
@@ -24,7 +24,6 @@ namespace Assembler.Parser
             int reducedLineCounter = 0;
             while (originalLineCounter < lines.Length)
             {
-                
                 string line = LineFormatter.DeleteComments(lines[originalLineCounter]);
                 if (line.Replace(" ","").Equals(""))
                 {

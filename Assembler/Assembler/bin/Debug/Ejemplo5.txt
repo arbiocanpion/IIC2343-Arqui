@@ -1,0 +1,11 @@
+DATA:		// Variables a sumar
+a 3 
+b 3 
+CODE:		// Codigo de suma
+MOV A,0		// A=0
+ADD A,(a)	// A=A+Mem[a]=3
+ADD A,(b)	// A=A+Mem[b]=6
+MOV B,A		// B=A
+end:
+  DEC A		// A=A-1 
+JMP end 

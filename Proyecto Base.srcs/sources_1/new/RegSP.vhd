@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date: 26.09.2015 19:33:18
+-- Create Date: 31.10.2015 16:56:33
 -- Design Name: 
--- Module Name: RegS - Behavioral
+-- Module Name: RegSP - Behavioral
 -- Project Name: 
 -- Target Devices: 
 -- Tool Versions: 
@@ -21,6 +21,7 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.std_logic_unsigned.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -31,18 +32,31 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity RegS is
-    Port ( 
-    	Z 		: 	in std_logic;		-- zero: 		1 when result = "000..."
-        N 		: 	in std_logic;		-- negative:	the most significative bit (indicates if result is negative)
-        V 		: 	in std_logic;		-- overflow:	if ALU has overflow
-        C 		: 	in std_logic;		-- carry:		carry out of ALU
-        Stout	: 	out std_logic_vector (3 downto 0));
-end RegS;
+entity RegSP is
+    Port (
+        clock :  in  std_logic;
+        IncSp : in STD_LOGIC;
+        DecSP : in STD_LOGIC;
+        SPout : out STD_LOGIC_VECTOR (11 downto 0));
+end RegSP;
 
-architecture Behavioral of RegS is
+architecture Behavioral of RegSP is
+
+signal dir : std_logic_vector(11 downto 0) := (others => '1');
 
 begin
 
-
+dir_prosses : process (clock)
+        begin
+          if (rising_edge(clock)) then
+            if (IncSp = '1') then
+                dir <= dir + 1;
+            elsif (DecSP = '1') then
+                dir <= dir - 1;            
+            end if;
+          end if;
+        end process;
+        
+SPout <= dir;
+        
 end Behavioral;

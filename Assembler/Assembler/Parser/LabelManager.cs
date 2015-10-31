@@ -11,7 +11,7 @@ namespace Assembler.Parser
 
         public Dictionary<string, int> labels
         {
-            get;
+            get; set;
         }
 
         public LabelManager()
@@ -36,5 +36,6 @@ namespace Assembler.Parser
                 return true;
             return false;
         }
+
     }
 }

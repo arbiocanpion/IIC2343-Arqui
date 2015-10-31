@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assembler
 {
-    enum ParameterType
+    public enum ParameterType
     {
         A,
         B,
@@ -18,12 +18,12 @@ namespace Assembler
         None
     }
 
-    class Instruction
+    public class Instruction
     {
         protected String _tenZeros = "0000000000";
         protected String _sixteenZeros = "0000000000000000";
-        protected Parameter _param1;
-        protected Parameter _param2;
+        public Parameter _param1;
+        public Parameter _param2;
         protected String _instruction;
 
         public Instruction(String param1, String param2)
@@ -95,6 +95,16 @@ namespace Assembler
         public override string ToString()
         {
             return _instruction;
+        }
+
+        public static bool isDoubleCycleInstruction(string line)
+        {
+            if (line.Length == 0) return false;
+            if (line.Split(' ')[0].Equals("RET") || line.Split(' ')[0].Equals("POP"))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

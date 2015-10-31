@@ -9,11 +9,12 @@ namespace Assembler
     class NotInstruction: Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.None),   "0101110"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A),     "0101111"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A),   "0110000"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.None), "0111001"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A), "0111010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.A), "0111011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.DirB , ParameterType.A), "0111100"}
+        };
 
         public NotInstruction(String param1, String param2) : base(param1, param2){ }
 

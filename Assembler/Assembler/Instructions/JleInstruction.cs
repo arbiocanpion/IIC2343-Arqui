@@ -9,10 +9,10 @@ namespace Assembler.Instructions
     class JleInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None),  "1000100"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Lit, ParameterType.None),  "1000100"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "1011101"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Lit , ParameterType.None), "1011101"}
+        };
 
         public JleInstruction(String param1, String param2) : base(param1, param2){ }
 

@@ -9,10 +9,10 @@ namespace Assembler.Instructions
     class JcrInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None),  "1000101"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Lit, ParameterType.None),  "1000101"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "1011110"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Lit , ParameterType.None), "1011110"}
+        };
 
         public JcrInstruction(String param1, String param2) : base(param1, param2){ }
 

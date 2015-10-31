@@ -10,15 +10,17 @@ namespace Assembler
     {
 
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.B),      "0001011"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B, ParameterType.A),      "0001100"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.Lit),    "0001101"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B, ParameterType.Lit),    "0001110"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.A, ParameterType.Dir),    "0001111"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.B, ParameterType.Dir),    "0010000"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None), "0010001"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B), "0001100"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.A), "0001101"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit), "0001110"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Lit), "0001111"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir), "0010000"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.Dir), "0010001"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "0010010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.DirB), "0010011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.B , ParameterType.DirB), "0010100"}
+        };
 
         public AddInstruction(String param1, String param2) : base(param1, param2){ }
 

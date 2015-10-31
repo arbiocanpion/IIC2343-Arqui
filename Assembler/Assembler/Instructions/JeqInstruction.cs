@@ -9,10 +9,10 @@ namespace Assembler.Instructions
     class JeqInstruction : Instruction
     {
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
-            new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Dir, ParameterType.None),  "0111111"},
-                { new Tuple<ParameterType, ParameterType>(ParameterType.Lit, ParameterType.None),  "0111111"}
-            };
+                 new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Dir , ParameterType.None), "1011000"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.Lit , ParameterType.None), "1011000"}
+        };
 
         public JeqInstruction(String param1, String param2) : base(param1, param2){ }
 

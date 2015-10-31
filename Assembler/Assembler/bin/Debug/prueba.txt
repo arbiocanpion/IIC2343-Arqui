@@ -1,0 +1,11 @@
+DATA:
+var1 9
+CODE:
+MOV A,(var1)
+MOV B,(var1)
+ADD A,1 // A=10
+SUB B,A // B=A-B=10-9=1
+SUB A,(var1) //A=A-Mem[var1]=10-9=1
+DEC A //A=0
+fin:
+JMP fin

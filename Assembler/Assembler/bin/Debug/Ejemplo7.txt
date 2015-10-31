@@ -1,0 +1,5 @@
+DATA:
+var1 Ah
+var2 Bh
+CODE:
+INC (var2)
