@@ -42,8 +42,7 @@ component ControlUnit is
         SPC     :   out std_logic;                      -- mux PC
         W       :   out std_logic;                      -- write RAM
         IncSp   :   out std_logic;                      -- increment stack pointer
-        DecSp   :   out std_logic;                      -- decrement stack pointer
-        SIN     :   std_logic                           -- mux input data
+        DecSp   :   out std_logic                       -- decrement stack pointer
     );
     end component;
 
@@ -157,9 +156,10 @@ signal upB          :   std_logic;
 signal downA        :   std_logic;
 signal downB        :   std_logic;
 
--- SENALES VALORES A, B y C
+-- SENALES VALORES A, B, SP
 signal valueA       :   std_logic_vector(15 downto 0);
 signal valueB       :   std_logic_vector(15 downto 0);
+signal valueSP      :   std_logic_vector(11 downto 0);
 
 -- SENAL RESULTADO OPERACION ALU
 signal Salu         :   std_logic_vector (15 downto 0);
@@ -175,7 +175,10 @@ signal MuxAout      :   std_logic_vector(15 downto 0);
 signal MuxBout      :   std_logic_vector(15 downto 0);
 
 -- SENAL MUX INPUT
-signal MuxINOut    :   std_logic_vector(15 downto 0);
+signal MuxINOut     :   std_logic_vector(15 downto 0);
+
+-- SENAL MUX ADDRESS
+signal MuxSOut      :   std_logic_vector(11 downto 0);
 
 begin
 
@@ -184,8 +187,7 @@ with SA select MuxAout <=
     valueA                  when "00",
     "0000000000000000"      when "01",
     "0000000000000001"      when "10",
-    MuxINOut               when "11",
-    valueA                  when others;
+    MuxINOut                when "11",
 
 -- Mux B
 with SB select MuxBout <=
@@ -198,6 +200,12 @@ with SB select MuxBout <=
 with romout(32 downto 17) select MuxINOut <=
     sw                      when "0000000000000000",
     "00000000000" & btn     when "0000000000000001";
+
+-- Mux Address in
+with SAdd select address <=
+    romout(28 downto 17)    when "00",
+    valueB(11 downto 0)     when "01",
+    valueSP                 when "10";
 
 -- AUMENTAR VALOR DE A y B
 upA     <= btn(1)   and btn(2); -- A izquierdo
@@ -289,7 +297,7 @@ inst_ROM: ROM port map(
 inst_RAM: RAM port map(
     clock   =>  clock,
     write   =>  W,
-    address =>  romout(28 downto 17),
+    address =>  address,
     datain  =>  Salu,
     dataout =>  ramout
     );
@@ -310,8 +318,7 @@ inst_ControlUnit: ControlUnit port map(
     SPC     =>  SPC,
     W       =>  W,
     IncSp   =>  IncSp,
-    DecSp   =>  DecSp,
-    SIN     =>  SIN
+    DecSp   =>  DecSp
     );
 
 inst_Status: RegistroStatus port map(
