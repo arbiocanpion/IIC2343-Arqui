@@ -1,10 +1,35 @@
 DATA:
-	aux1 0
-	aux2 0
+	list2 11
+		10
+		5
+		6
+		7
+		3
+		2
+		1
+		4
+	largo2	9
+	largo 0
+	inicio 0
+	i 0
+	n 0
+	div 0
+	j 0
+	min 0
+	imin 0
+
 CODE:
+	CALL median
+	JMP endFinal
+
+endFinal:
+	JMP endFinal
+
 median: //en caso de ser un arreglo de largo par se elige el menor de los dos valores del medio
-	MOV (aux1),A
-	MOV (aux2),B
+	MOV A,(largo2)
+	MOV B,list2
+	MOV (largo),A
+	MOV (inicio),B
 	PUSH B
 	PUSH A
 	CALL sort
@@ -15,17 +40,95 @@ median: //en caso de ser un arreglo de largo par se elige el menor de los dos va
 	MOV A,B
 	CMP A,1
 	JEQ impar
-	MOV A,(aux1)
+	MOV A,(largo)
 	SHR A
-	ADD A,(aux2)
+	ADD A,(inicio)
 	DEC A
 	MOV B,A
 	MOV A,(B)
 	impar:
-	MOV A,(aux1)
+	MOV A,(largo)
 	DEC A
 	SHR A
-	ADD A,(aux)2
+	ADD A,(inicio)
 	MOV B,A
 	MOV A,(B)
+	RET
+
+
+sort:
+	MOV (largo),A
+	MOV (inicio),B
+	CMP A, 1
+	JEQ end
+	
+	MOV A,(inicio)
+	DEC A  //esto es solo para que funcione el while desde el principio
+	MOV (i),A
+	
+	while1:
+	INC (i)
+	MOV B,(i)
+	MOV (j),B //se pone i en j
+	MOV (imin),B //se pone i como indice del minimo
+	MOV A,(B)
+	MOV (min),A  //se pone el valor de i en el valor del minimo
+	
+	while2:
+	INC (j)
+	MOV A,(min)  //aca se compara el valor minimo actual con el valor de J
+	MOV B,(j)
+	MOV B,(B)
+	CMP A,B
+	JLT endcomp //si el minimo es menor, nos saltamos lo siguiente
+	MOV (min),B  //aca se cambia el valor del minimo y su indice por el de J
+	MOV A,(j)
+	MOV (imin),A
+	endcomp:
+	MOV B,(largo)   //esto es para ver si J todavia no se sale del arreglo, osea ver si seguimos con el while2
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	CMP A,(j)  //
+	JGT while2
+  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+	MOV B,(i)
+	MOV B,(B)
+	MOV A,B
+	MOV B,(imin)
+	MOV (B),A
+	MOV B,(i)
+	MOV A,(min)
+	MOV (B),A  //
+	MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	DEC A
+	CMP A,(i)  //
+	JGT while1
+end:
+	RET	
+
+division:
+
+	MOV (n),A
+	MOV (div),B
+	MOV (i),0
+	
+	while:
+	MOV A,(n)
+	CMP A,B
+	JLT endwhile
+	INC (i)
+	MOV A,(div)
+	ADD B,A
+	JMP while
+	
+	endwhile:
+	MOV A,B
+	SUB B,(div)
+	MOV A,(n)
+	SUB B,A
+	MOV A,(i)
 	RET

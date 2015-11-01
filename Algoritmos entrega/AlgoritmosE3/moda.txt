@@ -1,13 +1,34 @@
 DATA:
-	inicio
-	largo
-	actual
-	moda
-	t
-	ractual
-	rmoda
+	list2 11
+		4
+		4
+		6
+		6
+		3
+		2
+		6
+	largo2	8
+	inicio 0
+	largo 0
+	actual 0
+	moda 0
+	t 0
+	ractual 0
+	rmoda 0
+	i 0
+	j 0
+	min 0
+	imin 0
 	
 CODE:
+	MOV A,(largo2)
+	MOV B,list2
+	CALL moda
+	JMP endFinal
+
+endFinal:
+	JMP endFinal
+
 moda:
 
 	MOV (largo),A
@@ -26,11 +47,11 @@ moda:
 	MOV (ractual),A
 	MOV (rmoda),A
 	
-	while:
+	whilem:
 	INC (t)
 	MOV A,(t)
 	CMP A,(largo)   //se compara que el siguiente valor este en el arreglo
-	JGE endwhile
+	JGE endwhilem
 	MOV B,(t)
 	MOV A,(inicio)
 	ADD B,A
@@ -39,7 +60,7 @@ moda:
 	CMP A,B  //se compara el valor actual con el de A
 	JNE else
 	INC(ractual)  //si son iguales se aumenta el conteo y se sigue con el siguiente
-	JMP while
+	JMP whilem
 	else:
 	MOV A,(ractual)
 	CMP A,(rmoda)
@@ -56,6 +77,62 @@ moda:
 	ADD B,A
 	MOV A,(B)
 	MOV (actual),A
-	JMP while
-	endwhile
+	JMP whilem
+	endwhilem:
+	MOV A,(moda)
+	MOV B,(rmoda)
 	RET
+
+sort:
+	MOV (largo),A
+	MOV (inicio),B
+	CMP A, 1
+	JEQ end
+	
+	MOV A,(inicio)
+	DEC A  //esto es solo para que funcione el while desde el principio
+	MOV (i),A
+	
+	while1:
+	INC (i)
+	MOV B,(i)
+	MOV (j),B //se pone i en j
+	MOV (imin),B //se pone i como indice del minimo
+	MOV A,(B)
+	MOV (min),A  //se pone el valor de i en el valor del minimo
+	
+	while2:
+	INC (j)
+	MOV A,(min)  //aca se compara el valor minimo actual con el valor de J
+	MOV B,(j)
+	MOV B,(B)
+	CMP A,B
+	JLT endcomp //si el minimo es menor, nos saltamos lo siguiente
+	MOV (min),B  //aca se cambia el valor del minimo y su indice por el de J
+	MOV A,(j)
+	MOV (imin),A
+	endcomp:
+	MOV B,(largo)   //esto es para ver si J todavia no se sale del arreglo, osea ver si seguimos con el while2
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	CMP A,(j)  //
+	JGT while2
+  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+	MOV B,(i)
+	MOV B,(B)
+	MOV A,B
+	MOV B,(imin)
+	MOV (B),A
+	MOV B,(i)
+	MOV A,(min)
+	MOV (B),A  //
+	MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	DEC A
+	CMP A,(i)  //
+	JGT while1
+end:
+	RET	
