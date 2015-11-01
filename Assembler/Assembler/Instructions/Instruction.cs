@@ -96,5 +96,15 @@ namespace Assembler
         {
             return _instruction;
         }
+
+        public static bool isDoubleCycleInstruction(string line)
+        {
+            if (line.Length == 0) return false;
+            if (line.Split(' ')[0].Equals("RET") || line.Split(' ')[0].Equals("POP"))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

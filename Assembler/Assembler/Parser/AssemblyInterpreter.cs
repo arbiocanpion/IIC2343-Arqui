@@ -82,6 +82,10 @@ namespace Assembler.Parser
                 else if (!LineFormatter.ReservedWord(line))
                 {
                     instructionCounter++;
+                    if (Instruction.isDoubleCycleInstruction(line))
+                    {
+                        instructionCounter++;
+                    }
                 }
             }
         }
