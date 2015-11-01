@@ -1,26 +1,29 @@
 DATA:
-	//param: inicio
-	//param: largo
+	inicio
+	largo
 	i
 	j
 	min
 	imin
 
 CODE:
-	MOV A, (largo)
+
+sort:
+	MOV (largo),A
+	MOV (inicio),B
 	CMP A, 1
 	JEQ end
 	
-	MOV A, (inicio)
+	MOV A,(inicio)
 	DEC A  //esto es solo para que funcione el while desde el principio
 	MOV (i),A
 	
 	while1:
 	INC (i)
-	MOV A,(i)
-	MOV (j),A //se pone i en j
-	MOV (imin),A //se pone i como indice del minimo
-	MOV A,(A)
+	MOV B,(i)
+	MOV (j),B //se pone i en j
+	MOV (imin),B //se pone i como indice del minimo
+	MOV A,(B)
 	MOV (min),A  //se pone el valor de i en el valor del minimo
 	
 	while2:
@@ -40,9 +43,11 @@ CODE:
 	DEC A
 	CMP A,(j)  //
 	JGT while2
-	MOV B,(imin)  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
-	MOV A,(i)
-	MOV A,(A)
+  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+	MOV B,(i)
+	MOV B,(B)
+	MOV A,B
+	MOV B,(imin)
 	MOV (B),A
 	MOV B,(i)
 	MOV A,(min)
@@ -54,4 +59,5 @@ CODE:
 	DEC A
 	CMP A,(i)  //
 	JGT while1
-	end:	
+	end:
+	RET	
