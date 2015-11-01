@@ -1,0 +1,50 @@
+DATA:
+	//param: inicio
+	//param: largo
+	actual
+	moda
+	t
+	ractual
+	rmoda
+	
+CODE:
+	ordenar(inicio, largo)
+	MOV (t),0
+	MOV A,(inicio)
+	MOV A,(A)  //se carga el primer valor en actual, y por defecto la moda es el primer valor, con una repeticion
+	MOV (actal),A
+	MOV (moda),A
+	MOV (ractual),1
+	MOV (rmoda),1
+	
+	while:
+	INC (t)
+	MOV A,(t)
+	CMP A,(largo)   //se compara que el siguiente valor este en el arreglo
+	JGE endwhile
+	MOV B,(t)
+	MOV A,(inicio)
+	ADD A,B
+	MOV B,(A)  //se carga el siguiente valor del arreglo en B
+	MOV A,(actual)
+	CMP A,B  //se compara el valor actual con el de B
+	JNE else
+	INC(ractual)  //si son iguales se aumenta el conteo y se sigue con el siguiente
+	JMP while
+	else:
+	MOV A,(ractual)
+	CMP A,(rmoda)
+	JLE not  //si no son iguales, se compara el conteo del valor actual con el de la moda
+	MOV A,(actual)   //si el actual es mayor al de la moda, lo cambiamos
+	MOV (moda),A
+	MOV A,(ractual)
+	MOV (rmoda),A
+	not:
+	MOV (ractual),1  //se resetea el valor actual y el conteo
+	MOV B,(t)
+	MOV A,(inicio)
+	ADD A,B
+	MOV B,(A)
+	MOV (actual),B
+	JMP while
+	endwhile	

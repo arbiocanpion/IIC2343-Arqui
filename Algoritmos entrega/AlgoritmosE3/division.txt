@@ -1,0 +1,25 @@
+DATA:
+	i 	//iteraciones
+	n 	//numerador
+	div //divisor
+
+CODE:
+	MOV (n),A
+	MOV (div),B
+	MOV (i),0
+	
+	while:
+	MOV A,(n)
+	CMP A,B
+	JLT endwhile
+	INC (i)
+	MOV A,(div)
+	ADD B,A
+	JMP while
+	
+	endwhile:
+	MOV A,B
+	SUB B,(div)
+	MOV A,(n)
+	SUB B,A
+	MOV A,(i)

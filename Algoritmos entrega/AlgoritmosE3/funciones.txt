@@ -83,8 +83,8 @@ end:
 
 sacar la mediana de un arreglo y entregarla en el registro A
 argumentos: inicio, largo
-ordenar(inicio,largo)
 
+ordenar(inicio,largo)
 MOV A,(largo)
 MOV B,2
 dividir //divide A:B
@@ -133,7 +133,7 @@ moda de un arreglo
 parametros: inicio, largo
 variables: actual, moda, t, ractual, rmoda
 
-ordanar(inicio,largo)
+ordenar(inicio,largo)
 MOV (t),0
 MOV A,(inicio)
 MOV A,(A)  //se carga el primer valor en actual, y por defecto la moda es el primer valor, con una repeticion

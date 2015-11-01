@@ -1,0 +1,20 @@
+DATA:
+	//param: inicio
+	//param: largo
+CODE:
+	ordenar(inicio,largo)
+	MOV A,(largo)
+	MOV B,2
+	dividir //divide A:B
+	MOV A,B
+	CMP A,1
+	JEQ impar
+	MOV A,(largo)
+	SHR A
+	MOV A,(A)
+	impar:
+	MOV A,(largo)
+	DEC A
+	SHR A
+	INC A
+	MOV A,(A)	

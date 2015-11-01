@@ -1,0 +1,57 @@
+DATA:
+	//param: inicio
+	//param: largo
+	i
+	j
+	min
+	imin
+
+CODE:
+	MOV A, (largo)
+	CMP A, 1
+	JEQ end
+	
+	MOV A, (inicio)
+	DEC A  //esto es solo para que funcione el while desde el principio
+	MOV (i),A
+	
+	while1:
+	INC (i)
+	MOV A,(i)
+	MOV (j),A //se pone i en j
+	MOV (imin),A //se pone i como indice del minimo
+	MOV A,(A)
+	MOV (min),A  //se pone el valor de i en el valor del minimo
+	
+	while2:
+	INC (j)
+	MOV A,(min)  //aca se compara el valor minimo actual con el valor de J
+	MOV B,(j)
+	MOV B,(B)
+	CMP A,B
+	JLT endcomp //si el minimo es menor, nos saltamos lo siguiente
+	MOV (min),B  //aca se cambia el valor del minimo y su indice por el de J
+	MOV A,(j)
+	MOV (imin),A
+	endcomp:
+	MOV B,(largo)   //esto es para ver si J todavia no se sale del arreglo, osea ver si seguimos con el while2
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	CMP A,(j)  //
+	JGT while2
+	MOV B,(imin)  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+	MOV A,(i)
+	MOV A,(A)
+	MOV (B),A
+	MOV B,(i)
+	MOV A,(min)
+	MOV (B),A  //
+	MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	DEC A
+	CMP A,(i)  //
+	JGT while1
+	end:	

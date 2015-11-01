@@ -1,0 +1,27 @@
+DATA:
+	//param: inicio
+	//param: largo
+	i
+	suma
+
+CODE:
+	MOV (suma),0
+	MOV (i),0
+	
+	while:
+	MOV A,(i)
+	CMP A,(largo)
+	JGE endwhile
+	MOV A,(inicio)
+	MOV B,(i)
+	ADD A,B
+	MOV B,(suma)
+	MOV A,(A)
+	ADD A,B
+	MOV (suma),A
+	INC (i)
+	JMP hile
+	endwhile
+	MOV A,(suma)
+	MOV B,(largo)
+	dividir	
