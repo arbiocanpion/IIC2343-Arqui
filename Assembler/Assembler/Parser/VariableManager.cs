@@ -19,10 +19,20 @@ namespace Assembler.Parser
 
         public static bool IsVariable(string line)
         {
-            if (!LineFormatter.ReservedWord(line) && line.Split(' ').Length <= 2)
+            int count = 0;
+            if (!LineFormatter.ReservedWord(line))
             {
                 return true;
             }
+            foreach (string b in line.Split(' '))
+            {
+                if (!b.Equals("") || !b.Equals(" "))
+                {
+                    count++;
+                }
+            }
+            if (count == 2)
+                return true;
             return false;
         }
         public void AddVariable(string name, string value) 

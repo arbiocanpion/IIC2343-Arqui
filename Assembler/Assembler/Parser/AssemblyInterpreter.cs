@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assembler.Parser
@@ -23,6 +24,7 @@ namespace Assembler.Parser
 
         public string Interpret(string code)
         {
+            code = Regex.Replace(code, "[\t ]{2,}", " ");
             code = code.Replace("\r\n", "\n");
             code = code.Replace("\t", " ");
             assemblyCode = new AssemblyCode(code);
@@ -47,24 +49,38 @@ namespace Assembler.Parser
                     && !LineFormatter.IsCommentLine(codeLines[i]))
                 {
                     string line = LineFormatter.FormatCodeLine(codeLines[i]);
-                    Instruction instruction = InstructionFactory
-                        .createInstruction(line, labelManager.labels, variableManager.variablesValues);
-                    instructions.Add(instruction);
-                    instructionCounter++;
-                    if (instruction.GetType() == typeof(Pop1Instruction))
+                    try
                     {
-                        instructions.Add(
-                            InstructionFactory.createInstruction(
-                                "2"+line, labelManager.labels, variableManager.variablesValues));
+                        Instruction instruction = InstructionFactory
+                            .createInstruction(line, labelManager.labels, variableManager.variablesValues);
+
+                        instructions.Add(instruction);
                         instructionCounter++;
+                        if (instruction.GetType() == typeof(Pop1Instruction))
+                        {
+                            instructions.Add(
+                                InstructionFactory.createInstruction(
+                                    "2" + line, labelManager.labels, variableManager.variablesValues));
+                            instructionCounter++;
+                        }
+                        else if (instruction.GetType() == typeof(Ret1Instruction))
+                        {
+                            instructions.Add(
+                                InstructionFactory.createInstruction(
+                                    "2" + line, labelManager.labels, variableManager.variablesValues));
+                            instructionCounter++;
+                        }
                     }
-                    else if (instruction.GetType() == typeof(Ret1Instruction))
+                    catch(Exception ex)
                     {
-                        instructions.Add(
-                            InstructionFactory.createInstruction(
-                                "2"+line, labelManager.labels, variableManager.variablesValues));
-                        instructionCounter++;
+                        Console.WriteLine();
+                        Console.WriteLine("ERROR EN LINEA: " +line);
+                        Console.WriteLine();
+                        Console.WriteLine(ex.Message);
+                        Console.WriteLine(ex.StackTrace);
+                        Console.ReadKey();
                     }
+
                 }
             }
         }
@@ -98,7 +114,6 @@ namespace Assembler.Parser
                 string line = LineFormatter.FormatDataLine(dataLines[i]);
                 if (VariableManager.IsVariable(line))
                 {
-                    // TODO: cambiar esto, ahora las lineas de variables pueden tener solo uno de largo.
                     string[] pair = line.Split(' ');
                     string value;
                     if (pair.Length == 1)

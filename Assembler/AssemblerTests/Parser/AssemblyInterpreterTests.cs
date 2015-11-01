@@ -229,5 +229,69 @@ namespace Assembler.Parser.Tests
                 Assert.Fail("Hubo un error en ejemplo 14");
             }
         }
+
+        [TestMethod()]
+        public void EjemploPrueba()
+        {
+            try
+            {
+                string text = File.ReadAllText("prueba.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en prueba");
+            }
+        }
+
+        [TestMethod()]
+        public void EjemploSort()
+        {
+            try
+            {
+                string text = File.ReadAllText("sort.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en sort");
+            }
+        }
+
+        [TestMethod()]
+        public void EjemploPromedio()
+        {
+            try
+            {
+                string text = File.ReadAllText("promedio.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en promedio");
+            }
+        }
+
+        [TestMethod()]
+        public void EjemploModa()
+        {
+            try
+            {
+                string text = File.ReadAllText("moda.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en moda");
+            }
+        }
     }
 }

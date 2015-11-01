@@ -1,0 +1,78 @@
+DATA:
+	list2 11
+		10
+		4
+		6
+		7
+		3
+		2
+		1
+	largo2	8
+	i 0
+	it 0
+	suma 0
+	long 0
+	init 0
+	n 0
+	div 0
+CODE:
+	CALL media
+	JMP endFinal
+
+endFinal:
+	JMP endFinal
+
+media:
+	MOV A,(largo2)
+	MOV B,list2
+	PUSH A
+	MOV A, 0
+	MOV (suma), A
+	MOV (i), A
+	POP A
+	MOV (long),A
+	MOV (init),B
+
+	while:
+	MOV A,(i)
+	CMP A,(long)
+	JGE endwhile
+	MOV A,(init)
+	MOV B,(i)
+	ADD B,A
+	MOV A,(B)
+	MOV B,(suma)
+	ADD A,B
+	MOV (suma),A
+	INC (i)
+	JMP while
+	endwhile:
+	MOV A,(suma)
+	MOV B,(long)
+	CALL division
+	RET
+
+division:
+	MOV (n),A
+	MOV (div),B
+	PUSH A
+	MOV A, 0
+	MOV (it),A
+	POP A
+	
+	whiled:
+	MOV A,(n)
+	CMP A,B
+	JLT endwhiled
+	INC (it)
+	MOV A,(div)
+	ADD B,A
+	JMP whiled
+	
+	endwhiled:
+	MOV A,B
+	SUB B,(div)
+	MOV A,(n)
+	SUB B,A
+	MOV A,(it)
+	RET	

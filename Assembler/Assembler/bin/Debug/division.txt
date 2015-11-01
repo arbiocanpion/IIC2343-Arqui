@@ -1,0 +1,32 @@
+DATA:
+	i 	0
+	n 	23
+	div	4
+
+CODE:
+division:
+	MOV A,23
+	MOV B,4
+	MOV (n),A
+	MOV (div),B
+	PUSH A
+	MOV A, 0
+	MOV (i), A
+	POP A
+	
+	while:
+	MOV A,(n)
+	CMP A,B
+	JLT endwhile
+	INC (i)
+	MOV A,(div)
+	ADD B,A
+	JMP while
+	
+	endwhile:
+	MOV A,B
+	SUB B,(div)
+	MOV A,(n)
+	SUB B,A
+	MOV A,(i)
+	RET

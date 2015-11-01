@@ -1,0 +1,136 @@
+DATA:
+	list2 11
+		10
+		5
+		6
+		7
+		3
+		2
+		1
+		4
+	largo2	9
+	largo 0
+	inicio 0
+	i 0
+	n 0
+	div 0
+	j 0
+	min 0
+	imin 0
+
+CODE:
+	CALL median
+	JMP endFinal
+
+endFinal:
+	JMP endFinal
+
+median: 
+	MOV A,(largo2)
+	MOV B,list2
+	MOV (largo),A
+	MOV (inicio),B
+	PUSH B
+	PUSH A
+	CALL sort
+	POP A
+	POP B
+	MOV B,2
+	CALL division
+	MOV A,B
+	CMP A,1
+	JEQ impar
+	MOV A,(largo)
+	SHR A
+	ADD A,(inicio)
+	DEC A
+	MOV B,A
+	MOV A,(B)
+	impar:
+	MOV A,(largo)
+	DEC A
+	SHR A
+	ADD A,(inicio)
+	MOV B,A
+	MOV A,(B)
+	RET
+
+
+sort:
+	MOV (largo),A
+	MOV (inicio),B
+	CMP A, 1
+	JEQ end
+	
+	MOV A,(inicio)
+	DEC A
+	MOV (i),A
+	
+	while1:
+	INC (i)
+	MOV B,(i)
+	MOV (j),B
+	MOV (imin),B
+	MOV A,(B)
+	MOV (min),A
+	
+	while2:
+	INC (j)
+	MOV A,(min)
+	MOV B,(j)
+	MOV B,(B)
+	CMP A,B
+	JLT endcomp
+	MOV (min),B
+	MOV A,(j)
+	MOV (imin),A
+endcomp:
+	MOV B,(largo)
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	CMP A,(j)  
+	JGT while2
+	MOV B,(i)
+	MOV B,(B)
+	MOV A,B
+	MOV B,(imin)
+	MOV (B),A
+	MOV B,(i)
+	MOV A,(min)
+	MOV (B),A
+	MOV B,(largo)
+	MOV A,(inicio)
+	ADD A,B
+	DEC A
+	DEC A
+	CMP A,(i)
+	JGT while1
+end:
+	RET	
+
+division:
+
+	MOV (n),A
+	MOV (div),B
+	PUSH A
+	MOV A, 0
+	MOV (i), A
+	POP A
+	
+	while:
+	MOV A,(n)
+	CMP A,B
+	JLT endwhile
+	INC (i)
+	MOV A,(div)
+	ADD B,A
+	JMP while
+	
+	endwhile:
+	MOV A,B
+	SUB B,(div)
+	MOV A,(n)
+	SUB B,A
+	MOV A,(i)
+	RET
