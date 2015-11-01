@@ -25,7 +25,7 @@ CODE:
 endFinal:
 	JMP endFinal
 
-median: //en caso de ser un arreglo de largo par se elige el menor de los dos valores del medio
+median: 
 	MOV A,(largo2)
 	MOV B,list2
 	MOV (largo),A
@@ -63,35 +63,34 @@ sort:
 	JEQ end
 	
 	MOV A,(inicio)
-	DEC A  //esto es solo para que funcione el while desde el principio
+	DEC A
 	MOV (i),A
 	
 	while1:
 	INC (i)
 	MOV B,(i)
-	MOV (j),B //se pone i en j
-	MOV (imin),B //se pone i como indice del minimo
+	MOV (j),B
+	MOV (imin),B
 	MOV A,(B)
-	MOV (min),A  //se pone el valor de i en el valor del minimo
+	MOV (min),A
 	
 	while2:
 	INC (j)
-	MOV A,(min)  //aca se compara el valor minimo actual con el valor de J
+	MOV A,(min)
 	MOV B,(j)
 	MOV B,(B)
 	CMP A,B
-	JLT endcomp //si el minimo es menor, nos saltamos lo siguiente
-	MOV (min),B  //aca se cambia el valor del minimo y su indice por el de J
+	JLT endcomp
+	MOV (min),B
 	MOV A,(j)
 	MOV (imin),A
-	endcomp:
-	MOV B,(largo)   //esto es para ver si J todavia no se sale del arreglo, osea ver si seguimos con el while2
+endcomp:
+	MOV B,(largo)
 	MOV A,(inicio)
 	ADD A,B
 	DEC A
-	CMP A,(j)  //
+	CMP A,(j)  
 	JGT while2
-  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
 	MOV B,(i)
 	MOV B,(B)
 	MOV A,B
@@ -99,13 +98,13 @@ sort:
 	MOV (B),A
 	MOV B,(i)
 	MOV A,(min)
-	MOV (B),A  //
-	MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
+	MOV (B),A
+	MOV B,(largo)
 	MOV A,(inicio)
 	ADD A,B
 	DEC A
 	DEC A
-	CMP A,(i)  //
+	CMP A,(i)
 	JGT while1
 end:
 	RET	
