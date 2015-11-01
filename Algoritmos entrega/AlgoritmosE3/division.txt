@@ -24,3 +24,4 @@ division:
 	MOV A,(n)
 	SUB B,A
 	MOV A,(i)
+	RET
