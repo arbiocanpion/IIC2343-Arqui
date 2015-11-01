@@ -66,9 +66,8 @@ endcomp:
 	MOV A,(inicio)
 	ADD A,B
 	DEC A
-	CMP A,(j)  //
-	JGT while2
-  //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
+	CMP A,(j)  
+	JGT while2 //esto se encarga de poner el minimo del subarreglo al principio, y el del principio en el otro lugar
 	MOV B,(i)
 	MOV B,(B)
 	MOV A,B
@@ -76,13 +75,13 @@ endcomp:
 	MOV (B),A
 	MOV B,(i)
 	MOV A,(min)
-	MOV (B),A  //
+	MOV (B),A  
 	MOV B,(largo)  //y aca vemos si i todavia no se pasa de la penultima posicion, para ver si seguimos con el while1
 	MOV A,(inicio)
 	ADD A,B
 	DEC A
 	DEC A
-	CMP A,(i)  //
+	CMP A,(i)  
 	JGT while1
 end:
 	RET	
