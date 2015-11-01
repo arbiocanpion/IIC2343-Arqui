@@ -1,10 +1,12 @@
 DATA:
-	i 	//iteraciones
-	n 	//numerador
-	div //divisor
+	i 	0
+	n 	23
+	div	4
 
 CODE:
 division:
+	MOV A,23
+	MOV B,4
 	MOV (n),A
 	MOV (div),B
 	MOV (i),0

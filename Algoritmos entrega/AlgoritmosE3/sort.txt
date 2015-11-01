@@ -6,15 +6,27 @@ DATA:
 			4
 			6
 	inicio 0
-	largo 5
+	largo 6
 	i 0
 	j 0
 	min 0
 	imin 0
+	list2 11
+		10
+		4
+		6
+		7
+		3
+		2
+		1
+	largo2	8
 
 CODE:
-	MOV A, largo
+	MOV A, (largo)
 	MOV B, list
+	CALL sort
+	MOV A, (largo2)
+	MOV B, list2
 	CALL sort
 	JMP endFinal
 
