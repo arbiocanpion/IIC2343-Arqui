@@ -38,8 +38,10 @@ moda:
 	CALL sort
 	POP B
 	POP A
-	
-	MOV (t),0
+	PUSH A
+	MOV A, 0
+	MOV (t),A
+	POP A
 	MOV A,(B)  //se carga el primer valor en actual, y por defecto la moda es el primer valor, con una repeticion
 	MOV (actual),A
 	MOV (moda),A

@@ -113,7 +113,10 @@ division:
 
 	MOV (n),A
 	MOV (div),B
-	MOV (i),0
+	PUSH A
+	MOV A, 0
+	MOV (i), A
+	POP A
 	
 	while:
 	MOV A,(n)

@@ -25,8 +25,11 @@ endFinal:
 media:
 	MOV A,(largo2)
 	MOV B,list2
-	MOV (suma),0
-	MOV (i),0
+	PUSH A
+	MOV A, 0
+	MOV (suma), A
+	MOV (i), A
+	POP A
 	MOV (long),A
 	MOV (init),B
 
@@ -52,7 +55,10 @@ media:
 division:
 	MOV (n),A
 	MOV (div),B
-	MOV (it),0
+	PUSH A
+	MOV A, 0
+	MOV (it),A
+	POP A
 	
 	whiled:
 	MOV A,(n)
