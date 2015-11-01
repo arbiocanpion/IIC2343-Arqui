@@ -1,12 +1,25 @@
 DATA:
-	inicio
-	largo
-	i
-	j
-	min
-	imin
+	list 	10
+			9
+			5
+			7
+			4
+			6
+	inicio 0
+	largo 5
+	i 0
+	j 0
+	min 0
+	imin 0
 
 CODE:
+	MOV A, largo
+	MOV B, list
+	CALL sort
+	JMP endFinal
+
+endFinal:
+	JMP endFinal
 
 sort:
 	MOV (largo),A
@@ -59,5 +72,5 @@ sort:
 	DEC A
 	CMP A,(i)  //
 	JGT while1
-	end:
+end:
 	RET	

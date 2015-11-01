@@ -1,0 +1,69 @@
+DATA:
+	length  5		
+	i 		0
+	min		0
+
+	list 	10
+			9
+			5
+			7
+			4
+			6
+
+CODE:
+	MOV A, (length)
+	MOV B, list
+	CALL sort
+	JMP end
+
+end:
+	JMP end
+
+sort:
+	CMP A, 1
+	JEQ endSort
+	CALL prepSort
+	JMP loop
+
+prepSort:
+	PUSH A
+	MOV A, 0
+	MOV (i), B
+	MOV A, (B)
+	MOV (min), A
+	POP A
+	RET
+
+loop:
+	PUSH A
+	ADD A, B
+	CMP A, (i)
+	JLT endLoop
+	POP A
+	PUSH A
+	PUSH B
+	MOV A, (i)
+	MOV B, (min)
+	CMP A, B
+	JLT newMin
+	JMP continueLoop
+
+continueLoop:
+	POP B
+	POP A
+	INC (i)
+	JMP loop
+
+newMin:
+	MOV (i), B
+	MOV (min), A
+	JMP continueLoop
+
+endLoop:
+	POP A
+	DEC A
+	INC (B)
+	CALL sort
+
+endSort:
+	RET
