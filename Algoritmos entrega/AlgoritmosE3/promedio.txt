@@ -1,27 +1,34 @@
 DATA:
-	//param: inicio
-	//param: largo
 	i
 	suma
-
+	long
+	init
 CODE:
+media:
 	MOV (suma),0
 	MOV (i),0
-	
+	MOV (long),A
+	MOV (init),B
+
 	while:
 	MOV A,(i)
-	CMP A,(largo)
+	CMP A,(long)
 	JGE endwhile
-	MOV A,(inicio)
+	MOV A,(init)
 	MOV B,(i)
-	ADD A,B
+	ADD B,A
+	MOV A,(B)
 	MOV B,(suma)
-	MOV A,(A)
 	ADD A,B
 	MOV (suma),A
 	INC (i)
-	JMP hile
+	JMP while
 	endwhile
 	MOV A,(suma)
-	MOV B,(largo)
-	dividir	
+	MOV B,(long)
+	PUSH A
+	PUSH B
+	CALL division
+	POP B
+	POP A
+	RET	

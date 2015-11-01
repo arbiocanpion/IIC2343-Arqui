@@ -1,21 +1,31 @@
 DATA:
-	//param: inicio
-	//param: largo
+	aux1 0
+	aux2 0
 CODE:
-	ordenar(inicio,largo)
-	MOV A,(largo)
+median: //en caso de ser un arreglo de largo par se elige el menor de los dos valores del medio
+	MOV (aux1),A
+	MOV (aux2),B
+	PUSH B
+	PUSH A
+	CALL sort
+	POP A
+	POP B
 	MOV B,2
-	dividir //divide A:B
+	CALL division
 	MOV A,B
 	CMP A,1
 	JEQ impar
-	MOV A,(largo)
-	SHR B,A
+	MOV A,(aux1)
+	SHR A
+	ADD A,(aux2)
+	DEC A
+	MOV B,A
 	MOV A,(B)
 	impar:
-	MOV A,(largo)
+	MOV A,(aux1)
 	DEC A
 	SHR A
-	INC A
+	ADD A,(aux)2
 	MOV B,A
-	MOV A,(B)	
+	MOV A,(B)
+	RET

@@ -4,6 +4,7 @@ DATA:
 	div //divisor
 
 CODE:
+division:
 	MOV (n),A
 	MOV (div),B
 	MOV (i),0
