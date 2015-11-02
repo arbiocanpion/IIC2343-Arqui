@@ -3,14 +3,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Basys3 is
     Port (
-        sw      :   in  std_logic_vector (15 downto 0);
-        btn     :   in  std_logic_vector (4 downto 0);  -- 0 Center, 1 Up, 2 Left, 3 Right, 4 Down
-        led     :   out std_logic_vector (2 downto 0);
-        clk     :   in  std_logic;
-        clk_up  :   in  std_logic;
-        seg     :   out std_logic_vector (7 downto 0);
-        an      :   out std_logic_vector (3 downto 0)
-    );
+        sw          : in   std_logic_vector (15 downto 0); -- SeÒales de entrada de los interruptores -- Arriba   = '1'   -- Los 3 swiches de la derecha: 2, 1 y 0.
+        btn         : in   std_logic_vector (4 downto 0);  -- SeÒales de entrada de los botones       -- Apretado = '1'   -- 0 central, 1 arriba, 2 izquierda, 3 derecha y 4 abajo.
+        led         : out  std_logic_vector (3 downto 0);  -- SeÒales de salida  a  los leds          -- Prendido = '1'   -- Los 4 leds de la derecha: 3, 2, 1 y 0.
+        clk         : in   std_logic;                      -- No Tocar - SeÒal de entrada del clock   -- Frecuencia = 100Mhz.
+        seg         : out  std_logic_vector (7 downto 0);  -- No Tocar - Salida de las seÒales de segmentos.
+        an          : out  std_logic_vector (3 downto 0)   -- No Tocar - Salida del selector de diplay.
+        );
 end Basys3;
 
 architecture Behavioral of Basys3 is
@@ -72,14 +71,31 @@ component PC
     );
     end component;
 
-component Clock_Divider
-    Port ( 
-        clk     :   in  std_logic;
-        clk_up  :   in  std_logic;
-        slow    :   in  std_logic;
-        clock   :   out std_logic
-    );
+component Clock_Divider -- No Tocar
+    Port (
+        clk         : in    std_logic;
+        speed       : in    std_logic_vector (1 downto 0);
+        clock       : out   std_logic
+          );
     end component;
+
+component Debouncer
+    Port (
+        clk         : in    std_logic;
+        datain      : in    std_logic_vector (4 downto 0);
+        dataout     : out   std_logic_vector (4 downto 0));
+    end component;
+
+component Timer 
+    Port (  
+        clk         : in    std_logic;
+        seconds     : out   std_logic_vector (15 downto 0);
+        mseconds    : out   std_logic_vector (15 downto 0);
+        useconds    : out   std_logic_vector (15 downto 0)
+          );
+    end component;
+
+signal d_btn            : std_logic_vector(4 downto 0);
     
 component Led_Driver
     Port (  
@@ -208,9 +224,14 @@ signal SadderPC     :   std_logic_vector(15 downto 0);
 signal MuxSPout     :   std_logic_vector(11 downto 0);
 signal CoutAdderPC  :   std_logic;
 
+-- SENALES TIMER
+signal seconds      :   std_logic_vector(15 downto 0);
+signal mseconds     :   std_logic_vector(15 downto 0);
+signal useconds     :   std_logic_vector(15 downto 0);
+
 begin
 
-clock <= clk;
+--clock <= clk;
 
 -- Mux A
 with SA select MuxAout <=
@@ -279,12 +300,24 @@ led(0) <= Sout(0);
 led(1) <= Sout(1);
 led(2) <= Sout(2);
 
---inst_Clock_Divider: Clock_Divider port map(
---    clk     =>  clk,
---    clk_up  =>  clk_up,
---    slow    =>  '1',
---    clock   =>  clock
---    );
+inst_Clock_Divider: Clock_Divider port map( -- No Tocar - Intancia de Clock_Divider.
+    clk         => clk,  -- No Tocar - Entrada del clock completo (100Mhz).
+    speed       => "01", -- Selector de velocidad: "00" full, "01" fast, "10" normal y "11" slow. 
+    clock       => clock -- No Tocar - Salida del clock reducido: 50Mhz, 8hz, 2hz y 0.5hz.
+    );
+
+inst_Debouncer: Debouncer port map(
+    clk         => clk,
+    datain      => btn,
+    dataout     => d_btn
+    );
+
+inst_Timer: Timer port map(
+    clk         => clk,
+    seconds     => seconds,
+    mseconds    => mseconds,
+    useconds    => useconds
+    );   
 
 inst_Led_Driver: Led_Driver port map(
 	dis_a   =>  dis_a,
