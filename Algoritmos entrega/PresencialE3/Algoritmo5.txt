@@ -1,0 +1,96 @@
+DATA:
+   a 1
+   b 2
+   s 3
+CODE:
+
+CALL wait_central
+IN A,0
+
+CALL wait_central
+IN B,0
+
+CALL mult_rusa
+
+end:
+JMP end
+
+mult_rusa:
+ PUSH B
+ MOV (a),A
+ MOV (b),B
+ MOV A,0
+ MOV (s),A
+ mult_rusa_next:
+ MOV A,(a)
+ AND A,1
+ CMP A,0
+ JEQ mult_rusa_even
+ MOV B,(b)
+ MOV A,(s)
+ ADD (s)
+ mult_rusa_even:
+ MOV A,(b)
+ SHL (b),A
+ MOV A,(a)
+ CMP A,0
+ JEQ mult_rusa_end
+ SHR (a),A
+ JMP mult_rusa_next
+ mult_rusa_end:
+ MOV A,(s)
+ POP B
+RET
+
+wait_central:
+ PUSH A
+ wait_central_loop:
+ CALL std_button_wait
+ CMP A,1
+ JNE wait_central_loop
+ POP A
+RET
+
+/////////////////Libreria std/////////////////////////////////////////////
+									//
+std_reg_swap:								//
+ XOR A,B								//
+ XOR B,A								//
+ XOR A,B								//
+RET									//
+									//
+/////////////////Libreria button {wait,std}///////////////////////////////
+									//
+									//
+std_button_wait:		// * en A, * en B			//
+ PUSH B				// Guarda B				//
+ IN A,1				// Estado Actual			//
+ std_button_wait_press_loop:						//			
+ IN B,1				// Nuevo Estado				//
+ CMP A,B			// Si !=				//
+ JEQ std_button_wait_press_loop // Continuar				//
+ XOR B,A			// Bits Cambiados			//
+ std_button_wait_release_lp:						//
+ IN A,1				// Nuevo Estado				//
+ AND A,B			// Bits Aún Cambiados			//
+ CMP A,0			// SI == 0				//
+ JNE std_button_wait_release_lp	// Continuar				//
+ MOV A,B			// Bits Cambiados a A			//
+ POP B				// Recupera B				//
+RET				// Retorno en A				//
+									//
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+

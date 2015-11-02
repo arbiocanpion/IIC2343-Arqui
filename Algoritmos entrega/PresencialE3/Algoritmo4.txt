@@ -1,0 +1,22 @@
+DATA:
+
+CODE:
+
+MOV A,3
+MOV B,2
+PUSH A
+PUSH B
+POP A
+POP B
+CALL sum
+ADD B,A
+
+end:
+JMP end
+
+sum:
+ ADD A,B
+RET
+
+
+

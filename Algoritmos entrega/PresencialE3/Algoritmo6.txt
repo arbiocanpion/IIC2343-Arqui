@@ -1,0 +1,457 @@
+DATA:
+
+mean	0
+
+median	0
+
+mode	0
+
+array	4
+	2
+	2
+	1
+	3
+n 	5
+
+array2	100
+	23
+	80
+	3
+	9
+	28
+	9
+	1
+n2 	8
+
+array3	54
+	58
+	49
+	15
+	31
+	76
+	44
+	38
+	77
+	90
+	4
+	47
+	4
+	81
+	59
+	26
+	5
+	82
+	37
+	32
+	65
+	85
+	9
+	95
+	13
+	87
+	33
+	11
+	22
+	67
+	61
+	83
+	37
+n3 	33
+
+
+//////////////////Variables para libreria std/////////////////////////////
+									//
+std_mem_swap_temp 0							//
+									//
+//////////////////Variables para libreria std_sort////////////////////////
+									//
+std_sort_min_max_i 0							//
+									//
+//////////////////Variables para libreria std_math////////////////////////
+									//
+std_math_n 0								//
+									//
+//////////////////Variables para libreria std_stat////////////////////////
+									//
+std_stat_mode_mode_temp 0						//
+std_stat_mode_mode 0							//
+std_stat_mode_max_i 0							//
+std_stat_mode_i 0							//
+									//
+//////////////////////////////////////////////////////////////////////////
+
+CODE:
+
+MOV A,(n)
+MOV B,array
+CALL run_stats
+
+MOV A,2
+CMP A,(mean)
+JNE error
+
+MOV A,2
+CMP A,(median)
+JNE error
+
+MOV A,2
+CMP A,(mode)
+JNE error
+
+MOV A,(n2)
+MOV B,array2
+CALL run_stats
+
+MOV A,32
+CMP A,(mean)
+JNE error
+
+MOV A,16
+CMP A,(median)
+JNE error
+
+MOV A,9
+CMP A,(mode)
+JNE error
+
+MOV A,(n3)
+MOV B,array3
+CALL run_stats
+
+MOV A,48
+CMP A,(mean)
+JNE error
+
+MOV A,47
+CMP A,(median)
+JNE error
+
+MOV A,4
+CMP A,(mode)
+JNE error
+
+end:
+ MOV A,AAh
+ MOV B,AAh
+JMP end
+
+error:
+ MOV A,FFh
+ MOV B,FFh
+JMP error
+
+run_stats:
+ CALL std_sort_min_max_sort
+ PUSH A
+ CALL std_stat_mean
+ MOV (mean),A
+ POP A
+ PUSH A
+ CALL std_stat_median
+ MOV (median),A
+ POP A
+ PUSH A
+ CALL std_stat_mode
+ MOV (mode),A
+ POP A 
+RET
+
+
+//////////////////Libreria de std/////////////////////////////////////////
+									//
+									//
+std_reg_swap:								//
+ XOR A,B								//
+ XOR B,A								//
+ XOR A,B								//
+RET									//
+									//
+std_mem_swap:								//
+ PUSH B									//
+ PUSH A									//
+ PUSH B									//
+ MOV B,(B)								//
+ MOV (std_mem_swap_temp),B						//
+ CALL std_reg_swap							//
+ MOV A,(B)								//
+ POP B									//
+ MOV (B),A								//
+ MOV A,(std_mem_swap_temp)						//
+ POP B									//
+ MOV (B),A								//
+ POP A									//
+ CALL std_reg_swap							//
+RET									//
+									//
+std_get_mems:								//
+ MOV B,(B)								//
+ CALL std_reg_swap							//
+ MOV B,(B)								//
+ CALL std_reg_swap							//
+RET									//
+									//
+/////////////////Libreria std_math {std}//////////////////////////////////
+									//
+std_math_divide:							//
+ PUSH B									//
+ MOV B,0								//
+ MOV (std_math_n),B							//
+ POP B									//
+ std_math_divide_loop:							//
+ CMP A,B								//
+ JLT std_math_divide_end						//
+ SUB A,B								//
+ INC (std_math_n)							//
+ JMP std_math_divide_loop						//
+ std_math_divide_end:							//
+ CALL std_reg_swap							//
+ MOV A,(std_math_n)							//
+RET									//
+									//
+std_math_round_divide:							//
+ PUSH B									//
+ SHL A									//
+ CALL std_math_divide							//
+ INC A									//
+ SHR A									//
+ POP B									//
+RET									//
+									//
+std_math_sum_array:							//
+ PUSH B									//
+ PUSH B									//
+ MOV B,0								//
+ MOV (std_math_n),B							//
+ POP B									//
+ std_math_sum_array_loop:						//
+ PUSH B									//
+ PUSH A									//
+ CMP A,0								//
+ JEQ std_math_sum_array_end						//
+ MOV A,(std_math_n)							//
+ ADD A,(B)								//
+ MOV (std_math_n),A							//
+ POP A									//
+ POP B									//
+ DEC A									//
+ INC B									//
+ JMP std_math_sum_array_loop						//
+ std_math_sum_array_end:						//
+ POP B									//
+ POP B									//
+ POP B									//
+ MOV A,(std_math_n) 							//
+RET									//
+									//
+/////////////////Libreria std_sort {std}//////////////////////////////////
+									//
+std_sort_min_max_sort:							//
+ PUSH B									//
+ PUSH A									//
+ std_sort_min_max_sort_loop:						//
+ CALL std_sort_min_max_pass						//
+ CMP A,3								//
+ JLT std_sort_min_max_sort_end						//
+ SUB A,2								//
+ INC B									//
+ JMP std_sort_min_max_sort_loop						//
+ std_sort_min_max_sort_end:						//
+ POP A									//
+ POP B									//
+RET									//
+									//
+std_sort_min_max_pass_init:						//
+ PUSH A									//
+ PUSH B									//
+ ADD A,B								//
+ CALL std_get_mems							//
+ CMP A,B								//
+ JGE std_sort_min_max_pass_init_end					//
+ POP B									//
+ POP A									//
+ PUSH A									//
+ ADD A,B								//
+ CALL std_mem_swap							//
+ PUSH B									//
+ std_sort_min_max_pass_init_end:					//
+ POP B									//
+ POP A									//
+RET									//
+									//
+std_sort_min_max_pass:							//
+ PUSH B									//
+ PUSH A									//
+ CMP A,1								//
+ JLE std_sort_min_max_pass_end						//
+ DEC A									//
+ CALL std_sort_min_max_pass_init					//
+ CMP A,1								//
+ JLE std_sort_min_max_pass_end						//
+ PUSH A									//
+ MOV A,0								//
+ MOV (std_sort_min_max_i),A						//
+ POP A									//
+ std_sort_min_max_pass_loop:						//
+ INC (std_sort_min_max_i)						//
+ CALL std_sort_min_max_test_min						//
+ CALL std_sort_min_max_test_max						//
+ CMP A,(std_sort_min_max_i)						//
+ JGT std_sort_min_max_pass_loop						//
+ std_sort_min_max_pass_end:						//
+ POP A									//
+ POP B									//
+RET									//
+									//
+std_sort_min_max_test_min:						//
+ PUSH A									//
+ PUSH B									//
+ MOV A,B								//
+ ADD A,(std_sort_min_max_i)						//
+ CALL std_get_mems							//
+ CMP A,B								//
+ JGE std_sort_min_max_test_min_end					//
+ POP B									//
+ POP A									//
+ PUSH A									//
+ PUSH B									//
+ MOV A,B								//
+ ADD A,(std_sort_min_max_i)						//
+ CALL std_mem_swap							//
+ std_sort_min_max_test_min_end:						//
+ POP B									//
+ POP A									//
+RET									//
+									//
+std_sort_min_max_test_max:						//
+ PUSH A									//
+ PUSH B									//
+ PUSH B									//
+ ADD B,A								//
+ POP A									//
+ ADD A,(std_sort_min_max_i)						//
+ CALL std_get_mems							//
+ CMP A,B								//
+ JLE std_sort_min_max_test_min_end					//
+ POP B									//
+ POP A									//
+ PUSH A									//
+ PUSH B									//
+ PUSH B									//
+ ADD B,A								//
+ POP A									//
+ ADD A,(std_sort_min_max_i)						//
+ CALL std_mem_swap							//
+ std_sort_min_max_test_max_end:						//
+ POP B									//
+ POP A									//
+RET									//
+									//
+/////////////////Libreria std_stat {std}//////////////////////////////////
+									//
+std_stat_mean:								//
+ PUSH B									//
+ PUSH A									//
+ CALL std_math_sum_array						//
+ POP B									//
+ CALL std_math_round_divide						//
+ POP B									//
+RET									//
+									//
+std_stat_median:							//
+ PUSH B									//
+ PUSH A									//
+ SHR A									//
+ JCR std_stat_median_odd						//
+ POP A									//
+ DEC A									//
+ SHR A									//
+ ADD B,A								//
+ MOV A,(B)								//
+ INC B									//
+ ADD A,(B)								//
+ INC A									//
+ SHR A									//
+ POP B									//
+ RET									//
+ std_stat_median_odd:							//
+ POP A									//
+ SHR A									//
+ ADD B,A								//
+ MOV A,(B)								//
+ POP B									//
+RET									//
+									//
+std_stat_mode:								//
+ PUSH B									//
+ PUSH B									//
+ MOV B,0								//
+ MOV (std_stat_mode_max_i),B						//
+ MOV (std_stat_mode_i),B						//
+ POP B									//
+ PUSH A									//
+ MOV A,(B)								//
+ MOV (std_stat_mode_mode_temp),A					//
+ MOV (std_stat_mode_mode),A						//
+ std_stat_mode_loop:							//
+ POP A 									//
+ CMP A,0								//
+ JEQ std_stat_mode_end							//
+ DEC A									//
+ PUSH A									//
+ MOV A,(B)								//
+ CMP A,(std_stat_mode_mode_temp)					//
+ JEQ std_stat_mode_loop_eq						//
+ MOV (std_stat_mode_mode_temp),A					//
+ MOV A,0								//
+ MOV (std_stat_mode_i),A						//
+ std_stat_mode_loop_eq:							//
+ INC(std_stat_mode_i)							//
+ INC B									//
+ MOV A,(std_stat_mode_i)						//
+ CMP A,(std_stat_mode_max_i)						//
+ JLE std_stat_mode_loop							//
+ MOV (std_stat_mode_max_i),A						//
+ MOV A,(std_stat_mode_mode_temp)					//
+ MOV (std_stat_mode_mode),A						//
+ JMP std_stat_mode_loop							//
+ std_stat_mode_end:							//
+ POP B									//
+ MOV A,(std_stat_mode_mode)						//
+RET 									//
+									//
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

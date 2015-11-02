@@ -1,0 +1,17 @@
+DATA:
+
+CODE:
+
+MOV B,0
+IN (B),0
+IN A,2
+ADD A,(B)
+IN B,1000h
+ADD A,B
+MOV B,0
+IN (B),1
+ADD A,(B)
+IN (B),FFFFh
+
+end:
+JMP end
