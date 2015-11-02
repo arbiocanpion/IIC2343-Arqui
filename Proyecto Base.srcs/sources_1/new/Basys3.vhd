@@ -210,6 +210,8 @@ signal CoutAdderPC  :   std_logic;
 
 begin
 
+clock <= clk;
+
 -- Mux A
 with SA select MuxAout <=
     valueA                  when "00",
@@ -277,12 +279,12 @@ led(0) <= Sout(0);
 led(1) <= Sout(1);
 led(2) <= Sout(2);
 
-inst_Clock_Divider: Clock_Divider port map(
-    clk     =>  clk,
-    clk_up  =>  clk_up,
-    slow    =>  '1',
-    clock   =>  clock
-    );
+--inst_Clock_Divider: Clock_Divider port map(
+--    clk     =>  clk,
+--    clk_up  =>  clk_up,
+--    slow    =>  '1',
+--    clock   =>  clock
+--    );
 
 inst_Led_Driver: Led_Driver port map(
 	dis_a   =>  dis_a,
