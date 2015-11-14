@@ -46,6 +46,7 @@
     <Compile Include="Instructions\CallInstruction.cs" />
     <Compile Include="Instructions\InInstruction.cs" />
     <Compile Include="Instructions\InstructionFactory.cs" />
+    <Compile Include="Instructions\OutInstruction.cs" />
     <Compile Include="Instructions\Pop1Instruction.cs" />
     <Compile Include="Instructions\Pop2Instruction.cs" />
     <Compile Include="Instructions\PushInstruction.cs" />

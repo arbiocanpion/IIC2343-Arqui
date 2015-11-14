@@ -18,7 +18,7 @@ namespace Assembler
                 return;
             }
             string text = File.ReadAllText(args[0]);
-            //string text = File.ReadAllText("./moda.txt");
+            //string text = File.ReadAllText("./Ejemplo16.txt");
             interpreter.Interpret(text);
             string output = DocumentBuilder.GenerateFinalDocument(interpreter.Instructions);
             File.WriteAllText(@"./output.txt", output);

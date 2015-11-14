@@ -1,12 +1,7 @@
 DATA:
-	list2 'a'
-		4
-		4
-		6
-		6
-		3
-		2
-		6
+	list2 "andres"
+	andres1 "andres1"
+	char1 'c'
 	largo2	8
 	inicio 0
 	largo 0
@@ -22,7 +17,7 @@ DATA:
 	
 CODE:
 	MOV A,(largo2)
-	MOV B,list2
+	MOV B,'a'
 	CALL moda
 	JMP endFinal
 

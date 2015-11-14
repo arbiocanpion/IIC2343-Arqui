@@ -24,9 +24,6 @@ namespace Assembler.Parser
 
         public string Interpret(string code)
         {
-            code = Regex.Replace(code, "[\t ]{2,}", " ");
-            code = code.Replace("\r\n", "\n");
-            code = code.Replace("\t", " ");
             assemblyCode = new AssemblyCode(code);
             labelManager = new LabelManager();
             variableManager = new VariableManager();

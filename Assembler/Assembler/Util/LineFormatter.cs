@@ -95,5 +95,35 @@ namespace Assembler.Util
         {
             return line.Replace(" ", "");
         }
+
+        public static bool IsString(string line)
+        {
+            if (line == null || line.Equals(""))
+                return false;
+            string[] parts = line.Split(' ');
+            if (parts.Length < 2)
+                return false;
+            string begin = parts[1].Substring(0, 1);
+            string end = parts[1].Substring(parts[1].Length - 1, 1);
+            if (begin.Equals("\"") && end.Equals("\"")) {
+                return true;
+            }
+            return false;
+        }
+
+        public static string GetCharacterArray(string line)
+        {
+            string[] parts = line.Split(' ');
+            string value = parts[1].TrimStart('"').TrimEnd('"');
+            char[] charArray = value.ToCharArray();
+            StringBuilder builder = new StringBuilder();
+            builder.Append(parts[0]).Append(" ");
+            foreach (char character in charArray)
+            {
+                builder.Append("'").Append(character).Append("'").Append("\n");
+            }
+            return builder.ToString();
+        }
     }
+
 }

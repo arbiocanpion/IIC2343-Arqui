@@ -9,9 +9,9 @@ namespace Assembler.Instructions
 {
     class InstructionFactory
     {
-        public static Instruction createInstruction(string line, 
-            Dictionary<string, int> labels, 
-            Dictionary<string,string> variables)
+        public static Instruction createInstruction(string line,
+            Dictionary<string, int> labels,
+            Dictionary<string, string> variables)
         {
             string[] parts = line.Split(' ');
             string param1 = "";
@@ -150,6 +150,10 @@ namespace Assembler.Instructions
             {
                 return new Ret2Instruction(param2, param2);
             }
+            else if (parts[0].Equals("OUT"))
+            {
+                return new OutInstruction(param1, param2);
+            }
             return null;
         }
 
@@ -158,11 +162,19 @@ namespace Assembler.Instructions
             Dictionary<string, string> variables)
         {
             if (param == null || param.Equals("")) return "";
+
             bool representDirection = param[0].Equals('(') && param[param.Length - 1].Equals(')');
+            bool representCharacter = param[0].Equals("'".ToCharArray()[0]) && param[param.Length - 1].Equals("'".ToCharArray()[0]);
 
-            param = param.Replace("(", "").Replace(")", "");            
+            param = param.Replace("(", "").Replace(")", "");
+            param = param.Replace("'", "");
 
-            if (labels.ContainsKey(param))
+            if (representCharacter)
+            {
+                int character = param[0];
+                param = character.ToString();
+            }
+            else if (labels.ContainsKey(param))
             {
                 param = labels[param].ToString();
             }
@@ -174,6 +186,7 @@ namespace Assembler.Instructions
             {
                 param = "(" + param + ")";
             }
+            
             return param;
         }
     }

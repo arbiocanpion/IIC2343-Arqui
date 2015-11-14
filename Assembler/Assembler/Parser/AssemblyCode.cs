@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Assembler.Parser
@@ -16,7 +17,9 @@ namespace Assembler.Parser
         public AssemblyCode(string assemblyCode)
         {
             StringBuilder builder = new StringBuilder();
-            assemblyCode.Replace("\t", " ");
+            assemblyCode = Regex.Replace(assemblyCode, "[\t ]{2,}", " ");
+            assemblyCode = assemblyCode.Replace("\r\n", "\n");
+            assemblyCode = assemblyCode.Replace("\t", " ");
             string[] lines = assemblyCode.Split('\n');
             dataStart = 0;
             codeStart = 0;
@@ -38,10 +41,21 @@ namespace Assembler.Parser
                 {
                     codeStart = reducedLineCounter;
                 }
-                builder.Append(line);
-                builder.Append('\n');
-                reducedLineCounter++;
-                originalLineCounter++;
+                if (LineFormatter.IsString(line))
+                {
+                    line = LineFormatter.GetCharacterArray(line);
+                    builder.Append(line);
+                    reducedLineCounter += line.Split('\n').Length - 1;
+                    originalLineCounter++;
+                }
+                else
+                {
+                    builder.Append(line);
+                    builder.Append('\n');
+                    reducedLineCounter++;
+                    originalLineCounter++;
+                }
+
             }
             this.lines = builder.ToString().Split('\n');
         }

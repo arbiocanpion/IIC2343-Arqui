@@ -231,6 +231,38 @@ namespace Assembler.Parser.Tests
         }
 
         [TestMethod()]
+        public void Ejemplo15Test()
+        {
+            try
+            {
+                string text = File.ReadAllText("Ejemplo15.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en ejemplo 15");
+            }
+        }
+
+        [TestMethod()]
+        public void Ejemplo16Test()
+        {
+            try
+            {
+                string text = File.ReadAllText("Ejemplo16.txt");
+                AssemblyInterpreter interpreter = new AssemblyInterpreter();
+                interpreter.Interpret(text);
+                Assert.IsTrue(true);
+            }
+            catch
+            {
+                Assert.Fail("Hubo un error en ejemplo 16");
+            }
+        }
+
+        [TestMethod()]
         public void EjemploPrueba()
         {
             try
