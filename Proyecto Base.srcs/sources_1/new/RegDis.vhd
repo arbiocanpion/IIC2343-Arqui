@@ -29,9 +29,9 @@ reg_prosses : process (clock)
           end if;
         end process;
         
-dis_a <= reg(3 downto 0);
-dis_b <= reg(7 downto 4);
-dis_c <= reg(11 downto 8);
-dis_d <= reg(15 downto 12);
+dis_d <= reg(3 downto 0);
+dis_c <= reg(7 downto 4);
+dis_b <= reg(11 downto 8);
+dis_a <= reg(15 downto 12);
         
 end Behavioral;

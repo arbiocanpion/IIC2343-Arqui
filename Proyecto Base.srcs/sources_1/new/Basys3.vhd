@@ -269,7 +269,7 @@ signal useconds     :   std_logic_vector(15 downto 0);
 
 begin
 
-clock <= clk;
+--clock <= clk;
 
 -- LCD CONNECTION
 --with loadLCD select algo <=
@@ -345,7 +345,7 @@ inst_Timer: Timer port map(
     seconds     => seconds,
     mseconds    => mseconds,
     useconds    => useconds
-    );   
+    );  
 
 inst_Led_Driver: Led_Driver port map(
 	dis_a   =>  dis_a,

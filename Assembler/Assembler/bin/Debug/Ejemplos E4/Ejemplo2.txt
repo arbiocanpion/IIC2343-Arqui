@@ -1,0 +1,9 @@
+DATA:
+
+CODE:
+loop:
+IN A,2
+OUT A,0
+IN A,3
+OUT A,1
+JMP loop
