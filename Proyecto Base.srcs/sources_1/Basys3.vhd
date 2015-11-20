@@ -3,12 +3,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Basys3 is
     Port (
-        sw          : in   std_logic_vector (15 downto 0); -- SeÒales de entrada de los interruptores -- Arriba   = '1'   -- Los 3 swiches de la derecha: 2, 1 y 0.
-        btn         : in   std_logic_vector (4 downto 0);  -- SeÒales de entrada de los botones       -- Apretado = '1'   -- 0 central, 1 arriba, 2 izquierda, 3 derecha y 4 abajo.
-        led         : out  std_logic_vector (15 downto 0);  -- SeÒales de salida  a  los leds          -- Prendido = '1'   -- Los 4 leds de la derecha: 3, 2, 1 y 0.
-        clk         : in   std_logic;                      -- No Tocar - SeÒal de entrada del clock   -- Frecuencia = 100Mhz.
-        seg         : out  std_logic_vector (7 downto 0);  -- No Tocar - Salida de las seÒales de segmentos.
-        an          : out  std_logic_vector (3 downto 0)   -- No Tocar - Salida del selector de diplay.
+        sw          : in    std_logic_vector(15 downto 0); -- SeÒales de entrada de los interruptores -- Arriba   = '1'   -- Los 3 swiches de la derecha: 2, 1 y 0.
+        btn         : in    std_logic_vector(4 downto 0);  -- SeÒales de entrada de los botones       -- Apretado = '1'   -- 0 central, 1 arriba, 2 izquierda, 3 derecha y 4 abajo.
+        led         : out   std_logic_vector(15 downto 0);  -- SeÒales de salida  a  los leds          -- Prendido = '1'   -- Los 4 leds de la derecha: 3, 2, 1 y 0.
+        lcd         : out   std_logic_vector(10 downto 0);
+        clk         : in    std_logic;                      -- No Tocar - SeÒal de entrada del clock   -- Frecuencia = 100Mhz.
+        seg         : out   std_logic_vector(7 downto 0);  -- No Tocar - Salida de las seÒales de segmentos.
+        an          : out   std_logic_vector(3 downto 0)   -- No Tocar - Salida del selector de diplay.
         );
 end Basys3;
 
@@ -16,7 +17,7 @@ architecture Behavioral of Basys3 is
 
 component RegistroStatus is
     Port ( 
-        clock   :  in  std_logic;
+        clock   :   in  std_logic;
         Z       :   in  std_logic;
         N       :   in  std_logic;
         C       :   in  std_logic;
@@ -269,11 +270,10 @@ signal useconds     :   std_logic_vector(15 downto 0);
 
 begin
 
---clock <= clk;
+--clock <= clk;    
 
--- LCD CONNECTION
---with loadLCD select algo <=
-    
+-- CONECCION LCD
+lcd <= loadLCD & valueA(9 downto 0);
 
 -- Mux A
 with SA select MuxAout <=
@@ -322,15 +322,10 @@ with SPC select MuxSPout <=
 -- REDUCIR VALOR DE A y B
 --downA   <= btn(4)   and btn(2); -- A izquierdo
 --downB   <= btn(4)   and btn(3); -- B derecho
-    
------------------------------------------------ SENALES DE STATUS
----------------------------------------------led(0) <= Sout(0);
----------------------------------------------led(1) <= Sout(1);
----------------------------------------------led(2) <= Sout(2);
 
 inst_Clock_Divider: Clock_Divider port map( -- No Tocar - Intancia de Clock_Divider.
     clk         => clk,  -- No Tocar - Entrada del clock completo (100Mhz).
-    speed       => "01", -- Selector de velocidad: "00" full, "01" fast, "10" normal y "11" slow. 
+    speed       => "00", -- Selector de velocidad: "00" full, "01" fast, "10" normal y "11" slow. 
     clock       => clock -- No Tocar - Salida del clock reducido: 50Mhz, 8hz, 2hz y 0.5hz.
     );
 
