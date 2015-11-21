@@ -1,4 +1,4 @@
-锘緿ATA:
+DATA:
 
 inicio_a	"Nombre_Jugador_1"
 inicio_b	"Nombre_Jugador_2"
@@ -63,15 +63,15 @@ CALL  lcd_go_start_line_b
 CALL	lcd_string
 CALL  lcd_go_start_line_b
 CALL	std_button_wait
-CMP	A, 00001b			//bot贸n centro
+CMP	A, 00001b			//bot髇 centro
 JEQ	endNombre1
-CMP	A, 00010b			// bot贸n arriba
+CMP	A, 00010b			// bot髇 arriba
 JEQ	aumentarCursor1
-CMP	A, 00100b			//bot贸n izquierda
+CMP	A, 00100b			//bot髇 izquierda
 JEQ	decrementarLetra1
-CMP	A, 01000b			//bot贸n derecha
+CMP	A, 01000b			//bot髇 derecha
 JEQ	aumentarLetra1
-CMP	A, 10000b			//bot贸n abajo
+CMP	A, 10000b			//bot髇 abajo
 JEQ	decrementarCursor1
 
 aumentarLetra1:
@@ -128,15 +128,15 @@ MOV	A, nombre2
 CALL  lcd_go_start_line_b
 CALL	lcd_string
 CALL	std_button_wait
-CMP	A, 00001b			//reemplazar con n煤mero del bot贸n del centro
+CMP	A, 00001b			//reemplazar con n鷐ero del bot髇 del centro
 JEQ	endNombre2
-CMP	A, 00010b			//reemplazar con n煤mero del bot贸n de arriba
+CMP	A, 00010b			//reemplazar con n鷐ero del bot髇 de arriba
 JEQ	aumentarCursor2
-CMP	A, 00100b			//reemplazar con n煤mero del bot贸n de la izquierda
+CMP	A, 00100b			//reemplazar con n鷐ero del bot髇 de la izquierda
 JEQ	decrementarLetra2
-CMP	A, 01000b			//reemplazar con n煤mero del bot贸n de la derecha
+CMP	A, 01000b			//reemplazar con n鷐ero del bot髇 de la derecha
 JEQ	aumentarLetra2
-CMP	A, 10000b			//reemplazar con n煤mero del bot贸n de abajo
+CMP	A, 10000b			//reemplazar con n鷐ero del bot髇 de abajo
 JEQ	decrementarCursor2
 
 aumentarLetra2:
@@ -242,7 +242,7 @@ salto11:
 MOV	A,(nombre1)
 keep4321:
 CALL	lcd_home
-CALL	lcd_go_start_line_b		//imprime en la segunda l铆nea "NOMBRE: Limpia"
+CALL	lcd_go_start_line_b		//imprime en la segunda l韓ea "NOMBRE: Limpia"
 CALL	lcd_string
 MOV	A, puntos
 CALL	lcd_string
@@ -334,13 +334,13 @@ RET
 ajustarCursor:
 MOV	A,0
 MOV	(i),A
-whilexd
+whilexd:
 MOV	A,(cursor)
 CMP	A,i
 JGT	iter
 RET
-iter
-lcd_shr_c
+iter:
+CALL lcd_shr_c
 INC	(i)
 JMP	whilexd
 
@@ -433,7 +433,7 @@ std_button_wait:	// * en A, * en B				//
  XOR B,A			// Bits Cambiados			//
  std_button_wait_release_lp:						//
  IN A,1				// Nuevo Estado				//
- AND A,B			// Bits A藱n Cambiados			//
+ AND A,B			// Bits A?n Cambiados			//
  CMP A,0			// SI == 0				//
  JNE std_button_wait_release_lp	// Continuar				//
  MOV A,B			// Bits Cambiados a A			//
@@ -506,10 +506,10 @@ wait_ms:			// Mseg en A, * en B			//
  IN B,2				// Seg Actual				//
  wait_ms_divide_loop:							//
   CMP A,1000			// Si Mseg < 1000			//
-  JLT wait_ms_divide_end	// Terminar divisi脹n			//
+  JLT wait_ms_divide_end	// Terminar divisi踤			//
   SUB A,1000			// Mseg - 1000				//
   INC B				// Seg ++				//
-  JMP wait_ms_divide_loop	// Continuar divisi脹n			//
+  JMP wait_ms_divide_loop	// Continuar divisi踤			//
  wait_ms_divide_end:							//
  CALL std_reg_swap		// Intercambiar Registros		//
  CALL wait_absolute_s_ms	// Espera Absoluta Seg Mseg		//
@@ -528,10 +528,10 @@ wait_us:			// Useg en A, * en B			//
 
  wait_us_divide_loop:							//
   CMP A,1000			// Si Useg < 1000			//
-  JLT wait_us_divide_end	// Terminar divisi脹n			//
+  JLT wait_us_divide_end	// Terminar divisi踤			//
   SUB A,1000			// Useg - 1000				//
   INC B				// Delta Mseg ++			//
-  JMP wait_us_divide_loop	// Continuar divisi脹n			//
+  JMP wait_us_divide_loop	// Continuar divisi踤			//
  
 wait_us_divide_end:							//
  CMP A,0			// Si Useg == 0				//
@@ -568,7 +568,7 @@ RET				// Void					//
 									//
 lcd_char:			// Char	en A, Puerto en B		//
  PUSH A				// Guarda el Char			//
- OR A,200h			// Agrega se帽al para escribir		//
+ OR A,200h			// Agrega se馻l para escribir		//
  CALL lcd_cmd			// Comando al Puerto			//
  POP A 				// Recupera el Char			//
 RET				// Void					//
