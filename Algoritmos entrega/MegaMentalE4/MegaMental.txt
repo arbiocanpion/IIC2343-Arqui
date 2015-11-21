@@ -24,7 +24,7 @@ cursor		0
 ptje1		"0"
 ptje2		"0"
 
-leds		1111h
+leds		FFFFh
 auxLed		1
 
 CODE:
@@ -49,8 +49,9 @@ CALL	lcd_go_start_line_a
 MOV	A, inicio_a			// "Nombre Jugador 1"
 CALL	lcd_string
 MOV	A, nombre1
+CALL  lcd_go_start_line_b
 CALL	lcd_string
-CALL	lcd_go_start_line_b
+CALL  lcd_go_start_line_b
 CALL	std_button_wait
 CMP	A, 00001b			//botón centro
 JEQ	endNombre1
@@ -109,8 +110,8 @@ MOV	A, inicio_b			// "Nombre Jugador 2"
 CALL	lcd_go_start_line_a
 CALL	lcd_string
 MOV	A, nombre2
+CALL  lcd_go_start_line_b
 CALL	lcd_string
-CALL	lcd_go_start_line_b
 CALL	std_button_wait
 CMP	A, 00001b			//reemplazar con número del botón del centro
 JEQ	endNombre2
@@ -575,6 +576,7 @@ RET				// Void					//
 lcd_address_line_a:		// *	en A, Puerto en B		//
  PUSH A				// Guarda A				//
  OR A,80h 		 	// Base 00h				//
+ MOV (cursor), A
  CALL lcd_cmd			// Comando al Puerto			//
  POP A				// Recupera A				//
 RET				// Void					//
@@ -582,6 +584,7 @@ RET				// Void					//
 lcd_address_line_b:		// *	en A, Puerto en B		//
  PUSH A				// Guarda A				//
  OR A,C0h 		 	// Base 40h				//
+ MOV (cursor), A
  CALL lcd_cmd			// Comando al Puerto			//
  POP A				// Recupera A				//
 RET				// Void					//
