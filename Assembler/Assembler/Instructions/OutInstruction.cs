@@ -11,10 +11,10 @@ namespace Assembler.Instructions
 
         private Dictionary<Tuple<ParameterType, ParameterType>, String> opcodes =
                  new Dictionary<Tuple<ParameterType, ParameterType>, string>() {
-             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B), "1100000"},
-             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.DirB), "1100001"},
-             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir), "1100010"},
-             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit), "1100011"}
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.B), "1100010"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.DirB), "1100011"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Dir), "1100100"},
+             { new Tuple<ParameterType, ParameterType>(ParameterType.A , ParameterType.Lit), "1100101"}
         };
         
         public OutInstruction(String param1, String param2) : base(param1, param2){ }
