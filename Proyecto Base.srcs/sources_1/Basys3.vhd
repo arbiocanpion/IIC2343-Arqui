@@ -3,12 +3,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Basys3 is
     Port (
-        sw          : in   std_logic_vector (15 downto 0); -- SeÒales de entrada de los interruptores -- Arriba   = '1'   -- Los 3 swiches de la derecha: 2, 1 y 0.
-        btn         : in   std_logic_vector (4 downto 0);  -- SeÒales de entrada de los botones       -- Apretado = '1'   -- 0 central, 1 arriba, 2 izquierda, 3 derecha y 4 abajo.
-        led         : out  std_logic_vector (3 downto 0);  -- SeÒales de salida  a  los leds          -- Prendido = '1'   -- Los 4 leds de la derecha: 3, 2, 1 y 0.
-        clk         : in   std_logic;                      -- No Tocar - SeÒal de entrada del clock   -- Frecuencia = 100Mhz.
-        seg         : out  std_logic_vector (7 downto 0);  -- No Tocar - Salida de las seÒales de segmentos.
-        an          : out  std_logic_vector (3 downto 0)   -- No Tocar - Salida del selector de diplay.
+        sw          : in    std_logic_vector(15 downto 0); -- SeÒales de entrada de los interruptores -- Arriba   = '1'   -- Los 3 swiches de la derecha: 2, 1 y 0.
+        btn         : in    std_logic_vector(4 downto 0);  -- SeÒales de entrada de los botones       -- Apretado = '1'   -- 0 central, 1 arriba, 2 izquierda, 3 derecha y 4 abajo.
+        led         : out   std_logic_vector(15 downto 0);  -- SeÒales de salida  a  los leds          -- Prendido = '1'   -- Los 4 leds de la derecha: 3, 2, 1 y 0.
+        lcd         : out   std_logic_vector(10 downto 0);
+        clk         : in    std_logic;                      -- No Tocar - SeÒal de entrada del clock   -- Frecuencia = 100Mhz.
+        seg         : out   std_logic_vector(7 downto 0);  -- No Tocar - Salida de las seÒales de segmentos.
+        an          : out   std_logic_vector(3 downto 0)   -- No Tocar - Salida del selector de diplay.
         );
 end Basys3;
 
@@ -16,7 +17,7 @@ architecture Behavioral of Basys3 is
 
 component RegistroStatus is
     Port ( 
-        clock   :  in  std_logic;
+        clock   :   in  std_logic;
         Z       :   in  std_logic;
         N       :   in  std_logic;
         C       :   in  std_logic;
@@ -41,7 +42,8 @@ component ControlUnit is
         SPC     :   out std_logic;                      -- mux PC
         W       :   out std_logic;                      -- write RAM
         IncSp   :   out std_logic;                      -- increment stack pointer
-        DecSp   :   out std_logic                       -- decrement stack pointer
+        DecSp   :   out std_logic;                      -- decrement stack pointer
+        Lout    :   out std_logic                       -- load out data
     );
     end component;
 
@@ -152,6 +154,38 @@ component Adder
     );
     end component;
 
+component RedDis
+    Port (
+        clock       :   in  std_logic;
+        loadDis     :   in  std_logic;
+        dataIN      :   in  std_logic_vector (15 downto 0);
+        dis_a       :   out std_logic_vector(3 downto 0);
+        dis_b       :   out std_logic_vector(3 downto 0);
+        dis_c       :   out std_logic_vector(3 downto 0);
+        dis_d       :   out std_logic_vector(3 downto 0)
+    );
+    end component;
+
+component RegLed
+    Port (
+        clock       :   in  std_logic;
+        loadLED     :   in  STD_LOGIC;
+        dataIN      :   in  STD_LOGIC_VECTOR (15 downto 0);
+        led         :   out  std_logic_vector (15 downto 0)
+    );
+    end component;
+
+component DecoderOUT is
+    Port (
+        clock       :   in  std_logic;
+        portAddress :   in STD_LOGIC_VECTOR (15 downto 0);
+        loadOut     :   in STD_LOGIC;
+        loadLCD     :   out STD_LOGIC;
+        loadDis     :   out STD_LOGIC;
+        loadLED     :   out STD_LOGIC
+    );
+    end component;
+
 -- SENAL CLOCK
 signal clock        :   std_logic;   
 
@@ -178,7 +212,7 @@ signal SPC          :   std_logic;                      -- mux PC
 signal W            :   std_logic;                      -- write RAM
 signal IncSp        :   std_logic;                      -- increment stack pointer
 signal DecSp        :   std_logic;                      -- decrement stack pointer
-signal SIN          :   std_logic;                      -- mux input data
+signal Lout         :   std_logic;                      -- load out data
             
 -- SENALES DISPLAY
 signal dis_a        :   std_logic_vector(3 downto 0);
@@ -213,6 +247,11 @@ signal MuxBout      :   std_logic_vector(15 downto 0);
 -- SENAL MUX INPUT
 signal MuxINOut     :   std_logic_vector(15 downto 0);
 
+-- SENALES DECODER OUT
+signal loadLCD      :   std_logic;
+signal loadDis      :   std_logic;
+signal loadLED      :   std_logic;
+
 -- SENAL MUX ADDRESS
 signal MuxSOut      :   std_logic_vector(11 downto 0);
 
@@ -231,7 +270,10 @@ signal useconds     :   std_logic_vector(15 downto 0);
 
 begin
 
---clock <= clk;
+--clock <= clk;    
+
+-- CONECCION LCD
+lcd <= loadLCD & valueA(9 downto 0);
 
 -- Mux A
 with SA select MuxAout <=
@@ -251,6 +293,9 @@ with SB select MuxBout <=
 with romout(32 downto 17) select MuxINOut <=
     sw                      when "0000000000000000",
     "00000000000" & btn     when "0000000000000001",
+    seconds                 when "0000000000000010",
+    mseconds                when "0000000000000011",
+    useconds                when "0000000000000100",
     "0000000000000000"      when others;
 
 -- Mux Address in
@@ -271,38 +316,16 @@ with SPC select MuxSPout <=
     ramout(11 downto 0)     when '1';
 
 -- AUMENTAR VALOR DE A y B
-upA     <= btn(1)   and btn(2); -- A izquierdo
-upB     <= btn(1)   and btn(3); -- B derecho
+--upA     <= btn(1)   and btn(2); -- A izquierdo
+--upB     <= btn(1)   and btn(3); -- B derecho
 
 -- REDUCIR VALOR DE A y B
-downA   <= btn(4)   and btn(2); -- A izquierdo
-downB   <= btn(4)   and btn(3); -- B derecho
-
--- MOSTRAR RESULTADO OPERACION DE A y B
-with btn(0) select
-    dis_d <= Salu(3 downto 0)   when '1',
-    valueB (3 downto 0)         when others;
-    
-with btn(0) select
-    dis_c <= Salu(7 downto 4)   when '1',
-    valueB (7 downto 4)         when others;
-        
-with btn(0) select
-    dis_b <= Salu(11 downto 8)  when '1',
-    valueA (3 downto 0)         when others;
-            
-with btn(0) select
-    dis_a <= Salu(15 downto 12) when '1',
-    valueA (7 downto 4)         when others;
-    
--- SENALES DE STATUS
-led(0) <= Sout(0);
-led(1) <= Sout(1);
-led(2) <= Sout(2);
+--downA   <= btn(4)   and btn(2); -- A izquierdo
+--downB   <= btn(4)   and btn(3); -- B derecho
 
 inst_Clock_Divider: Clock_Divider port map( -- No Tocar - Intancia de Clock_Divider.
     clk         => clk,  -- No Tocar - Entrada del clock completo (100Mhz).
-    speed       => "01", -- Selector de velocidad: "00" full, "01" fast, "10" normal y "11" slow. 
+    speed       => "00", -- Selector de velocidad: "00" full, "01" fast, "10" normal y "11" slow. 
     clock       => clock -- No Tocar - Salida del clock reducido: 50Mhz, 8hz, 2hz y 0.5hz.
     );
 
@@ -317,7 +340,7 @@ inst_Timer: Timer port map(
     seconds     => seconds,
     mseconds    => mseconds,
     useconds    => useconds
-    );   
+    );  
 
 inst_Led_Driver: Led_Driver port map(
 	dis_a   =>  dis_a,
@@ -393,7 +416,8 @@ inst_ControlUnit: ControlUnit port map(
     SPC     =>  SPC,
     W       =>  W,
     IncSp   =>  IncSp,
-    DecSp   =>  DecSp
+    DecSp   =>  DecSp,
+    Lout    =>  Lout
     );
 
 inst_Status: RegistroStatus port map(
@@ -417,6 +441,32 @@ inst_AdderPC: Adder port map(
     Cin     =>  '0',
     Cout    =>  CoutAdderPC,
     S       =>  SadderPC
+    );
+
+inst_RegDis: RedDis port map(
+    clock   =>  clock,
+    loadDis =>  loadDis,
+    dataIN  =>  valueA,
+    dis_a   =>  dis_a,
+    dis_b   =>  dis_b,
+    dis_c   =>  dis_c,
+    dis_d   =>  dis_d
+    );
+
+inst_RegLed: RegLed port map(
+    clock   =>  clock,
+    loadLED =>  loadLED,
+    dataIN  =>  valueA,
+    led     =>  led
+    );
+
+inst_DecoderOUT: DecoderOUT port map(
+    clock       =>  clock,
+    portAddress =>  MuxBout,
+    loadOut     =>  Lout,
+    loadLCD     =>  loadLCD,
+    loadDis     =>  loadDis,
+    loadLED     =>  loadLED
     );
     
 end Behavioral;
