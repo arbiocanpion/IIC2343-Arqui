@@ -1,9 +1,11 @@
-DATA:
+﻿DATA:
 
 inicio_a	"Nombre_Jugador_1"
 inicio_b	"Nombre_Jugador_2"
 
 turno		0 
+
+i		0
 
 ingresa	"Ingresa"
 limpia		"Limpia"
@@ -326,6 +328,20 @@ MOV A, (turno)
 NOT A
 MOV (turno), A
 RET
+
+ajustarCursor:
+MOV	A,0
+MOV	(i),A
+whilexd
+MOV	A,(cursor)
+CMP	A,i
+JGT	iter
+RET
+iter
+lcd_shr_c
+INC	(i)
+JMP	whilexd
+
 
 play:
 CALL 	encenderLeds
