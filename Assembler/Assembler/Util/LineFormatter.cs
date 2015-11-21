@@ -100,7 +100,7 @@ namespace Assembler.Util
         {
             if (line == null || line.Equals(""))
                 return false;
-            string[] parts = line.Split(' ');
+            string[] parts = line.Split(new char[] { ' ' }, 2);
             if (parts.Length < 2)
                 return false;
             string begin = parts[1].Substring(0, 1);
@@ -113,7 +113,7 @@ namespace Assembler.Util
 
         public static string GetCharacterArray(string line)
         {
-            string[] parts = line.Split(' ');
+            string[] parts = line.Split(new char[] { ' ' }, 2);
             string value = parts[1].TrimStart('"').TrimEnd('"');
             char[] charArray = value.ToCharArray();
             StringBuilder builder = new StringBuilder();

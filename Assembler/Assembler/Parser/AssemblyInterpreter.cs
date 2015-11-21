@@ -111,9 +111,13 @@ namespace Assembler.Parser
                 string line = LineFormatter.FormatDataLine(dataLines[i]);
                 if (VariableManager.IsVariable(line))
                 {
-                    string[] pair = line.Split(' ');
+                    string[] pair = line.Split(new char[] { ' ' }, 2);
                     string value;
-                    if (pair.Length == 1)
+                    if (line.Equals("' '"))
+                    {
+                        value = line;
+                    }
+                    else if (pair.Length == 1)
                     {
                         value = pair[0];
                     }

@@ -13,7 +13,7 @@ namespace Assembler.Instructions
             Dictionary<string, int> labels,
             Dictionary<string, string> variables)
         {
-            string[] parts = line.Split(' ');
+            string[] parts = line.Split(new char[] { ' ' }, 3);
             string param1 = "";
             string param2 = "";
             if (parts.Length > 1)
