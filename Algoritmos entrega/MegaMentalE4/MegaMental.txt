@@ -45,6 +45,8 @@ CALL	limpia
 JMP	start
 
 elegirNombre1:
+CALL	lcd_clear
+CALL	lcd_home
 CALL	lcd_go_start_line_a
 MOV	A, inicio_a			// "Nombre Jugador 1"
 CALL	lcd_string
@@ -87,6 +89,7 @@ MOV	A,(cursor)
 CMP	A,3
 JEQ	saltar1
 INC	(cursor)
+CALL lcd_shr_c
 saltar1:
 JMP	elegirNombre1
 
@@ -97,6 +100,7 @@ JEQ 	saltar21
 PUSH A
 MOV A, (cursor)
 DEC A
+CALL lcd_shl_c
 MOV (cursor), A
 POP A
 saltar21:
@@ -106,6 +110,8 @@ endNombre1:
 RET
 
 elegirNombre2:
+CALL	lcd_clear
+CALL	lcd_home
 MOV	A, inicio_b			// "Nombre Jugador 2"
 CALL	lcd_go_start_line_a
 CALL	lcd_string
@@ -167,6 +173,8 @@ endNombre2:
 RET
 
 imprimirPuntajes:
+CALL	lcd_clear
+CALL	lcd_home
 CALL lcd_go_start_line_a
 MOV	A, nombre1
 CALL	lcd_string
@@ -224,6 +232,7 @@ JMP	keep4321
 salto11:
 MOV	A,(nombre1)
 keep4321:
+CALL	lcd_home
 CALL	lcd_go_start_line_b		//imprime en la segunda línea "NOMBRE: Limpia"
 CALL	lcd_string
 MOV	A, puntos
@@ -236,6 +245,9 @@ CALL 	std_button_wait			//esperar hasta que se aprete un boton
 RET
 
 continuar:
+CALL	lcd_clear
+CALL 	imprimirPuntajes
+CALL	lcd_home
 MOV	A,continuar
 CALL	lcd_go_start_line_b
 CALL	std_button_wait
@@ -254,6 +266,7 @@ win1:
 INC	(ptje2)
 MOV	A,(nombre1)
 keep:
+CALL	lcd_home
 CALL	lcd_go_start_line_b
 MOV	A,(espacio)
 CALL	lcd_string
@@ -272,6 +285,7 @@ lose2:
 INC	(ptje2)
 MOV	A,(nombre1)
 keep2:
+CALL	lcd_home
 CALL	lcd_go_start_line_b
 MOV	A,(espacio)
 CALL	lcd_string
@@ -369,16 +383,11 @@ RET
 
 decLed:			//prende los leds de la placa segun "leds"
 PUSH	A
-PUSH	B
 MOV	A, (leds)
-MOV	B, (auxLed)
-SUB	A, B
-MOV	(leds), A
-MOV 	A, B
-ADD	A, B
-MOV	(auxLed), A
-POP	B
+SHL A
+MOV (leds), A
 POP	A
+RET
 
 /////////////////Libreria std/////////////////////////////////////////////
 									//
@@ -647,4 +656,3 @@ lcd_init:			// *	en A, Puerto en B		//
  CALL lcd_home			// Return Home				//
  POP A				// Recupera A				//
 RET				// Void					//
-									
