@@ -37,8 +37,13 @@ PUSH A
 MOV A, 0
 MOV (ptje1), A
 MOV (ptje2), A
+MOV	(cursor), A
 POP A
 CALL	elegirNombre1
+PUSH A
+MOV A, 0
+MOV	(cursor), A
+POP A
 CALL	elegirNombre2
 CALL	ingreso
 CALL	limpia
