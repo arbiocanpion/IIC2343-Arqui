@@ -54,6 +54,7 @@ JMP	start
 elegirNombre1:
 CALL	lcd_clear
 CALL	lcd_home
+CALL	ajustarCursor
 CALL	lcd_go_start_line_a
 MOV	A, inicio_a			// "Nombre Jugador 1"
 CALL	lcd_string
@@ -119,6 +120,7 @@ RET
 elegirNombre2:
 CALL	lcd_clear
 CALL	lcd_home
+CALL	ajustarCursor
 MOV	A, inicio_b			// "Nombre Jugador 2"
 CALL	lcd_go_start_line_a
 CALL	lcd_string
