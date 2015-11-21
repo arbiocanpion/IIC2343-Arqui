@@ -1,28 +1,28 @@
 DATA:
 
-inicio_a	“Nombre Jugador 1”
-inicio_b	“Nombre Jugador 2”
+inicio_a	"Nombre Jugador 1"
+inicio_b	"Nombre Jugador 2"
 
 turno		0 
 
-ingresa	“Ingresa”
-limpia		“Limpia”
-adivina 	“Adivina”
-gana 		“Gana”
-pierde		“Pierde”
-continuar	“continuar…?”
-puntos		“:”
-espacio	“ “
+ingresa	"Ingresa"
+limpia		"Limpia"
+adivina 	"Adivina"
+gana 		"Gana"
+pierde		"Pierde"
+continuar	"continuar...?"
+puntos		":"
+espacio	" "
 
 clave		0
 
-nombre1	“AAAA”
-nombre2	“AAAA”
+nombre1	"AAAA"
+nombre2	"AAAA"
 
 cursor		0
 
-ptje1		“0”
-ptje2		“0”
+ptje1		"0"
+ptje2		"0"
 
 leds		1111h
 auxLed		1
@@ -33,8 +33,11 @@ MOV	B,2
 CALL	lcd_init
 
 nuevo:
-MOV (ptje1), 0
-MOV (ptje2), 0
+PUSH A
+MOV A, 0
+MOV (ptje1), A
+MOV (ptje2), A
+POP A
 CALL	elegirNombre1
 CALL	elegirNombre2
 CALL	ingreso
@@ -43,7 +46,7 @@ JMP	start
 
 elegirNombre1:
 CALL	lcd_go_start_line_a
-MOV	A, inicio_a			// “Nombre Jugador 1”
+MOV	A, inicio_a			// "Nombre Jugador 1"
 CALL	lcd_string
 MOV	A, nombre1
 CALL	lcd_string
@@ -71,7 +74,11 @@ decrementarLetra1:
 MOV	A,nombre1
 ADD	A,(cursor)
 MOV	B,A
-DEC	(B)
+PUSH A
+MOV A, (B)
+DEC A
+MOV (B), A
+POP A
 JMP	elegirNombre1
 
 aumentarCursor1:
@@ -86,7 +93,11 @@ decrementarCursor1:
 MOV	A,(cursor)
 CMP	A,0
 JEQ 	saltar21
-DEC	(cursor)
+PUSH A
+MOV A, (cursor)
+DEC A
+MOV (cursor), A
+POP A
 saltar21:
 JMP	elegirNombre1 
 
@@ -94,7 +105,7 @@ endNombre1:
 RET
 
 elegirNombre2:
-MOV	A, inicio_b			// “Nombre Jugador 2”
+MOV	A, inicio_b			// "Nombre Jugador 2"
 CALL	lcd_go_start_line_a
 CALL	lcd_string
 MOV	A, nombre2
@@ -123,7 +134,11 @@ decrementarLetra2:
 MOV	A,nombre2
 ADD	A,(cursor)
 MOV	B,A
-DEC	(B)
+PUSH A
+MOV A, (B)
+DEC A
+MOV (B), A
+POP A
 JMP	elegirNombre2
 
 aumentarCursor2:
@@ -138,7 +153,11 @@ decrementarCursor2:
 MOV	A,(cursor)
 CMP	A,0
 JEQ 	saltar2
-DEC	(cursor)
+PUSH A
+MOV A, (cursor)
+DEC A
+MOV (cursor), A
+POP A
 saltar2:
 JMP	elegirNombre2 
 
@@ -177,7 +196,7 @@ JMP	keep432
 salto1:
 MOV	A,(nombre1)
 keep432:
-CALL	lcd_go_start_line_b		//imprime en la segunda linea: “NOMBRE: Ingresa”
+CALL	lcd_go_start_line_b		//imprime en la segunda linea: "NOMBRE: Ingresa"
 CALL	lcd_string
 MOV	A, puntos
 CALL	lcd_string
@@ -204,7 +223,7 @@ JMP	keep4321
 salto11:
 MOV	A,(nombre1)
 keep4321:
-CALL	lcd_go_start_line_b		//imprime en la segunda línea “NOMBRE: Limpia”
+CALL	lcd_go_start_line_b		//imprime en la segunda línea "NOMBRE: Limpia"
 CALL	lcd_string
 MOV	A, puntos
 CALL	lcd_string
@@ -221,7 +240,7 @@ CALL	lcd_go_start_line_b
 CALL	std_button_wait
 CMP	A, 00001b
 JEQ	play
-JMP	new
+JMP	nuevo
 
 win:
 MOV	A,(turno)
@@ -244,7 +263,7 @@ RET
 lose:
 MOV	A,(turno)
 CMP	A,0b
-JEQ	lose1
+JEQ	lose2
 INC	(ptje1)
 MOV	A,(nombre2)
 JMP	keep2
@@ -254,13 +273,13 @@ MOV	A,(nombre1)
 keep2:
 CALL	lcd_go_start_line_b
 MOV	A,(espacio)
-CALL	lcd:string
+CALL	lcd_string
 MOV	A,(pierde)
 CALL	lcd_string
 RET
 
 start:
-CALL	imprimirPuntaje
+CALL	imprimirPuntajes
 CALL 	lcd_go_start_line_b
 CALL	printTurno
 MOV	A, espacio
@@ -270,7 +289,8 @@ CALL	lcd_string
 JMP play
 
 printTurno:
-CMP	turno, 0b
+MOV A, turno
+CMP	A, 0b
 JEQ	turnoJ1
 MOV	A, nombre2
 CALL	lcd_string
@@ -297,38 +317,44 @@ MOV	B, A
 IN	A, 0
 CMP 	A, (clave)
 JEQ	win
-CMP	B, 00001b		// central AND
+CALL std_reg_swap
+CMP	A, 00001b		// central AND
 JEQ	a_and_clave
-CMP	B, 00010b		// arriba ADD
+CMP	A, 00010b		// arriba ADD
 JEQ	a_add_clave
-CMP	B, 00100b		// izq OR
+CMP	A, 00100b		// izq OR
 JEQ	a_or_clave
-CMP	B, 01000b		// derecha XOR
+CMP	A, 01000b		// derecha XOR
 JEQ	a_xor_clave
-CMP	B, 10000b		// abajo SUB
+CMP	A, 10000b		// abajo SUB
 JEQ	a_sub_clave
 
 a_and_clave:
+CALL std_reg_swap
 AND 	A, (clave)
 CALL	decLed
 JMP	play
 
 a_add_clave:
+CALL std_reg_swap
 ADD 	A, (clave)
 CALL	decLed
 JMP	play
 
 a_or_clave:
+CALL std_reg_swap
 OR 	A, (clave)
 CALL	decLed
 JMP	play
 
 a_xor_clave:
+CALL std_reg_swap
 XOR 	A, (clave)
 CALL	decLed
 JMP	play
 
 a_sub_clave:
+CALL std_reg_swap
 SUB 	A, (clave)
 CALL	decLed
 JMP	play
@@ -340,7 +366,7 @@ OUT A, 1
 POP A
 RET
 
-decLed:			//prende los leds de la placa segun “leds”
+decLed:			//prende los leds de la placa segun "leds"
 PUSH	A
 PUSH	B
 MOV	A, (leds)
@@ -480,16 +506,16 @@ wait_us_divide_end:							//
  DEC A				// Restaurar Useg			//
  
 wait_us_no_fix:								// 
- PUSH A				// Guarda USeg				//
- PUSH B				// Guarda Delta Mseg			//
- IN A,3				// Mseg Actual				//
- ADD B,A			// Mseg Actual + Delta Mseg		//
- POP A				// Recupera Delta Mseg			//
- CALL wait_ms			// Espera Relativa Delta Mseg		//
- MOV A,B			// Mseg					//
- CMP A,1000			// Si Mseg < 1000			//
- JLT wait_us_ms_no_fix		// Saltar Fix				//
- SUB A,1000			// Mseg = Mseg - 1000			//
+ PUSH A				               // Guarda USeg				//
+ PUSH B				               // Guarda Delta Mseg			//
+ IN A,3				               // Mseg Actual				//
+ ADD B,A			               // Mseg Actual + Delta Mseg		//
+ POP A				               // Recupera Delta Mseg			//
+ CALL wait_ms			           // Espera Relativa Delta Mseg		//
+ MOV A,B			               // Mseg					//
+ CMP A,1000			             // Si Mseg < 1000			//
+ JLT wait_us_ms_no_fix		   // Saltar Fix				//
+ SUB A,1000			             // Mseg = Mseg - 1000			//
  wait_us_ms_no_fix:							//
  POP B				// Recupera Useg			//
  CALL wait_absolute_fixed_ms_us	// Espera Absoluta Mseg	Useg		//
