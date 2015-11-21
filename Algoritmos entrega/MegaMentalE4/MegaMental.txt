@@ -12,7 +12,7 @@ gana 		"Gana"
 pierde		"Pierde"
 continuar	"continuar...?"
 puntos		":"
-espacio	"."
+espacio	"_"
 
 clave		0
 
