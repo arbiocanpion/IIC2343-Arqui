@@ -62,7 +62,7 @@ MOV		B, 0
 CALL 	posCursor
 CALL	std_button_wait
 JEQ		endNombre
-
+JMP		elegirNombre1
 //CMP		A, 1			//botón centro
 //JEQ		endNombre
 
@@ -141,6 +141,7 @@ MOV		B, 0
 CALL 	posCursor
 CALL	std_button_wait
 JMP		endNombre
+JMP		elegirNombre2
 //CMP		A, 1			//botón centro
 //JEQ		endNombre
 //CMP		A, 2			// botón arriba
