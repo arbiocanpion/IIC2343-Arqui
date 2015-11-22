@@ -297,7 +297,6 @@ MOV 	A,(leds)
 CMP 	A,0b				//comparo si no me queda ningun led prendido
 JEQ		lose				//pierdo
 POP 	A
-CALL	contarUnos
 CALL 	std_button_wait		//espero boton para ver los switchs
 MOV 	B, A				//guardo el boton en B
 IN		A,0					//guardo switches en A
@@ -365,7 +364,8 @@ MOV	(digitos), A
 CMP	A,0
 JEQ	endCicloUnos
 SHR	B
-JMP	ciclo
+JMP	cicloUnos
+
 
 endCicloUnos:
 RET
