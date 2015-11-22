@@ -350,7 +350,7 @@ contarUnos:			 //A viene con el resultado OR,XOR,ADD,SUB,AND
 MOV	(contador), 0
 MOV	(digitos), 15
 CALL	cicloUnos
-MOV	A, contador
+MOV	A, (contador)
 RET
 
 cicloUnos:
@@ -365,7 +365,6 @@ CMP	A,0
 JEQ	endCicloUnos
 SHR	B
 JMP	cicloUnos
-
 
 endCicloUnos:
 RET
