@@ -1,4 +1,4 @@
-DATA:
+﻿DATA:
 
 ingresa		"Ingresa"
 limpia		"Limpia"
@@ -320,29 +320,55 @@ a_and_clave:
 CALL 	std_reg_swap
 AND 	A, (clave)
 CALL	decLed
+CALL	contarUnos
 JMP		play
 a_add_clave:
 CALL 	std_reg_swap
 ADD 	A, (clave)
 CALL	decLed
+CALL	contarUnos
 JMP		play
 a_or_clave:
 CALL 	std_reg_swap
 OR		A, (clave)
 CALL	decLed
+CALL	contarUnos
 JMP		play
 a_xor_clave:
 CALL 	std_reg_swap
 XOR 	A, (clave)
 CALL	decLed
+CALL	contarUnos
 JMP		play
 a_sub_clave:
 CALL 	std_reg_swap
 SUB 	A, (clave)
 CALL	decLed
+CALL	contarUnos
 JMP		play
 
-contarUnos:
+contarUnos:			 //A viene con el resultado OR,XOR,ADD,SUB,AND
+MOV	(contador), 0
+MOV	(digitos), 15
+CALL	cicloUnos
+MOV	A, contador
+RET
+
+cicloUnos:
+MOV	B, A
+AND	A,1
+ADD	A, (contador)
+MOV	(contador), A
+MOV	A, (digitos)
+DEC	A
+MOV	(digitos), A
+CMP	A,0
+JEQ	endCicloUnos
+SHR	B
+JMP	ciclo
+
+endCicloUnos:
+RET
 
 
 encenderLeds:
