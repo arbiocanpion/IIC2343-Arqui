@@ -1,0 +1,184 @@
+DATA:
+
+ingresa		"Ingresa"
+limpia		"Limpia"
+adivina 	"Adivina"
+gana 		"Gana"
+pierde		"Pierde"
+continuar	"continuar...?"
+puntos		":"
+espacio		" "
+
+inicio_a	"Nombre Jugador 1"
+inicio_b	"Nombre Jugador 2"
+
+nombre1	"AAAA"
+nombre2	"AAAA"
+
+ptje1		"0"
+ptje2		"0"
+
+cursor		0
+turno		0
+
+leds		FFFFh
+
+clave		0
+
+CODE:
+
+MOV	B,2
+CALL	lcd_init
+
+nuevo:
+MOV 	A, 0
+PUSH 	A
+MOV 	(cursor), A
+CALL	elegirNombre1
+POP		A
+PUSH 	A
+MOV 	(cursor), A
+CALL	elegirNombre2
+POP		A
+PUSH 	A
+MOV 	(cursor), A
+JMP nuevo
+
+elegirNombre1:  // entra A = 0
+CALL 	lcd_clear
+MOV		A, inicio_a
+CALL	lcd_string
+CALL	lcd_go_start_line_b
+MOV 	A, nombre1
+CALL 	lcd_string
+CALL	lcd_go_start_line_b
+MOV		A, (cursor)
+MOV		B, 0
+CALL 	posCursor
+CALL	std_button_wait
+CMP		A, 00001b			//botón centro
+JEQ		endNombre
+
+CMP		A, 00010b			// botón arriba
+JEQ		decrementarCursor1
+
+CMP		A, 00100b			//botón izquierda
+JEQ		decrementarLetra1
+
+CMP		A, 01000b			//botón derechO
+JEQ		aumentarLetra1
+
+CMP		A, 10000b			//botón abajo
+JEQ		aumentarCursor1
+
+
+endNombre:
+RET
+
+posCursor:
+CMP 	A, B
+JEQ 	endPosCursor
+CALL	lcd_shr_c
+INC 	B
+JMP 	posCursor
+
+endPosCursor:
+RET
+
+aumentarLetra1:
+MOV		A,nombre1
+ADD		A,(cursor)
+MOV		B,A
+INC		(B)
+JMP		elegirNombre1
+
+decrementarLetra1:
+MOV		A,nombre1
+ADD		A,(cursor)
+MOV		B,A
+PUSH 	A
+MOV 	A, (B)
+DEC		A
+MOV 	(B), A
+POP 	A
+JMP		elegirNombre1
+
+aumentarCursor1:
+MOV		A,(cursor)
+CMP		A,3
+JEQ		elegirNombre1
+INC		(cursor)
+JMP		elegirNombre1
+
+decrementarCursor1:
+MOV		A,(cursor)
+CMP		A,0
+JEQ 	elegirNombre1
+PUSH 	A
+DEC 	A
+MOV 	(cursor), A
+POP 	A
+JMP		elegirNombre1
+
+
+elegirNombre2:
+CALL 	lcd_clear
+MOV		A, inicio_b
+CALL	lcd_string
+CALL	lcd_go_start_line_b
+MOV 	A, nombre2
+CALL	lcd_string
+CALL	lcd_go_start_line_b
+MOV		A, (cursor)
+MOV		B, 0
+CALL 	posCursor
+CALL	std_button_wait
+CMP		A, 00001b			//botón centro
+JEQ		endNombre
+CMP		A, 00010b			// botón arriba
+JEQ		aumentarCursor2
+CMP		A, 00100b			//botón izquierda
+JEQ		decrementarLetra2
+CMP		A, 01000b			//botón derecha
+JEQ		aumentarLetra2
+CMP		A, 10000b			//botón abajo
+JEQ		decrementarCursor2
+
+
+
+aumentarLetra2:
+MOV		A,nombre2
+ADD		A,(cursor)
+MOV		B,A
+INC		(B)
+JMP		elegirNombre2
+
+decrementarLetra2:
+MOV		A,nombre2	
+ADD		A,(cursor)
+MOV		B,A
+PUSH 	A
+MOV 	A, (B)
+DEC 	A
+MOV 	(B), A
+POP 	A
+JMP		elegirNombre2
+
+aumentarCursor2:
+MOV		A,(cursor)
+CMP		A,3
+JEQ		elegirNombre2
+INC		(cursor)
+JMP		elegirNombre2
+
+decrementarCursor2:
+MOV		A,(cursor)
+CMP		A,0
+JEQ 	elegirNombre2
+PUSH 	A
+DEC 	A
+MOV 	(cursor),A
+POP 	A
+JMP		elegirNombre2 
+
+

@@ -53,6 +53,7 @@ MOV		A, inicio_a
 CALL	lcd_string
 CALL	lcd_go_start_line_b
 MOV 	A, nombre1
+CALL 	lcd_string
 CALL	lcd_go_start_line_b
 MOV		A, (cursor)
 MOV		B, 0
@@ -133,6 +134,7 @@ MOV		A, inicio_b
 CALL	lcd_string
 CALL	lcd_go_start_line_b
 MOV 	A, nombre2
+CALL	lcd_string
 CALL	lcd_go_start_line_b
 MOV		A, (cursor)
 MOV		B, 0
@@ -295,6 +297,7 @@ MOV 	A,(leds)
 CMP 	A,0b				//comparo si no me queda ningun led prendido
 JEQ		lose				//pierdo
 POP 	A
+CALL	contarUnos
 CALL 	std_button_wait		//espero boton para ver los switchs
 MOV 	B, A				//guardo el boton en B
 IN		A,0					//guardo switches en A
@@ -338,6 +341,9 @@ CALL 	std_reg_swap
 SUB 	A, (clave)
 CALL	decLed
 JMP		play
+
+contarUnos:
+
 
 encenderLeds:
 PUSH 	A
