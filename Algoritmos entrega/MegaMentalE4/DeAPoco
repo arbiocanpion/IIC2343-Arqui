@@ -182,3 +182,271 @@ POP 	A
 JMP		elegirNombre2 
 
 
+
+/////////////////Libreria std/////////////////////////////////////////////
+									//
+std_reg_swap:			// * en A, * en B			//
+  XOR A,B			// Diferencia en A			//
+  XOR B,A			// A en B				//
+  XOR A,B			// B en A				//
+RET				// Retorno B en A y A en B		//
+									//
+/////////////////Libreria button /////////////////////////////////////////
+									//
+									//
+std_button_wait:	// * en A, * en B				//
+ PUSH B				// Guarda B				//
+ IN A,1			// Estado Actual				//
+ std_button_wait_press_loop:						//			
+ IN B,1				// Nuevo Estado				//
+ CMP A,B			// Si !=				//
+ JEQ std_button_wait_press_loop // Continuar				//
+ XOR B,A			// Bits Cambiados			//
+ std_button_wait_release_lp:						//
+ IN A,1				// Nuevo Estado				//
+ AND A,B			// Bits A˙n Cambiados			//
+ CMP A,0			// SI == 0				//
+ JNE std_button_wait_release_lp	// Continuar				//
+ MOV A,B			// Bits Cambiados a A			//
+ POP B				// Recupera B				//
+RET				// Retorno en A				//
+									//
+//////////////////Libraria wait {std}/////////////////////////////////////
+									//
+wait_absolute_s_ms:		// Seg en A, Mseg en B			//
+ PUSH B				// Guarda Mseg				//
+
+ wait_absolute_s:		// Algo de Magia			//
+  IN B,2			//					//
+  CMP A,B			//					//
+  JGT wait_absolute_s		//					//
+ POP B				//					//
+ JMP wait_absolute_s_sanity	//					//
+ wait_absolute_ms_loop:		//					//
+  MOV B,A			//					//
+  POP A				//					//
+  wait_absolute_s_sanity:	//					//
+   PUSH B			//					//
+   IN B,2			//					//
+   CMP A,B			//					//
+   JNE wait_absolute_ms_end	//					//
+   POP B			//					//
+  PUSH A			//					//
+  MOV A,B			//					//
+  IN B,3			//					//
+  CMP A,B			//					//
+  JGT wait_absolute_ms_loop	//					//
+  MOV B,A			//					//
+  POP A				//					//
+  RET				//					//
+ wait_absolute_ms_end:		//					//
+ POP B				// Recupera Mseg			//
+RET				// Void					//
+									//
+wait_absolute_fixed_ms_us:	// Mseg en A, Useg en B			//
+ PUSH A				// Guarda Mseg				//	
+ JMP wait_absolute_ms_sanity	// Algo de Magia			//
+ wait_absolute_us_loop:		//					//
+  MOV B,A			//					//
+  POP A				//					//
+  wait_absolute_ms_sanity:	//					//
+   PUSH B			//					//
+   IN B,3			//					//
+   CMP A,B			//					//
+   JNE wait_absolute_us_end	//					//
+   POP B			//					//
+  PUSH A			//					//
+  MOV A,B			//					//
+  IN B,4			//					//
+  CMP A,B			//					//
+  JGT wait_absolute_us_loop	//					//
+  MOV B,A			//					//
+  POP A				//					//
+  POP A				//					//
+  RET				//					//
+ wait_absolute_us_end:		//					//
+ POP B				// Recupera Los Useg			//
+ POP A				// Recupera los Mseg			//
+RET				// Void					//
+									//
+wait_ms:			// Mseg en A, * en B			//
+ PUSH A				// Guarda los Mseg			//
+ PUSH B				// Guarda B				//
+ IN B,3				// Mseg Actual				//
+ ADD A,B			// Mas Mseg Delay			//
+ IN B,2				// Seg Actual				//
+ wait_ms_divide_loop:							//
+  CMP A,1000			// Si Mseg < 1000			//
+  JLT wait_ms_divide_end	// Terminar divisiÛn			//
+  SUB A,1000			// Mseg - 1000				//
+  INC B				// Seg ++				//
+  JMP wait_ms_divide_loop	// Continuar divisiÛn			//
+ wait_ms_divide_end:							//
+ CALL std_reg_swap		// Intercambiar Registros		//
+ CALL wait_absolute_s_ms	// Espera Absoluta Seg Mseg		//
+ POP B				// Recupera B				//
+ POP A				// Recupera los Mseg			//
+RET				// Void					//
+									//
+									//
+wait_us:			// Useg en A, * en B			//
+ PUSH A				// Guarda los Useg			//
+ PUSH B				// Guarda B				//
+ IN B,4				// Useg Actual				//
+ ADD A,B			// Mas Useg Delay			//
+ INC A				// Arreglar Useg			//
+ MOV B,0			// Delta Mseg	= 0			//
+
+ wait_us_divide_loop:							//
+  CMP A,1000			// Si Useg < 1000			//
+  JLT wait_us_divide_end	// Terminar divisiÛn			//
+  SUB A,1000			// Useg - 1000				//
+  INC B				// Delta Mseg ++			//
+  JMP wait_us_divide_loop	// Continuar divisiÛn			//
+ 
+wait_us_divide_end:							//
+ CMP A,0			// Si Useg == 0				//
+ JEQ wait_us_no_fix		// No Restaurar				//
+ DEC A				// Restaurar Useg			//
+ 
+wait_us_no_fix:								// 
+ PUSH A				               // Guarda USeg				//
+ PUSH B				               // Guarda Delta Mseg			//
+ IN A,3				               // Mseg Actual				//
+ ADD B,A			               // Mseg Actual + Delta Mseg		//
+ POP A				               // Recupera Delta Mseg			//
+ CALL wait_ms			           // Espera Relativa Delta Mseg		//
+ MOV A,B			               // Mseg					//
+ CMP A,1000			             // Si Mseg < 1000			//
+ JLT wait_us_ms_no_fix		   // Saltar Fix				//
+ SUB A,1000			             // Mseg = Mseg - 1000			//
+ wait_us_ms_no_fix:							//
+ POP B				// Recupera Useg			//
+ CALL wait_absolute_fixed_ms_us	// Espera Absoluta Mseg	Useg		//
+ POP B				// Recupera B				//
+ POP A				// Recupera los Useg			//
+RET				// Void					//
+									//		
+//////////////////Libreria lcd {wait}/////////////////////////////////////
+									//
+lcd_cmd:			// Comando en A, Puerto en B		//
+ PUSH A				// Guarda el Comando			//
+ OUT A, B			// Comando al Puerto			//
+ MOV A,39			// > 39us				//
+ CALL wait_us			// Comand Delay			//
+ POP A 				// Recupera el Comando		//
+RET				// Void					//
+									//
+lcd_char:			// Char	en A, Puerto en B		//
+ PUSH A				// Guarda el Char			//
+ OR A,200h			// Agrega señal para escribir		//
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A 				// Recupera el Char			//
+RET				// Void					//
+									//
+lcd_clear:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A		 		//
+ MOV A,01h 			// 01h					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ MOV A,1530			// > 1.53ms				//
+ CALL wait_us			// Comand Delay				//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_home:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,02h   			// 02h					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ MOV A,1530			// > 1.53ms				//
+ CALL wait_us			// Comand Delay			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_go_start_line_a:		// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,0			// Address 0				//
+ CALL lcd_address_line_a	// Cambiar a Address en linea A		//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_go_start_line_b:		// *	en A, Puerto en B	        //
+ PUSH A				// Guarda A				//
+ MOV A,0			// Address 0				//
+ CALL lcd_address_line_b	// Cambiar a Address en linea B		//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_address_line_a:		// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ OR A,80h 		 	// Base 00h				//
+ MOV (cursor), A
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_address_line_b:		// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ OR A,C0h 		 	// Base 40h				//
+ MOV (cursor), A
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_shl:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,18h			// 18h					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_shr:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,1Ch			// 1Ch					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_shl_c:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,10h			// 10h					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_shr_c:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,14h			// 14h					//
+ CALL lcd_cmd			// Comando al Puerto			//
+ POP A				// Recupera A				//
+RET				// Void					//
+									//
+lcd_string: 			// Puntero en A, puerto en B		//
+ PUSH A				// Guarda el puntero			//
+ PUSH B				// Guarda el puerto			//
+ MOV B,A			// Posiciona el puntero			//
+ MOV A,(B)			// Obtiene el Char			//
+ POP B				// Recupera el Puerto			//
+ CMP A,0			// Si Char == 0				//
+ JEQ lcd_string_end		// Termina				//
+ CALL lcd_char			// Escribe				//
+ POP A				// Recupera el puntero			//
+ INC A				// Incrementa el puntero		//
+ JMP lcd_string			// Next					//
+ lcd_string_end:							//
+ POP A				// Recupera el ultimo puntero		//
+RET				// Retorna el puntero final en A	//
+									//
+lcd_init:			// *	en A, Puerto en B		//
+ PUSH A				// Guarda A				//
+ MOV A,30d			// > 30ms 				//
+ CALL wait_ms			// PwrOn Delay				//
+ MOV A,111100b			// { Lines, Display, Font }		//
+ CALL lcd_cmd  			// Function Set				//
+ MOV A,001111b			// { Display, Cursor, Blink }		//
+ CALL lcd_cmd 			// Display Ctrl Set			//
+ CALL lcd_clear			// Display Clear			//
+ MOV A,000110b			// { Mode, Shift }			//
+ CALL lcd_cmd 			// Entry Mode Set			//
+ CALL lcd_home			// Return Home				//
+ POP A				// Recupera A				//
+RET				// Void					//
