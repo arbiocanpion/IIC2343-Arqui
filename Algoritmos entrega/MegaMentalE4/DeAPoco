@@ -56,19 +56,19 @@ MOV		A, (cursor)
 MOV		B, 0
 CALL 	posCursor
 CALL	std_button_wait
-CMP		A, 00001b			//botón centro
+CMP		A, 1			//botón centro
 JEQ		endNombre
 
-CMP		A, 00010b			// botón arriba
+CMP		A, 2			// botón arriba
 JEQ		decrementarCursor1
 
-CMP		A, 00100b			//botón izquierda
+CMP		A, 4			//botón izquierda
 JEQ		decrementarLetra1
 
-CMP		A, 01000b			//botón derechO
+CMP		A, 8			//botón derechO
 JEQ		aumentarLetra1
 
-CMP		A, 10000b			//botón abajo
+CMP		A, 16			//botón abajo
 JEQ		aumentarCursor1
 
 
@@ -133,15 +133,15 @@ MOV		A, (cursor)
 MOV		B, 0
 CALL 	posCursor
 CALL	std_button_wait
-CMP		A, 00001b			//botón centro
+CMP		A, 1			//botón centro
 JEQ		endNombre
-CMP		A, 00010b			// botón arriba
+CMP		A, 2			// botón arriba
 JEQ		aumentarCursor2
-CMP		A, 00100b			//botón izquierda
+CMP		A, 4			//botón izquierda
 JEQ		decrementarLetra2
-CMP		A, 01000b			//botón derecha
+CMP		A, 8			//botón derecha
 JEQ		aumentarLetra2
-CMP		A, 10000b			//botón abajo
+CMP		A, 16			//botón abajo
 JEQ		decrementarCursor2
 
 
