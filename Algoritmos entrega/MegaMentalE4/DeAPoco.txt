@@ -57,49 +57,46 @@ CALL 	lcd_clear
 MOV		A, inicio_a
 CALL	lcd_string
 CALL	lcd_go_start_line_b
-MOV 	A, nombre1
+MOV 	A, (nombre1)
 CALL 	lcd_string
 CALL	lcd_go_start_line_b
 MOV		A, (cursor)
-MOV		B, 0
-CALL 	posCursor
+MOV		B, 10b
 CALL	std_button_wait
+CALL  posCursor
+
+CMP		A, 1h			//botón centro
 JEQ		endNombre
-JMP		elegirNombre1
-//CMP		A, 1			//botón centro
-//JEQ		endNombre
 
-//CMP		A, 2			// botón arriba
-//JEQ		decrementarCursor1
+CMP		A, 2h			// botón arriba
+JEQ		decrementarCursor1
 
-//CMP		A, 4			//botón izquierda
-//JEQ		decrementarLetra1
+CMP		A, 4h			//botón izquierda
+JEQ		decrementarLetra1
 
-//CMP		A, 8			//botón derechO
-//JEQ		aumentarLetra1
+CMP		A, 8h			//botón derechO
+JEQ		aumentarLetra1
 
-//CMP		A, 16			//botón abajo
-//JEQ		aumentarCursor1
+CMP		A, 10h			//botón abajo
+JEQ		aumentarCursor1
 
+JMP   elegirNombre1
 
 endNombre:
 RET
 
 posCursor:
-CMP 	A, B
-JEQ 	endPosCursor
-CALL	lcd_shr_c
-INC 	B
-JMP 	posCursor
-
-endPosCursor:
+PUSH A
+MOV A, (cursor)
+MOV B, 10b
+CALL lcd_address_line_b
+POP A
 RET
 
 aumentarLetra1:
-MOV	A,nombre1
-ADD	A,(cursor)
-MOV	B,A
-INC	(B)
+MOV	A, (nombre1)
+ADD	A, (nombre1)
+MOV (nombre1), A
 JMP	elegirNombre1
 
 decrementarLetra1:
@@ -141,20 +138,18 @@ CALL	lcd_string
 CALL	lcd_go_start_line_b
 MOV		A, (cursor)
 MOV		B, 0
-CALL 	posCursor
 CALL	std_button_wait
-JMP		endNombre
-JMP		elegirNombre2
-//CMP		A, 1			//botón centro
-//JEQ		endNombre
-//CMP		A, 2			// botón arriba
-//JEQ		aumentarCursor2
-//CMP		A, 4			//botón izquierda
-//JEQ		decrementarLetra2
-//CMP		A, 8			//botón derecha
-//JEQ		aumentarLetra2
-//CMP		A, 16			//botón abajo
-//JEQ		decrementarCursor2
+
+CMP		A, 1			//botón centro
+JEQ		endNombre
+CMP		A, 2			// botón arriba
+JEQ		aumentarCursor2
+CMP		A, 4			//botón izquierda
+JEQ		decrementarLetra2
+CMP		A, 8			//botón derecha
+JEQ		aumentarLetra2
+CMP		A, 16			//botón abajo
+JEQ		decrementarCursor2
 
 
 

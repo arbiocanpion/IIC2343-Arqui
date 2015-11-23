@@ -17,165 +17,165 @@ architecture Behavioral of ROM is
 type memory_array is array (0 to ((2 ** 12) - 1) ) of std_logic_vector (32 downto 0);
 
 signal memory : memory_array:= (
-	"000000000100100100000000000000010",	-- instrucción 1 - Assembler.MovInstruction A, Lit
+	"000000000100111000000000000000010",	-- instrucción 1 - Assembler.MovInstruction A, Lit
 	"000000000000000000000000000000110",	-- instrucción 2 - Assembler.MovInstruction Dir, A
-	"000000000110111000000000000000010",	-- instrucción 3 - Assembler.MovInstruction A, Lit
+	"000000000110111100000000000000010",	-- instrucción 3 - Assembler.MovInstruction A, Lit
 	"000000000000000100000000000000110",	-- instrucción 4 - Assembler.MovInstruction Dir, A
-	"000000000110011100000000000000010",	-- instrucción 5 - Assembler.MovInstruction A, Lit
+	"000000000110110100000000000000010",	-- instrucción 5 - Assembler.MovInstruction A, Lit
 	"000000000000001000000000000000110",	-- instrucción 6 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 7 - Assembler.MovInstruction A, Lit
+	"000000000110001000000000000000010",	-- instrucción 7 - Assembler.MovInstruction A, Lit
 	"000000000000001100000000000000110",	-- instrucción 8 - Assembler.MovInstruction Dir, A
-	"000000000110010100000000000000010",	-- instrucción 9 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 9 - Assembler.MovInstruction A, Lit
 	"000000000000010000000000000000110",	-- instrucción 10 - Assembler.MovInstruction Dir, A
-	"000000000111001100000000000000010",	-- instrucción 11 - Assembler.MovInstruction A, Lit
+	"000000000110010100000000000000010",	-- instrucción 11 - Assembler.MovInstruction A, Lit
 	"000000000000010100000000000000110",	-- instrucción 12 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 13 - Assembler.MovInstruction A, Lit
+	"000000000101111100000000000000010",	-- instrucción 13 - Assembler.MovInstruction A, Lit
 	"000000000000011000000000000000110",	-- instrucción 14 - Assembler.MovInstruction Dir, A
-	"000000000100110000000000000000010",	-- instrucción 15 - Assembler.MovInstruction A, Lit
+	"000000000100101000000000000000010",	-- instrucción 15 - Assembler.MovInstruction A, Lit
 	"000000000000011100000000000000110",	-- instrucción 16 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 17 - Assembler.MovInstruction A, Lit
+	"000000000111010100000000000000010",	-- instrucción 17 - Assembler.MovInstruction A, Lit
 	"000000000000100000000000000000110",	-- instrucción 18 - Assembler.MovInstruction Dir, A
-	"000000000110110100000000000000010",	-- instrucción 19 - Assembler.MovInstruction A, Lit
+	"000000000110011100000000000000010",	-- instrucción 19 - Assembler.MovInstruction A, Lit
 	"000000000000100100000000000000110",	-- instrucción 20 - Assembler.MovInstruction Dir, A
-	"000000000111000000000000000000010",	-- instrucción 21 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 21 - Assembler.MovInstruction A, Lit
 	"000000000000101000000000000000110",	-- instrucción 22 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 23 - Assembler.MovInstruction A, Lit
+	"000000000110010000000000000000010",	-- instrucción 23 - Assembler.MovInstruction A, Lit
 	"000000000000101100000000000000110",	-- instrucción 24 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 25 - Assembler.MovInstruction A, Lit
+	"000000000110111100000000000000010",	-- instrucción 25 - Assembler.MovInstruction A, Lit
 	"000000000000110000000000000000110",	-- instrucción 26 - Assembler.MovInstruction Dir, A
-	"000000000100000100000000000000010",	-- instrucción 27 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 27 - Assembler.MovInstruction A, Lit
 	"000000000000110100000000000000110",	-- instrucción 28 - Assembler.MovInstruction Dir, A
-	"000000000110010000000000000000010",	-- instrucción 29 - Assembler.MovInstruction A, Lit
+	"000000000101111100000000000000010",	-- instrucción 29 - Assembler.MovInstruction A, Lit
 	"000000000000111000000000000000110",	-- instrucción 30 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 31 - Assembler.MovInstruction A, Lit
+	"000000000011000100000000000000010",	-- instrucción 31 - Assembler.MovInstruction A, Lit
 	"000000000000111100000000000000110",	-- instrucción 32 - Assembler.MovInstruction Dir, A
-	"000000000111011000000000000000010",	-- instrucción 33 - Assembler.MovInstruction A, Lit
+	"000000000100111000000000000000010",	-- instrucción 33 - Assembler.MovInstruction A, Lit
 	"000000000001000000000000000000110",	-- instrucción 34 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 35 - Assembler.MovInstruction A, Lit
+	"000000000110111100000000000000010",	-- instrucción 35 - Assembler.MovInstruction A, Lit
 	"000000000001000100000000000000110",	-- instrucción 36 - Assembler.MovInstruction Dir, A
-	"000000000110111000000000000000010",	-- instrucción 37 - Assembler.MovInstruction A, Lit
+	"000000000110110100000000000000010",	-- instrucción 37 - Assembler.MovInstruction A, Lit
 	"000000000001001000000000000000110",	-- instrucción 38 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 39 - Assembler.MovInstruction A, Lit
+	"000000000110001000000000000000010",	-- instrucción 39 - Assembler.MovInstruction A, Lit
 	"000000000001001100000000000000110",	-- instrucción 40 - Assembler.MovInstruction Dir, A
-	"000000000100011100000000000000010",	-- instrucción 41 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 41 - Assembler.MovInstruction A, Lit
 	"000000000001010000000000000000110",	-- instrucción 42 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 43 - Assembler.MovInstruction A, Lit
+	"000000000110010100000000000000010",	-- instrucción 43 - Assembler.MovInstruction A, Lit
 	"000000000001010100000000000000110",	-- instrucción 44 - Assembler.MovInstruction Dir, A
-	"000000000110111000000000000000010",	-- instrucción 45 - Assembler.MovInstruction A, Lit
+	"000000000101111100000000000000010",	-- instrucción 45 - Assembler.MovInstruction A, Lit
 	"000000000001011000000000000000110",	-- instrucción 46 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 47 - Assembler.MovInstruction A, Lit
+	"000000000100101000000000000000010",	-- instrucción 47 - Assembler.MovInstruction A, Lit
 	"000000000001011100000000000000110",	-- instrucción 48 - Assembler.MovInstruction Dir, A
-	"000000000101000000000000000000010",	-- instrucción 49 - Assembler.MovInstruction A, Lit
+	"000000000111010100000000000000010",	-- instrucción 49 - Assembler.MovInstruction A, Lit
 	"000000000001100000000000000000110",	-- instrucción 50 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 51 - Assembler.MovInstruction A, Lit
+	"000000000110011100000000000000010",	-- instrucción 51 - Assembler.MovInstruction A, Lit
 	"000000000001100100000000000000110",	-- instrucción 52 - Assembler.MovInstruction Dir, A
-	"000000000110010100000000000000010",	-- instrucción 53 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 53 - Assembler.MovInstruction A, Lit
 	"000000000001101000000000000000110",	-- instrucción 54 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 55 - Assembler.MovInstruction A, Lit
+	"000000000110010000000000000000010",	-- instrucción 55 - Assembler.MovInstruction A, Lit
 	"000000000001101100000000000000110",	-- instrucción 56 - Assembler.MovInstruction Dir, A
-	"000000000110010000000000000000010",	-- instrucción 57 - Assembler.MovInstruction A, Lit
+	"000000000110111100000000000000010",	-- instrucción 57 - Assembler.MovInstruction A, Lit
 	"000000000001110000000000000000110",	-- instrucción 58 - Assembler.MovInstruction Dir, A
-	"000000000110010100000000000000010",	-- instrucción 59 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 59 - Assembler.MovInstruction A, Lit
 	"000000000001110100000000000000110",	-- instrucción 60 - Assembler.MovInstruction Dir, A
-	"000000000110001100000000000000010",	-- instrucción 61 - Assembler.MovInstruction A, Lit
+	"000000000101111100000000000000010",	-- instrucción 61 - Assembler.MovInstruction A, Lit
 	"000000000001111000000000000000110",	-- instrucción 62 - Assembler.MovInstruction Dir, A
-	"000000000110111100000000000000010",	-- instrucción 63 - Assembler.MovInstruction A, Lit
+	"000000000011001000000000000000010",	-- instrucción 63 - Assembler.MovInstruction A, Lit
 	"000000000001111100000000000000110",	-- instrucción 64 - Assembler.MovInstruction Dir, A
-	"000000000110111000000000000000010",	-- instrucción 65 - Assembler.MovInstruction A, Lit
+	"000000000000000000000000000000010",	-- instrucción 65 - Assembler.MovInstruction A, Lit
 	"000000000010000000000000000000110",	-- instrucción 66 - Assembler.MovInstruction Dir, A
-	"000000000111010000000000000000010",	-- instrucción 67 - Assembler.MovInstruction A, Lit
+	"000000000000000000000000000000010",	-- instrucción 67 - Assembler.MovInstruction A, Lit
 	"000000000010000100000000000000110",	-- instrucción 68 - Assembler.MovInstruction Dir, A
-	"000000000110100100000000000000010",	-- instrucción 69 - Assembler.MovInstruction A, Lit
+	"000000000100100100000000000000010",	-- instrucción 69 - Assembler.MovInstruction A, Lit
 	"000000000010001000000000000000110",	-- instrucción 70 - Assembler.MovInstruction Dir, A
 	"000000000110111000000000000000010",	-- instrucción 71 - Assembler.MovInstruction A, Lit
 	"000000000010001100000000000000110",	-- instrucción 72 - Assembler.MovInstruction Dir, A
-	"000000000111010100000000000000010",	-- instrucción 73 - Assembler.MovInstruction A, Lit
+	"000000000110011100000000000000010",	-- instrucción 73 - Assembler.MovInstruction A, Lit
 	"000000000010010000000000000000110",	-- instrucción 74 - Assembler.MovInstruction Dir, A
-	"000000000110000100000000000000010",	-- instrucción 75 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 75 - Assembler.MovInstruction A, Lit
 	"000000000010010100000000000000110",	-- instrucción 76 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 77 - Assembler.MovInstruction A, Lit
+	"000000000110010100000000000000010",	-- instrucción 77 - Assembler.MovInstruction A, Lit
 	"000000000010011000000000000000110",	-- instrucción 78 - Assembler.MovInstruction Dir, A
-	"000000000010111000000000000000010",	-- instrucción 79 - Assembler.MovInstruction A, Lit
+	"000000000111001100000000000000010",	-- instrucción 79 - Assembler.MovInstruction A, Lit
 	"000000000010011100000000000000110",	-- instrucción 80 - Assembler.MovInstruction Dir, A
-	"000000000010111000000000000000010",	-- instrucción 81 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 81 - Assembler.MovInstruction A, Lit
 	"000000000010100000000000000000110",	-- instrucción 82 - Assembler.MovInstruction Dir, A
-	"000000000010111000000000000000010",	-- instrucción 83 - Assembler.MovInstruction A, Lit
+	"000000000100110000000000000000010",	-- instrucción 83 - Assembler.MovInstruction A, Lit
 	"000000000010100100000000000000110",	-- instrucción 84 - Assembler.MovInstruction Dir, A
-	"000000000011111100000000000000010",	-- instrucción 85 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 85 - Assembler.MovInstruction A, Lit
 	"000000000010101000000000000000110",	-- instrucción 86 - Assembler.MovInstruction Dir, A
-	"000000000011101000000000000000010",	-- instrucción 87 - Assembler.MovInstruction A, Lit
+	"000000000110110100000000000000010",	-- instrucción 87 - Assembler.MovInstruction A, Lit
 	"000000000010101100000000000000110",	-- instrucción 88 - Assembler.MovInstruction Dir, A
-	"000000000010000000000000000000010",	-- instrucción 89 - Assembler.MovInstruction A, Lit
+	"000000000111000000000000000000010",	-- instrucción 89 - Assembler.MovInstruction A, Lit
 	"000000000010110000000000000000110",	-- instrucción 90 - Assembler.MovInstruction Dir, A
-	"000000000100111000000000000000010",	-- instrucción 91 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 91 - Assembler.MovInstruction A, Lit
 	"000000000010110100000000000000110",	-- instrucción 92 - Assembler.MovInstruction Dir, A
-	"000000000110111100000000000000010",	-- instrucción 93 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 93 - Assembler.MovInstruction A, Lit
 	"000000000010111000000000000000110",	-- instrucción 94 - Assembler.MovInstruction Dir, A
-	"000000000110110100000000000000010",	-- instrucción 95 - Assembler.MovInstruction A, Lit
+	"000000000100000100000000000000010",	-- instrucción 95 - Assembler.MovInstruction A, Lit
 	"000000000010111100000000000000110",	-- instrucción 96 - Assembler.MovInstruction Dir, A
-	"000000000110001000000000000000010",	-- instrucción 97 - Assembler.MovInstruction A, Lit
+	"000000000110010000000000000000010",	-- instrucción 97 - Assembler.MovInstruction A, Lit
 	"000000000011000000000000000000110",	-- instrucción 98 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 99 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 99 - Assembler.MovInstruction A, Lit
 	"000000000011000100000000000000110",	-- instrucción 100 - Assembler.MovInstruction Dir, A
-	"000000000110010100000000000000010",	-- instrucción 101 - Assembler.MovInstruction A, Lit
+	"000000000111011000000000000000010",	-- instrucción 101 - Assembler.MovInstruction A, Lit
 	"000000000011001000000000000000110",	-- instrucción 102 - Assembler.MovInstruction Dir, A
-	"000000000010000000000000000000010",	-- instrucción 103 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 103 - Assembler.MovInstruction A, Lit
 	"000000000011001100000000000000110",	-- instrucción 104 - Assembler.MovInstruction Dir, A
-	"000000000100101000000000000000010",	-- instrucción 105 - Assembler.MovInstruction A, Lit
+	"000000000110111000000000000000010",	-- instrucción 105 - Assembler.MovInstruction A, Lit
 	"000000000011010000000000000000110",	-- instrucción 106 - Assembler.MovInstruction Dir, A
-	"000000000111010100000000000000010",	-- instrucción 107 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 107 - Assembler.MovInstruction A, Lit
 	"000000000011010100000000000000110",	-- instrucción 108 - Assembler.MovInstruction Dir, A
-	"000000000110011100000000000000010",	-- instrucción 109 - Assembler.MovInstruction A, Lit
+	"000000000100011100000000000000010",	-- instrucción 109 - Assembler.MovInstruction A, Lit
 	"000000000011011000000000000000110",	-- instrucción 110 - Assembler.MovInstruction Dir, A
 	"000000000110000100000000000000010",	-- instrucción 111 - Assembler.MovInstruction A, Lit
 	"000000000011011100000000000000110",	-- instrucción 112 - Assembler.MovInstruction Dir, A
-	"000000000110010000000000000000010",	-- instrucción 113 - Assembler.MovInstruction A, Lit
+	"000000000110111000000000000000010",	-- instrucción 113 - Assembler.MovInstruction A, Lit
 	"000000000011100000000000000000110",	-- instrucción 114 - Assembler.MovInstruction Dir, A
-	"000000000110111100000000000000010",	-- instrucción 115 - Assembler.MovInstruction A, Lit
+	"000000000110000100000000000000010",	-- instrucción 115 - Assembler.MovInstruction A, Lit
 	"000000000011100100000000000000110",	-- instrucción 116 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 117 - Assembler.MovInstruction A, Lit
+	"000000000101000000000000000000010",	-- instrucción 117 - Assembler.MovInstruction A, Lit
 	"000000000011101000000000000000110",	-- instrucción 118 - Assembler.MovInstruction Dir, A
-	"000000000010000000000000000000010",	-- instrucción 119 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 119 - Assembler.MovInstruction A, Lit
 	"000000000011101100000000000000110",	-- instrucción 120 - Assembler.MovInstruction Dir, A
-	"000000000011000100000000000000010",	-- instrucción 121 - Assembler.MovInstruction A, Lit
+	"000000000110010100000000000000010",	-- instrucción 121 - Assembler.MovInstruction A, Lit
 	"000000000011110000000000000000110",	-- instrucción 122 - Assembler.MovInstruction Dir, A
-	"000000000100111000000000000000010",	-- instrucción 123 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 123 - Assembler.MovInstruction A, Lit
 	"000000000011110100000000000000110",	-- instrucción 124 - Assembler.MovInstruction Dir, A
-	"000000000110111100000000000000010",	-- instrucción 125 - Assembler.MovInstruction A, Lit
+	"000000000110010000000000000000010",	-- instrucción 125 - Assembler.MovInstruction A, Lit
 	"000000000011111000000000000000110",	-- instrucción 126 - Assembler.MovInstruction Dir, A
-	"000000000110110100000000000000010",	-- instrucción 127 - Assembler.MovInstruction A, Lit
+	"000000000110010100000000000000010",	-- instrucción 127 - Assembler.MovInstruction A, Lit
 	"000000000011111100000000000000110",	-- instrucción 128 - Assembler.MovInstruction Dir, A
-	"000000000110001000000000000000010",	-- instrucción 129 - Assembler.MovInstruction A, Lit
+	"000000000110001100000000000000010",	-- instrucción 129 - Assembler.MovInstruction A, Lit
 	"000000000100000000000000000000110",	-- instrucción 130 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 131 - Assembler.MovInstruction A, Lit
+	"000000000110111100000000000000010",	-- instrucción 131 - Assembler.MovInstruction A, Lit
 	"000000000100000100000000000000110",	-- instrucción 132 - Assembler.MovInstruction Dir, A
-	"000000000110010100000000000000010",	-- instrucción 133 - Assembler.MovInstruction A, Lit
+	"000000000110111000000000000000010",	-- instrucción 133 - Assembler.MovInstruction A, Lit
 	"000000000100001000000000000000110",	-- instrucción 134 - Assembler.MovInstruction Dir, A
-	"000000000010000000000000000000010",	-- instrucción 135 - Assembler.MovInstruction A, Lit
+	"000000000111010000000000000000010",	-- instrucción 135 - Assembler.MovInstruction A, Lit
 	"000000000100001100000000000000110",	-- instrucción 136 - Assembler.MovInstruction Dir, A
-	"000000000100101000000000000000010",	-- instrucción 137 - Assembler.MovInstruction A, Lit
+	"000000000110100100000000000000010",	-- instrucción 137 - Assembler.MovInstruction A, Lit
 	"000000000100010000000000000000110",	-- instrucción 138 - Assembler.MovInstruction Dir, A
-	"000000000111010100000000000000010",	-- instrucción 139 - Assembler.MovInstruction A, Lit
+	"000000000110111000000000000000010",	-- instrucción 139 - Assembler.MovInstruction A, Lit
 	"000000000100010100000000000000110",	-- instrucción 140 - Assembler.MovInstruction Dir, A
-	"000000000110011100000000000000010",	-- instrucción 141 - Assembler.MovInstruction A, Lit
+	"000000000111010100000000000000010",	-- instrucción 141 - Assembler.MovInstruction A, Lit
 	"000000000100011000000000000000110",	-- instrucción 142 - Assembler.MovInstruction Dir, A
 	"000000000110000100000000000000010",	-- instrucción 143 - Assembler.MovInstruction A, Lit
 	"000000000100011100000000000000110",	-- instrucción 144 - Assembler.MovInstruction Dir, A
-	"000000000110010000000000000000010",	-- instrucción 145 - Assembler.MovInstruction A, Lit
+	"000000000111001000000000000000010",	-- instrucción 145 - Assembler.MovInstruction A, Lit
 	"000000000100100000000000000000110",	-- instrucción 146 - Assembler.MovInstruction Dir, A
-	"000000000110111100000000000000010",	-- instrucción 147 - Assembler.MovInstruction A, Lit
+	"000000000010111000000000000000010",	-- instrucción 147 - Assembler.MovInstruction A, Lit
 	"000000000100100100000000000000110",	-- instrucción 148 - Assembler.MovInstruction Dir, A
-	"000000000111001000000000000000010",	-- instrucción 149 - Assembler.MovInstruction A, Lit
+	"000000000010111000000000000000010",	-- instrucción 149 - Assembler.MovInstruction A, Lit
 	"000000000100101000000000000000110",	-- instrucción 150 - Assembler.MovInstruction Dir, A
-	"000000000010000000000000000000010",	-- instrucción 151 - Assembler.MovInstruction A, Lit
+	"000000000010111000000000000000010",	-- instrucción 151 - Assembler.MovInstruction A, Lit
 	"000000000100101100000000000000110",	-- instrucción 152 - Assembler.MovInstruction Dir, A
-	"000000000011001000000000000000010",	-- instrucción 153 - Assembler.MovInstruction A, Lit
+	"000000000011111100000000000000010",	-- instrucción 153 - Assembler.MovInstruction A, Lit
 	"000000000100110000000000000000110",	-- instrucción 154 - Assembler.MovInstruction Dir, A
-	"000000000100000100000000000000010",	-- instrucción 155 - Assembler.MovInstruction A, Lit
+	"000000000011101000000000000000010",	-- instrucción 155 - Assembler.MovInstruction A, Lit
 	"000000000100110100000000000000110",	-- instrucción 156 - Assembler.MovInstruction Dir, A
-	"000000000100000100000000000000010",	-- instrucción 157 - Assembler.MovInstruction A, Lit
+	"000000000101111100000000000000010",	-- instrucción 157 - Assembler.MovInstruction A, Lit
 	"000000000100111000000000000000110",	-- instrucción 158 - Assembler.MovInstruction Dir, A
-	"000000000100000100000000000000010",	-- instrucción 159 - Assembler.MovInstruction A, Lit
+	"000000000000000000000000000000010",	-- instrucción 159 - Assembler.MovInstruction A, Lit
 	"000000000100111100000000000000110",	-- instrucción 160 - Assembler.MovInstruction Dir, A
 	"000000000100000100000000000000010",	-- instrucción 161 - Assembler.MovInstruction A, Lit
 	"000000000101000000000000000000110",	-- instrucción 162 - Assembler.MovInstruction Dir, A
@@ -187,639 +187,639 @@ signal memory : memory_array:= (
 	"000000000101001100000000000000110",	-- instrucción 168 - Assembler.MovInstruction Dir, A
 	"000000000100000100000000000000010",	-- instrucción 169 - Assembler.MovInstruction A, Lit
 	"000000000101010000000000000000110",	-- instrucción 170 - Assembler.MovInstruction Dir, A
-	"000000000011000000000000000000010",	-- instrucción 171 - Assembler.MovInstruction A, Lit
+	"000000000100000100000000000000010",	-- instrucción 171 - Assembler.MovInstruction A, Lit
 	"000000000101010100000000000000110",	-- instrucción 172 - Assembler.MovInstruction Dir, A
-	"000000000011000000000000000000010",	-- instrucción 173 - Assembler.MovInstruction A, Lit
+	"000000000100000100000000000000010",	-- instrucción 173 - Assembler.MovInstruction A, Lit
 	"000000000101011000000000000000110",	-- instrucción 174 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000000000010",	-- instrucción 175 - Assembler.MovInstruction A, Lit
+	"000000000100000100000000000000010",	-- instrucción 175 - Assembler.MovInstruction A, Lit
 	"000000000101011100000000000000110",	-- instrucción 176 - Assembler.MovInstruction Dir, A
 	"000000000000000000000000000000010",	-- instrucción 177 - Assembler.MovInstruction A, Lit
 	"000000000101100000000000000000110",	-- instrucción 178 - Assembler.MovInstruction Dir, A
-	"111111111111111100000000000000010",	-- instrucción 179 - Assembler.MovInstruction A, Lit
+	"000000000011000000000000000000010",	-- instrucción 179 - Assembler.MovInstruction A, Lit
 	"000000000101100100000000000000110",	-- instrucción 180 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000000000010",	-- instrucción 181 - Assembler.MovInstruction A, Lit
+	"000000000011000000000000000000010",	-- instrucción 181 - Assembler.MovInstruction A, Lit
 	"000000000101101000000000000000110",	-- instrucción 182 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000000000010",	-- instrucción 183 - Assembler.MovInstruction A, Lit
+	"111111111111111100000000000000010",	-- instrucción 183 - Assembler.MovInstruction A, Lit
 	"000000000101101100000000000000110",	-- instrucción 184 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000000000010",	-- instrucción 185 - Assembler.MovInstruction A, Lit
+	"000000000000000100000000000000010",	-- instrucción 185 - Assembler.MovInstruction A, Lit
 	"000000000101110000000000000000110",	-- instrucción 186 - Assembler.MovInstruction Dir, A
 	"000000000000001000000000000000011",	-- instrucción 187 - Assembler.MovInstruction B, Lit
-	"000000110001010000000000001010010",	-- instrucción 188 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000000000010",	-- instrucción 189 - Assembler.MovInstruction A, Lit
-	"000000000000000000000000001001110",	-- instrucción 190 - Assembler.Instructions.PushInstruction A, None
-	"000000000101011100000000000000110",	-- instrucción 191 - Assembler.MovInstruction Dir, A
-	"000000001100111100000000001010010",	-- instrucción 192 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 193 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 194 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000000000000001001110",	-- instrucción 195 - Assembler.Instructions.PushInstruction A, None
-	"000000000101011100000000000000110",	-- instrucción 196 - Assembler.MovInstruction Dir, A
-	"000000010000001000000000001010010",	-- instrucción 197 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 198 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 199 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000000000000001001110",	-- instrucción 200 - Assembler.Instructions.PushInstruction A, None
-	"000000000101011100000000000000110",	-- instrucción 201 - Assembler.MovInstruction Dir, A
-	"000000000101100000000000000000100",	-- instrucción 202 - Assembler.MovInstruction A, Dir
-	"000000010100001100000000001010010",	-- instrucción 203 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 204 - Assembler.MovInstruction A, Dir
-	"000000010101100100000000001010010",	-- instrucción 205 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 206 - Assembler.MovInstruction A, Dir
-	"000000010110110000000000001010111",	-- instrucción 207 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000101011011100000000001010010",	-- instrucción 208 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110100000000000000010",	-- instrucción 209 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 210 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 211 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 212 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 213 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 214 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 215 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000000000011",	-- instrucción 216 - Assembler.MovInstruction B, Lit
-	"000000001101111000000000001010010",	-- instrucción 217 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 218 - Assembler.Instructions.CallInstruction Lit, None
-	"000000001101110000000000001011000",	-- instrucción 219 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000001100111100000000001010111",	-- instrucción 220 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100001",	-- instrucción 221 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 222 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001010",	-- instrucción 223 - Assembler.CmpInstruction A, B
-	"000000001110001100000000001011000",	-- instrucción 224 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 225 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000001000110",	-- instrucción 226 - Assembler.IncInstruction B, Lit
-	"000000001101111000000000001010111",	-- instrucción 227 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100001",	-- instrucción 228 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 229 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000100110100000000000000010",	-- instrucción 230 - Assembler.MovInstruction A, Lit
-	"000000000101011100000000000010000",	-- instrucción 231 - Assembler.AddInstruction A, Dir
-	"000000000000000000000000000000001",	-- instrucción 232 - Assembler.MovInstruction B, A
-	"000000000000000000000000001001000",	-- instrucción 233 - Assembler.IncInstruction DirB, Lit
-	"000000001100111100000000001010111",	-- instrucción 234 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 235 - Assembler.MovInstruction A, Lit
-	"000000000101011100000000000010000",	-- instrucción 236 - Assembler.AddInstruction A, Dir
-	"000000000000000000000000000000001",	-- instrucción 237 - Assembler.MovInstruction B, A
-	"000000000000000000000000001001110",	-- instrucción 238 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000001000",	-- instrucción 239 - Assembler.MovInstruction A, DirB
-	"000000000000000100000000001001001",	-- instrucción 240 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000000000000000000000001010",	-- instrucción 241 - Assembler.MovInstruction DirB, A
-	"000000000000000100000000001100000",	-- instrucción 242 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 243 - Assembler.Instructions.Pop2Instruction A, None
-	"000000001100111100000000001010111",	-- instrucción 244 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 245 - Assembler.MovInstruction A, Dir
-	"000000000000001100000000001001011",	-- instrucción 246 - Assembler.CmpInstruction A, Lit
-	"000000001100111100000000001011000",	-- instrucción 247 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000101011100000000001000111",	-- instrucción 248 - Assembler.IncInstruction Dir, Lit
-	"000000001100111100000000001010111",	-- instrucción 249 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 250 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000001001011",	-- instrucción 251 - Assembler.CmpInstruction A, Lit
-	"000000001100111100000000001011000",	-- instrucción 252 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 253 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000100000000001001001",	-- instrucción 254 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000101011100000000000000110",	-- instrucción 255 - Assembler.MovInstruction Dir, A
+	"000000101110100100000000001010010",	-- instrucción 188 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 189 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000010",	-- instrucción 190 - Assembler.MovInstruction A, Lit
+	"000000000101100100000000000000110",	-- instrucción 191 - Assembler.MovInstruction Dir, A
+	"000000000101101000000000000000110",	-- instrucción 192 - Assembler.MovInstruction Dir, A
+	"000000000101100000000000000000110",	-- instrucción 193 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100000",	-- instrucción 194 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 195 - Assembler.Instructions.Pop2Instruction A, None
+	"000000001100110100000000001010010",	-- instrucción 196 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 197 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000010",	-- instrucción 198 - Assembler.MovInstruction A, Lit
+	"000000000101100000000000000000110",	-- instrucción 199 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100000",	-- instrucción 200 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 201 - Assembler.Instructions.Pop2Instruction A, None
+	"000000010000010000000000001010010",	-- instrucción 202 - Assembler.Instructions.CallInstruction Lit, None
+	"000000010100111100000000001010010",	-- instrucción 203 - Assembler.Instructions.CallInstruction Lit, None
+	"000000010110010100000000001010010",	-- instrucción 204 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011010000000000000001010111",	-- instrucción 205 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000101000110000000000001010010",	-- instrucción 206 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001010100000000001010010",	-- instrucción 207 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011011100100000000001010010",	-- instrucción 208 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001111000000000001010010",	-- instrucción 209 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000000000000000000010",	-- instrucción 210 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 211 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101000000000000000000010",	-- instrucción 212 - Assembler.MovInstruction A, Lit
+	"000000101010010100000000001010010",	-- instrucción 213 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 214 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101010010100000000001010010",	-- instrucción 215 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 216 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001001011",	-- instrucción 217 - Assembler.CmpInstruction A, Lit
+	"000000010000001000000000001011000",	-- instrucción 218 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000001000000000001001011",	-- instrucción 219 - Assembler.CmpInstruction A, Lit
+	"000000001111000100000000001011000",	-- instrucción 220 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000010000000000001001011",	-- instrucción 221 - Assembler.CmpInstruction A, Lit
+	"000000001110011100000000001011000",	-- instrucción 222 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000100000000000001001011",	-- instrucción 223 - Assembler.CmpInstruction A, Lit
+	"000000001110001000000000001011000",	-- instrucción 224 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000001000000000000001001011",	-- instrucción 225 - Assembler.CmpInstruction A, Lit
+	"000000001111011100000000001011000",	-- instrucción 226 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101000000000000000000010",	-- instrucción 227 - Assembler.MovInstruction A, Lit
+	"000000000101100000000000000010000",	-- instrucción 228 - Assembler.AddInstruction A, Dir
+	"000000000000000000000000000000001",	-- instrucción 229 - Assembler.MovInstruction B, A
+	"000000000000000000000000001001000",	-- instrucción 230 - Assembler.IncInstruction DirB, Lit
+	"000000001100110100000000001010111",	-- instrucción 231 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101000000000000000000010",	-- instrucción 232 - Assembler.MovInstruction A, Lit
+	"000000000101100000000000000010000",	-- instrucción 233 - Assembler.AddInstruction A, Dir
+	"000000000000000000000000000000001",	-- instrucción 234 - Assembler.MovInstruction B, A
+	"000000000000000000000000001001110",	-- instrucción 235 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000001000",	-- instrucción 236 - Assembler.MovInstruction A, DirB
+	"000000000000000100000000001001001",	-- instrucción 237 - Assembler.Instructions.DecInstruction A, Lit
+	"000000000000000000000000000001010",	-- instrucción 238 - Assembler.MovInstruction DirB, A
+	"000000000000000100000000001100000",	-- instrucción 239 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 240 - Assembler.Instructions.Pop2Instruction A, None
+	"000000001100110100000000001010111",	-- instrucción 241 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101100000000000000000100",	-- instrucción 242 - Assembler.MovInstruction A, Dir
+	"000000000000001100000000001001011",	-- instrucción 243 - Assembler.CmpInstruction A, Lit
+	"000000001111011000000000001011000",	-- instrucción 244 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101100000000000001000111",	-- instrucción 245 - Assembler.IncInstruction Dir, Lit
+	"000000101101000100000000001010010",	-- instrucción 246 - Assembler.Instructions.CallInstruction Lit, None
+	"000000001100110100000000001010111",	-- instrucción 247 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101100000000000000000100",	-- instrucción 248 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 249 - Assembler.CmpInstruction A, Lit
+	"000000010000000100000000001011000",	-- instrucción 250 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 251 - Assembler.Instructions.PushInstruction A, None
+	"000000000101100000000000000000100",	-- instrucción 252 - Assembler.MovInstruction A, Dir
+	"000000000000000100000000001001001",	-- instrucción 253 - Assembler.Instructions.DecInstruction A, Lit
+	"000000101100101000000000001010010",	-- instrucción 254 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101100000000000000000110",	-- instrucción 255 - Assembler.MovInstruction Dir, A
 	"000000000000000100000000001100000",	-- instrucción 256 - Assembler.Instructions.Pop1Instruction Lit, None
 	"000000000000000000000000001010000",	-- instrucción 257 - Assembler.Instructions.Pop2Instruction A, None
-	"000000001100111100000000001010111",	-- instrucción 258 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000101011011100000000001010010",	-- instrucción 259 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000011110100000000000000010",	-- instrucción 260 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 261 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 262 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 263 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 264 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 265 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 266 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000000000011",	-- instrucción 267 - Assembler.MovInstruction B, Lit
-	"000000001101111000000000001010010",	-- instrucción 268 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 269 - Assembler.Instructions.CallInstruction Lit, None
-	"000000001101110000000000001010111",	-- instrucción 270 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000010000001000000000001010111",	-- instrucción 271 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 272 - Assembler.MovInstruction A, Lit
-	"000000000101011100000000000010000",	-- instrucción 273 - Assembler.AddInstruction A, Dir
-	"000000000000000000000000001001000",	-- instrucción 274 - Assembler.IncInstruction DirB, Lit
-	"000000010000001000000000001010111",	-- instrucción 275 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 276 - Assembler.MovInstruction A, Lit
-	"000000000101011100000000000010000",	-- instrucción 277 - Assembler.AddInstruction A, Dir
-	"000000000000000000000000000000001",	-- instrucción 278 - Assembler.MovInstruction B, A
-	"000000000000000000000000001001110",	-- instrucción 279 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000001000",	-- instrucción 280 - Assembler.MovInstruction A, DirB
-	"000000000000000100000000001001001",	-- instrucción 281 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000000000000000000000001010",	-- instrucción 282 - Assembler.MovInstruction DirB, A
-	"000000000000000100000000001100000",	-- instrucción 283 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 284 - Assembler.Instructions.Pop2Instruction A, None
-	"000000010000001000000000001010111",	-- instrucción 285 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 286 - Assembler.MovInstruction A, Dir
-	"000000000000001100000000001001011",	-- instrucción 287 - Assembler.CmpInstruction A, Lit
-	"000000010000001000000000001011000",	-- instrucción 288 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000101011100000000001000111",	-- instrucción 289 - Assembler.IncInstruction Dir, Lit
-	"000000010000001000000000001010111",	-- instrucción 290 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101011100000000000000100",	-- instrucción 291 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000001001011",	-- instrucción 292 - Assembler.CmpInstruction A, Lit
-	"000000010000001000000000001011000",	-- instrucción 293 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 294 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000100000000001001001",	-- instrucción 295 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000101011100000000000000110",	-- instrucción 296 - Assembler.MovInstruction Dir, A
-	"000000000000000100000000001100000",	-- instrucción 297 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 298 - Assembler.Instructions.Pop2Instruction A, None
-	"000000010000001000000000001010111",	-- instrucción 299 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 300 - Assembler.Instructions.PushInstruction A, None
-	"000000101100000000000000001010010",	-- instrucción 301 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 302 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 303 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010101100000000000000010",	-- instrucción 304 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 305 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 306 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 307 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101010100000000000000010",	-- instrucción 308 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 309 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 310 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 311 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 312 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 313 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010101100000000000000010",	-- instrucción 314 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 315 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 316 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 317 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101011000000000000000010",	-- instrucción 318 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 319 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 320 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 321 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 322 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 323 - Assembler.Instructions.Ret2Instruction None, None
-	"000000101011011100000000001010010",	-- instrucción 324 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 325 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000001001011",	-- instrucción 326 - Assembler.CmpInstruction A, Lit
-	"000000010100100100000000001011000",	-- instrucción 327 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000001100110100000000001010111",	-- instrucción 258 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 259 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 260 - Assembler.Instructions.Ret2Instruction None, None
+	"000000101000110000000000001010010",	-- instrucción 261 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001010100000000001010010",	-- instrucción 262 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011011100100000000001010010",	-- instrucción 263 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000001000000000000000000010",	-- instrucción 264 - Assembler.MovInstruction A, Lit
+	"000000101001111000000000001010010",	-- instrucción 265 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 266 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101010000000000000000010",	-- instrucción 267 - Assembler.MovInstruction A, Lit
+	"000000101010010100000000001010010",	-- instrucción 268 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 269 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 270 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001001011",	-- instrucción 271 - Assembler.CmpInstruction A, Lit
+	"000000010011011000000000001011000",	-- instrucción 272 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000001000000000001001011",	-- instrucción 273 - Assembler.CmpInstruction A, Lit
+	"000000010010011100000000001011000",	-- instrucción 274 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000010000000000001001011",	-- instrucción 275 - Assembler.CmpInstruction A, Lit
+	"000000010001110100000000001011000",	-- instrucción 276 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000100000000000001001011",	-- instrucción 277 - Assembler.CmpInstruction A, Lit
+	"000000010001100000000000001011000",	-- instrucción 278 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000001000000000000001001011",	-- instrucción 279 - Assembler.CmpInstruction A, Lit
+	"000000010010110000000000001011000",	-- instrucción 280 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101010000000000000000010",	-- instrucción 281 - Assembler.MovInstruction A, Lit
+	"000000000101100000000000000010000",	-- instrucción 282 - Assembler.AddInstruction A, Dir
+	"000000000000000000000000000000001",	-- instrucción 283 - Assembler.MovInstruction B, A
+	"000000000000000000000000001001000",	-- instrucción 284 - Assembler.IncInstruction DirB, Lit
+	"000000010000010000000000001010111",	-- instrucción 285 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101010000000000000000010",	-- instrucción 286 - Assembler.MovInstruction A, Lit
+	"000000000101100000000000000010000",	-- instrucción 287 - Assembler.AddInstruction A, Dir
+	"000000000000000000000000000000001",	-- instrucción 288 - Assembler.MovInstruction B, A
+	"000000000000000000000000001001110",	-- instrucción 289 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000001000",	-- instrucción 290 - Assembler.MovInstruction A, DirB
+	"000000000000000100000000001001001",	-- instrucción 291 - Assembler.Instructions.DecInstruction A, Lit
+	"000000000000000000000000000001010",	-- instrucción 292 - Assembler.MovInstruction DirB, A
+	"000000000000000100000000001100000",	-- instrucción 293 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 294 - Assembler.Instructions.Pop2Instruction A, None
+	"000000010000010000000000001010111",	-- instrucción 295 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101100000000000000000100",	-- instrucción 296 - Assembler.MovInstruction A, Dir
+	"000000000000001100000000001001011",	-- instrucción 297 - Assembler.CmpInstruction A, Lit
+	"000000010010101100000000001011000",	-- instrucción 298 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101100000000000001000111",	-- instrucción 299 - Assembler.IncInstruction Dir, Lit
+	"000000010000010000000000001010111",	-- instrucción 300 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101100000000000000000100",	-- instrucción 301 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 302 - Assembler.CmpInstruction A, Lit
+	"000000010011010100000000001011000",	-- instrucción 303 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 304 - Assembler.Instructions.PushInstruction A, None
+	"000000000101100000000000000000100",	-- instrucción 305 - Assembler.MovInstruction A, Dir
+	"000000000000000100000000001001001",	-- instrucción 306 - Assembler.Instructions.DecInstruction A, Lit
+	"000000000101100000000000000000110",	-- instrucción 307 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100000",	-- instrucción 308 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 309 - Assembler.Instructions.Pop2Instruction A, None
+	"000000010000010000000000001010111",	-- instrucción 310 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 311 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 312 - Assembler.Instructions.Ret2Instruction None, None
+	"000000101000110000000000001010010",	-- instrucción 313 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001010100000000001010010",	-- instrucción 314 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001111000000000001010010",	-- instrucción 315 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101000000000000000000010",	-- instrucción 316 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 317 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100110100000000000000010",	-- instrucción 318 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 319 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 320 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 321 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101100100000000000000010",	-- instrucción 322 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 323 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 324 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 325 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101010000000000000000010",	-- instrucción 326 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 327 - Assembler.Instructions.CallInstruction Lit, None
 	"000000000100110100000000000000010",	-- instrucción 328 - Assembler.MovInstruction A, Lit
-	"000000010100101000000000001010111",	-- instrucción 329 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 330 - Assembler.MovInstruction A, Lit
-	"000000101101000000000000001010010",	-- instrucción 331 - Assembler.Instructions.CallInstruction Lit, None
-	"000000110000001100000000001010010",	-- instrucción 332 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 333 - Assembler.MovInstruction A, Lit
-	"000000101011000000000000001010010",	-- instrucción 334 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000000000010",	-- instrucción 335 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 336 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 337 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001001011",	-- instrucción 338 - Assembler.CmpInstruction A, Lit
-	"000000010101010000000000001011000",	-- instrucción 339 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000010101000000000000001010111",	-- instrucción 340 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000001010100",	-- instrucción 341 - Assembler.Instructions.InInstruction A, Lit
-	"000000000101101000000000000000110",	-- instrucción 342 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000000000010",	-- instrucción 343 - Assembler.MovInstruction A, Lit
-	"000000000000000100000000001100001",	-- instrucción 344 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 345 - Assembler.Instructions.Ret2Instruction None, None
-	"000000101011011100000000001010010",	-- instrucción 346 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 347 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000001001011",	-- instrucción 348 - Assembler.CmpInstruction A, Lit
-	"000000010101111100000000001011000",	-- instrucción 349 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 350 - Assembler.MovInstruction A, Lit
-	"000000010110000000000000001010111",	-- instrucción 351 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 352 - Assembler.MovInstruction A, Lit
-	"000000101101000000000000001010010",	-- instrucción 353 - Assembler.Instructions.CallInstruction Lit, None
-	"000000110000001100000000001010010",	-- instrucción 354 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 355 - Assembler.MovInstruction A, Lit
-	"000000101011000000000000001010010",	-- instrucción 356 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010101100100000000000000010",	-- instrucción 357 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 358 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 359 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001001011",	-- instrucción 360 - Assembler.CmpInstruction A, Lit
-	"000000010110101000000000001011000",	-- instrucción 361 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000010110011000000000001010111",	-- instrucción 362 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100001",	-- instrucción 363 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 364 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 365 - Assembler.Instructions.PushInstruction A, None
-	"111111111111111100000000000000010",	-- instrucción 366 - Assembler.MovInstruction A, Lit
-	"000000000101100100000000000000110",	-- instrucción 367 - Assembler.MovInstruction Dir, A
-	"000000000000000100000000001100000",	-- instrucción 368 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 369 - Assembler.Instructions.Pop2Instruction A, None
-	"000000101011011100000000001010010",	-- instrucción 370 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 371 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 372 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000001001011",	-- instrucción 373 - Assembler.CmpInstruction A, Lit
-	"000000010111100100000000001011000",	-- instrucción 374 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 375 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 376 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010111101100000000001010111",	-- instrucción 377 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 378 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 379 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000010110000000000000000010",	-- instrucción 380 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 381 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000110100000000000000010",	-- instrucción 382 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 383 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 384 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000000000010",	-- instrucción 385 - Assembler.MovInstruction A, Lit
-	"000000011000001000000000001010111",	-- instrucción 386 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 387 - Assembler.Instructions.PushInstruction A, None
-	"000000011100100000000000001010010",	-- instrucción 388 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100100000000000000100",	-- instrucción 389 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000001001011",	-- instrucción 390 - Assembler.CmpInstruction A, Lit
-	"000000011111011100000000001011000",	-- instrucción 391 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 392 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 393 - Assembler.Instructions.Pop2Instruction A, None
-	"000000011001101000000000001010010",	-- instrucción 394 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 395 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000000000001",	-- instrucción 396 - Assembler.MovInstruction B, A
-	"000000000000000000000000001010100",	-- instrucción 397 - Assembler.Instructions.InInstruction A, Lit
-	"000000000101101000000000001001100",	-- instrucción 398 - Assembler.CmpInstruction A, Dir
-	"000000011101011100000000001011000",	-- instrucción 399 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 400 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001001011",	-- instrucción 401 - Assembler.CmpInstruction A, Lit
-	"000000011011010000000000001011000",	-- instrucción 402 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000001000000000001001011",	-- instrucción 403 - Assembler.CmpInstruction A, Lit
-	"000000011011100000000000001011000",	-- instrucción 404 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000010000000000001001011",	-- instrucción 405 - Assembler.CmpInstruction A, Lit
-	"000000011011110000000000001011000",	-- instrucción 406 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000100000000000001001011",	-- instrucción 407 - Assembler.CmpInstruction A, Lit
-	"000000011100000000000000001011000",	-- instrucción 408 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000001000000000000001001011",	-- instrucción 409 - Assembler.CmpInstruction A, Lit
-	"000000011100010000000000001011000",	-- instrucción 410 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 411 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000000010",	-- instrucción 412 - Assembler.MovInstruction A, Lit
-	"000000000101101100000000000000110",	-- instrucción 413 - Assembler.MovInstruction Dir, A
-	"000000000000111100000000000000010",	-- instrucción 414 - Assembler.MovInstruction A, Lit
-	"000000000101110000000000000000110",	-- instrucción 415 - Assembler.MovInstruction Dir, A
-	"000000000000000100000000001100000",	-- instrucción 416 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 417 - Assembler.Instructions.Pop2Instruction A, None
-	"000000011010010100000000001010010",	-- instrucción 418 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101100000000000000100",	-- instrucción 419 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001100001",	-- instrucción 420 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 421 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000000000001",	-- instrucción 422 - Assembler.MovInstruction B, A
-	"000000000000000100000000000100000",	-- instrucción 423 - Assembler.AndInstruction A, Lit
-	"000000000101101100000000000010000",	-- instrucción 424 - Assembler.AddInstruction A, Dir
-	"000000000101101100000000000000110",	-- instrucción 425 - Assembler.MovInstruction Dir, A
-	"000000000101110000000000000000100",	-- instrucción 426 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001001001",	-- instrucción 427 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000101110000000000000000110",	-- instrucción 428 - Assembler.MovInstruction Dir, A
-	"000000000000000000000000001001011",	-- instrucción 429 - Assembler.CmpInstruction A, Lit
-	"000000011011001000000000001011000",	-- instrucción 430 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 431 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000001000001",	-- instrucción 432 - Assembler.ShrInstruction A, None
-	"000000100010010100000000001010010",	-- instrucción 433 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011010010100000000001010111",	-- instrucción 434 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 329 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 330 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 331 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101101000000000000000010",	-- instrucción 332 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 333 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 334 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 335 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000010000000000000000000100",	-- instrucción 336 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 337 - Assembler.CmpInstruction A, Lit
+	"000000010101010000000000001011000",	-- instrucción 338 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101010000000000000000100",	-- instrucción 339 - Assembler.MovInstruction A, Dir
+	"000000010101010100000000001010111",	-- instrucción 340 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101000000000000000000100",	-- instrucción 341 - Assembler.MovInstruction A, Dir
+	"000000101010010100000000001010010",	-- instrucción 342 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 343 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100110100000000000000010",	-- instrucción 344 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 345 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 346 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 347 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000010001000000000000000010",	-- instrucción 348 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 349 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 350 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001001011",	-- instrucción 351 - Assembler.CmpInstruction A, Lit
+	"000000010110000100000000001011000",	-- instrucción 352 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000010101110100000000001010111",	-- instrucción 353 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000000000000001010100",	-- instrucción 354 - Assembler.Instructions.InInstruction A, Lit
+	"000000000100111100000000000000110",	-- instrucción 355 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100001",	-- instrucción 356 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 357 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000010000000000000000000100",	-- instrucción 358 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 359 - Assembler.CmpInstruction A, Lit
+	"000000010110101000000000001011000",	-- instrucción 360 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101010000000000000000100",	-- instrucción 361 - Assembler.MovInstruction A, Dir
+	"000000010110101100000000001010111",	-- instrucción 362 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101000000000000000000100",	-- instrucción 363 - Assembler.MovInstruction A, Dir
+	"000000101001010100000000001010010",	-- instrucción 364 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101010010100000000001010010",	-- instrucción 365 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101101100000000000001010010",	-- instrucción 366 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100110100000000000000010",	-- instrucción 367 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 368 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 369 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 370 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000010001000000000000000010",	-- instrucción 371 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 372 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 373 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 374 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 375 - Assembler.Instructions.Ret2Instruction None, None
+	"000000101000110000000000001010010",	-- instrucción 376 - Assembler.Instructions.CallInstruction Lit, None
+	"000000010011100000000000001010010",	-- instrucción 377 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001010100000000001010010",	-- instrucción 378 - Assembler.Instructions.CallInstruction Lit, None
+	"000000010111011100000000000000010",	-- instrucción 379 - Assembler.MovInstruction A, Lit
+	"000000101010010100000000001010010",	-- instrucción 380 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 381 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001001011",	-- instrucción 382 - Assembler.CmpInstruction A, Lit
+	"000000011100001100000000001011000",	-- instrucción 383 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000001011110000000000001010111",	-- instrucción 384 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000010000000000000000000100",	-- instrucción 385 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 386 - Assembler.CmpInstruction A, Lit
+	"000000011000011000000000001011000",	-- instrucción 387 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101101000000000001000111",	-- instrucción 388 - Assembler.IncInstruction Dir, Lit
+	"000000000101010000000000000000100",	-- instrucción 389 - Assembler.MovInstruction A, Dir
+	"000000011000100000000000001010111",	-- instrucción 390 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101101000000000001000111",	-- instrucción 391 - Assembler.IncInstruction Dir, Lit
+	"000000000101000000000000000000100",	-- instrucción 392 - Assembler.MovInstruction A, Dir
+	"000000101001010100000000001010010",	-- instrucción 393 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101010010100000000001010010",	-- instrucción 394 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000100",	-- instrucción 395 - Assembler.MovInstruction A, Dir
+	"000000101101100000000000001010010",	-- instrucción 396 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000011011000000000000000100",	-- instrucción 397 - Assembler.MovInstruction A, Dir
+	"000000101101100000000000001010010",	-- instrucción 398 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 399 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 400 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000010000000000000000000100",	-- instrucción 401 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 402 - Assembler.CmpInstruction A, Lit
+	"000000011001011000000000001011000",	-- instrucción 403 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101100100000000001000111",	-- instrucción 404 - Assembler.IncInstruction Dir, Lit
+	"000000000101010000000000000000100",	-- instrucción 405 - Assembler.MovInstruction A, Dir
+	"000000011001100000000000001010111",	-- instrucción 406 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000101101000000000001000111",	-- instrucción 407 - Assembler.IncInstruction Dir, Lit
+	"000000000101000000000000000000100",	-- instrucción 408 - Assembler.MovInstruction A, Dir
+	"000000101001010100000000001010010",	-- instrucción 409 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101010010100000000001010010",	-- instrucción 410 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000100",	-- instrucción 411 - Assembler.MovInstruction A, Dir
+	"000000101101100000000000001010010",	-- instrucción 412 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000011101000000000000000100",	-- instrucción 413 - Assembler.MovInstruction A, Dir
+	"000000101101100000000000001010010",	-- instrucción 414 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 415 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 416 - Assembler.Instructions.Ret2Instruction None, None
+	"000000010011100000000000001010010",	-- instrucción 417 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101010010100000000001010010",	-- instrucción 418 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011010100000000000001010010",	-- instrucción 419 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111000000000000000010",	-- instrucción 420 - Assembler.MovInstruction A, Lit
+	"000000101000010100000000001010010",	-- instrucción 421 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000010111100000000000000010",	-- instrucción 422 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 423 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 424 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000010000000000000000000010",	-- instrucción 425 - Assembler.MovInstruction A, Lit
+	"000000000000000000000000001001011",	-- instrucción 426 - Assembler.CmpInstruction A, Lit
+	"000000011010111100000000001011000",	-- instrucción 427 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000101010000000000000000010",	-- instrucción 428 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 429 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 430 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 431 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000101000000000000000000010",	-- instrucción 432 - Assembler.MovInstruction A, Lit
+	"000000101101100000000000001010010",	-- instrucción 433 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011011010000000000001010010",	-- instrucción 434 - Assembler.Instructions.CallInstruction Lit, None
 	"000000000000000100000000001100001",	-- instrucción 435 - Assembler.Instructions.Ret1Instruction Lit, None
 	"000000000000000000000000001010011",	-- instrucción 436 - Assembler.Instructions.Ret2Instruction None, None
-	"000000100010010100000000001010010",	-- instrucción 437 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101000000000000100010",	-- instrucción 438 - Assembler.AndInstruction A, Dir
-	"000000011100111100000000001010010",	-- instrucción 439 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011000001000000000001010111",	-- instrucción 440 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 441 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101000000000000010000",	-- instrucción 442 - Assembler.AddInstruction A, Dir
-	"000000011100111100000000001010010",	-- instrucción 443 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011000001000000000001010111",	-- instrucción 444 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 445 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101000000000000101011",	-- instrucción 446 - Assembler.OrInstruction A, Dir
-	"000000011100111100000000001010010",	-- instrucción 447 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011000001000000000001010111",	-- instrucción 448 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 449 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101000000000000110100",	-- instrucción 450 - Assembler.XorInstruction A, Dir
-	"000000011100111100000000001010010",	-- instrucción 451 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011000001000000000001010111",	-- instrucción 452 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 453 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101101000000000000011001",	-- instrucción 454 - Assembler.SubInstruction A, Dir
-	"000000011100111100000000001010010",	-- instrucción 455 - Assembler.Instructions.CallInstruction Lit, None
-	"000000011000001000000000001010111",	-- instrucción 456 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000001001110",	-- instrucción 457 - Assembler.Instructions.PushInstruction A, None
-	"000000000101100100000000000000100",	-- instrucción 458 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001100101",	-- instrucción 459 - Assembler.Instructions.OutInstruction A, Lit
-	"000000000000000100000000001100000",	-- instrucción 460 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 461 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 462 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 463 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 464 - Assembler.Instructions.PushInstruction A, None
-	"000000000101100100000000000000100",	-- instrucción 465 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000000111101",	-- instrucción 466 - Assembler.ShlInstruction A, None
-	"000000000101100100000000000000110",	-- instrucción 467 - Assembler.MovInstruction Dir, A
-	"000000000000000100000000001100000",	-- instrucción 468 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 469 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 470 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 471 - Assembler.Instructions.Ret2Instruction None, None
-	"000000101011011100000000001010010",	-- instrucción 472 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 473 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 474 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000001001011",	-- instrucción 475 - Assembler.CmpInstruction A, Lit
-	"000000011110001100000000001011000",	-- instrucción 476 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 477 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 478 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 479 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101011000000000000000100",	-- instrucción 480 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001000101",	-- instrucción 481 - Assembler.IncInstruction A, Lit
-	"000000000101011000000000000000110",	-- instrucción 482 - Assembler.MovInstruction Dir, A
-	"000000011110100100000000001010111",	-- instrucción 483 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 484 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 485 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 486 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101010100000000000000100",	-- instrucción 487 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001000101",	-- instrucción 488 - Assembler.IncInstruction A, Lit
-	"000000000101010100000000000000110",	-- instrucción 489 - Assembler.MovInstruction Dir, A
-	"000000000001010000000000000000010",	-- instrucción 490 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 491 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101100000000000000001010010",	-- instrucción 492 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 493 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 494 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101011011100000000001010010",	-- instrucción 495 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 496 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 497 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100001100100000000000000010",	-- instrucción 498 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 499 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 500 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001001011",	-- instrucción 501 - Assembler.CmpInstruction A, Lit
-	"000000100001100100000000001011000",	-- instrucción 502 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000100001110100000000001010111",	-- instrucción 503 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 504 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 505 - Assembler.Instructions.Pop2Instruction A, None
-	"000000101011011100000000001010010",	-- instrucción 506 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 507 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 508 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000001001011",	-- instrucción 509 - Assembler.CmpInstruction A, Lit
-	"000000100000010100000000001011000",	-- instrucción 510 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000101000100000000000000010",	-- instrucción 511 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 512 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 513 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101010100000000000000100",	-- instrucción 514 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001000101",	-- instrucción 515 - Assembler.IncInstruction A, Lit
-	"000000000101010100000000000000110",	-- instrucción 516 - Assembler.MovInstruction Dir, A
-	"000000100000101100000000001010111",	-- instrucción 517 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000100110100000000000000010",	-- instrucción 518 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 519 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101111110000000000001010010",	-- instrucción 520 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101011000000000000000100",	-- instrucción 521 - Assembler.MovInstruction A, Dir
-	"000000000000000100000000001000101",	-- instrucción 522 - Assembler.IncInstruction A, Lit
-	"000000000101011000000000000000110",	-- instrucción 523 - Assembler.MovInstruction Dir, A
-	"000000000001100000000000000000010",	-- instrucción 524 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 525 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101100000000000000001010010",	-- instrucción 526 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 527 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 528 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101011011100000000001010010",	-- instrucción 529 - Assembler.Instructions.CallInstruction Lit, None
-	"000000010010101100000000001010010",	-- instrucción 530 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101101000000000000001010010",	-- instrucción 531 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100001100100000000000000010",	-- instrucción 532 - Assembler.MovInstruction A, Lit
-	"000000110000001100000000001010010",	-- instrucción 533 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100010101000000000001010010",	-- instrucción 534 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001001011",	-- instrucción 535 - Assembler.CmpInstruction A, Lit
-	"000000100001100100000000001011000",	-- instrucción 536 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000100001110100000000001010111",	-- instrucción 537 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 538 - Assembler.MovInstruction A, Dir
-	"000000000000000000000000000111001",	-- instrucción 539 - Assembler.NotInstruction A, None
-	"000000000101100000000000000000110",	-- instrucción 540 - Assembler.MovInstruction Dir, A
-	"000000100010000000000000001010111",	-- instrucción 541 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 542 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 543 - Assembler.Instructions.Pop2Instruction A, None
-	"000000001011110000000000001010111",	-- instrucción 544 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000010100001100000000001010010",	-- instrucción 545 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 546 - Assembler.MovInstruction A, Dir
-	"000000010101100100000000001010010",	-- instrucción 547 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000101100000000000000000100",	-- instrucción 548 - Assembler.MovInstruction A, Dir
-	"000000010110110000000000001010111",	-- instrucción 549 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000000110000",	-- instrucción 550 - Assembler.XorInstruction A, B
-	"000000000000000000000000000110001",	-- instrucción 551 - Assembler.XorInstruction B, A
-	"000000000000000000000000000110000",	-- instrucción 552 - Assembler.XorInstruction A, B
-	"000000000000000100000000001100001",	-- instrucción 553 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 554 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001111",	-- instrucción 555 - Assembler.Instructions.PushInstruction B, None
-	"000000000000000100000000001010100",	-- instrucción 556 - Assembler.Instructions.InInstruction A, Lit
-	"000000000000000100000000001010101",	-- instrucción 557 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 558 - Assembler.CmpInstruction A, B
-	"000000100010110000000000001011000",	-- instrucción 559 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000000000000000110001",	-- instrucción 560 - Assembler.XorInstruction B, A
-	"000000000000000100000000001010100",	-- instrucción 561 - Assembler.Instructions.InInstruction A, Lit
-	"000000000000000000000000000011110",	-- instrucción 562 - Assembler.AndInstruction A, B
-	"000000000000000000000000001001011",	-- instrucción 563 - Assembler.CmpInstruction A, Lit
-	"000000100011000000000000001011001",	-- instrucción 564 - Assembler.Instructions.JneInstruction Lit, None
-	"000000000000000000000000000000000",	-- instrucción 565 - Assembler.MovInstruction A, B
+	"000000000010000000000000000000100",	-- instrucción 437 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000000111001",	-- instrucción 438 - Assembler.NotInstruction A, None
+	"000000000010000000000000000000110",	-- instrucción 439 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100001",	-- instrucción 440 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 441 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000000000010",	-- instrucción 442 - Assembler.MovInstruction A, Lit
+	"000000000010000100000000000000110",	-- instrucción 443 - Assembler.MovInstruction Dir, A
+	"000000000101100000000000000000100",	-- instrucción 444 - Assembler.MovInstruction A, Dir
+	"000000000010000100000000001001011",	-- instrucción 445 - Assembler.CmpInstruction A, Lit
+	"000000011100000000000000001011010",	-- instrucción 446 - Assembler.Instructions.JgtInstruction Lit, None
+	"000000000000000100000000001100001",	-- instrucción 447 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 448 - Assembler.Instructions.Ret2Instruction None, None
+	"000000101101000100000000001010010",	-- instrucción 449 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000010000100000000001000111",	-- instrucción 450 - Assembler.IncInstruction Dir, Lit
+	"000000011011101100000000001010111",	-- instrucción 451 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011110101100000000001010010",	-- instrucción 452 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000101101100000000000000100",	-- instrucción 453 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000001001011",	-- instrucción 454 - Assembler.CmpInstruction A, Lit
+	"000000011001000000000000001011000",	-- instrucción 455 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000011111111100000000001010010",	-- instrucción 456 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000000000000000000001",	-- instrucción 457 - Assembler.MovInstruction B, A
+	"000000000000000000000000001010100",	-- instrucción 458 - Assembler.Instructions.InInstruction A, Lit
+	"000000000100111100000000001001100",	-- instrucción 459 - Assembler.CmpInstruction A, Dir
+	"000000011000000000000000001011000",	-- instrucción 460 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 461 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001001011",	-- instrucción 462 - Assembler.CmpInstruction A, Lit
+	"000000011101011100000000001011000",	-- instrucción 463 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000001000000000001001011",	-- instrucción 464 - Assembler.CmpInstruction A, Lit
+	"000000011101101100000000001011000",	-- instrucción 465 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000010000000000001001011",	-- instrucción 466 - Assembler.CmpInstruction A, Lit
+	"000000011101111100000000001011000",	-- instrucción 467 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000100000000000001001011",	-- instrucción 468 - Assembler.CmpInstruction A, Lit
+	"000000011110001100000000001011000",	-- instrucción 469 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000001000000000000001001011",	-- instrucción 470 - Assembler.CmpInstruction A, Lit
+	"000000011110011100000000001011000",	-- instrucción 471 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 472 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111100000000000100010",	-- instrucción 473 - Assembler.AndInstruction A, Dir
+	"000000011111001000000000001010010",	-- instrucción 474 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 475 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 476 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111100000000000010000",	-- instrucción 477 - Assembler.AddInstruction A, Dir
+	"000000011111001000000000001010010",	-- instrucción 478 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 479 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 480 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111100000000000101011",	-- instrucción 481 - Assembler.OrInstruction A, Dir
+	"000000011111001000000000001010010",	-- instrucción 482 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 483 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 484 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111100000000000110100",	-- instrucción 485 - Assembler.XorInstruction A, Dir
+	"000000011111001000000000001010010",	-- instrucción 486 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 487 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 488 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000100111100000000000011001",	-- instrucción 489 - Assembler.SubInstruction A, Dir
+	"000000011111001000000000001010010",	-- instrucción 490 - Assembler.Instructions.CallInstruction Lit, None
+	"000000011100001100000000001010111",	-- instrucción 491 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 492 - Assembler.Instructions.PushInstruction A, None
+	"000000000101101100000000000000100",	-- instrucción 493 - Assembler.MovInstruction A, Dir
+	"000000000000000100000000001100101",	-- instrucción 494 - Assembler.Instructions.OutInstruction A, Lit
+	"000000000000000100000000001100000",	-- instrucción 495 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 496 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 497 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 498 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 499 - Assembler.Instructions.PushInstruction A, None
+	"000000000101101100000000000000100",	-- instrucción 500 - Assembler.MovInstruction A, Dir
+	"000000000000000000000000000111101",	-- instrucción 501 - Assembler.ShlInstruction A, None
+	"000000000101101100000000000000110",	-- instrucción 502 - Assembler.MovInstruction Dir, A
+	"000000000000000100000000001100000",	-- instrucción 503 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 504 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 505 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 506 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000000110000",	-- instrucción 507 - Assembler.XorInstruction A, B
+	"000000000000000000000000000110001",	-- instrucción 508 - Assembler.XorInstruction B, A
+	"000000000000000000000000000110000",	-- instrucción 509 - Assembler.XorInstruction A, B
+	"000000000000000100000000001100001",	-- instrucción 510 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 511 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001111",	-- instrucción 512 - Assembler.Instructions.PushInstruction B, None
+	"000000000000000100000000001010100",	-- instrucción 513 - Assembler.Instructions.InInstruction A, Lit
+	"000000000000000100000000001010101",	-- instrucción 514 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 515 - Assembler.CmpInstruction A, B
+	"000000100000000100000000001011000",	-- instrucción 516 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000000000000000000110001",	-- instrucción 517 - Assembler.XorInstruction B, A
+	"000000000000000100000000001010100",	-- instrucción 518 - Assembler.Instructions.InInstruction A, Lit
+	"000000000000000000000000000011110",	-- instrucción 519 - Assembler.AndInstruction A, B
+	"000000000000000000000000001001011",	-- instrucción 520 - Assembler.CmpInstruction A, Lit
+	"000000100000010100000000001011001",	-- instrucción 521 - Assembler.Instructions.JneInstruction Lit, None
+	"000000000000000000000000000000000",	-- instrucción 522 - Assembler.MovInstruction A, B
+	"000000000000000100000000001100000",	-- instrucción 523 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 524 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000100000000001100001",	-- instrucción 525 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 526 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001111",	-- instrucción 527 - Assembler.Instructions.PushInstruction B, None
+	"000000000000001000000000001010101",	-- instrucción 528 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 529 - Assembler.CmpInstruction A, B
+	"000000100000111100000000001011010",	-- instrucción 530 - Assembler.Instructions.JgtInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 531 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 532 - Assembler.Instructions.Pop2Instruction B, None
+	"000000100001100000000000001010111",	-- instrucción 533 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000000000000000000001",	-- instrucción 534 - Assembler.MovInstruction B, A
+	"000000000000000100000000001100000",	-- instrucción 535 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 536 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000000000000001001111",	-- instrucción 537 - Assembler.Instructions.PushInstruction B, None
+	"000000000000001000000000001010101",	-- instrucción 538 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 539 - Assembler.CmpInstruction A, B
+	"000000100010100000000000001011001",	-- instrucción 540 - Assembler.Instructions.JneInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 541 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 542 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000000000000001001110",	-- instrucción 543 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000000",	-- instrucción 544 - Assembler.MovInstruction A, B
+	"000000000000001100000000001010101",	-- instrucción 545 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 546 - Assembler.CmpInstruction A, B
+	"000000100001010100000000001011010",	-- instrucción 547 - Assembler.Instructions.JgtInstruction Lit, None
+	"000000000000000000000000000000001",	-- instrucción 548 - Assembler.MovInstruction B, A
+	"000000000000000100000000001100000",	-- instrucción 549 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 550 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 551 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 552 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000100000000001100000",	-- instrucción 553 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 554 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000100000000001100001",	-- instrucción 555 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 556 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 557 - Assembler.Instructions.PushInstruction A, None
+	"000000100011000100000000001010111",	-- instrucción 558 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000000000000000000001",	-- instrucción 559 - Assembler.MovInstruction B, A
+	"000000000000000100000000001100000",	-- instrucción 560 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 561 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000000000000001001111",	-- instrucción 562 - Assembler.Instructions.PushInstruction B, None
+	"000000000000001100000000001010101",	-- instrucción 563 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 564 - Assembler.CmpInstruction A, B
+	"000000100100001100000000001011001",	-- instrucción 565 - Assembler.Instructions.JneInstruction Lit, None
 	"000000000000000100000000001100000",	-- instrucción 566 - Assembler.Instructions.Pop1Instruction Lit, None
 	"000000000000000000000000001010001",	-- instrucción 567 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000100000000001100001",	-- instrucción 568 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 569 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001111",	-- instrucción 570 - Assembler.Instructions.PushInstruction B, None
-	"000000000000001000000000001010101",	-- instrucción 571 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 572 - Assembler.CmpInstruction A, B
-	"000000100011101000000000001011010",	-- instrucción 573 - Assembler.Instructions.JgtInstruction Lit, None
+	"000000000000000000000000001001110",	-- instrucción 568 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000000",	-- instrucción 569 - Assembler.MovInstruction A, B
+	"000000000000010000000000001010101",	-- instrucción 570 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000001001010",	-- instrucción 571 - Assembler.CmpInstruction A, B
+	"000000100010111000000000001011010",	-- instrucción 572 - Assembler.Instructions.JgtInstruction Lit, None
+	"000000000000000000000000000000001",	-- instrucción 573 - Assembler.MovInstruction B, A
 	"000000000000000100000000001100000",	-- instrucción 574 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 575 - Assembler.Instructions.Pop2Instruction B, None
-	"000000100100001100000000001010111",	-- instrucción 576 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000000000001",	-- instrucción 577 - Assembler.MovInstruction B, A
-	"000000000000000100000000001100000",	-- instrucción 578 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 579 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000000000000001001111",	-- instrucción 580 - Assembler.Instructions.PushInstruction B, None
-	"000000000000001000000000001010101",	-- instrucción 581 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 582 - Assembler.CmpInstruction A, B
-	"000000100101001100000000001011001",	-- instrucción 583 - Assembler.Instructions.JneInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 584 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 585 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000000000000001010000",	-- instrucción 575 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100000",	-- instrucción 576 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 577 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 578 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 579 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000100000000001100000",	-- instrucción 580 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 581 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000100000000001100000",	-- instrucción 582 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 583 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 584 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 585 - Assembler.Instructions.Ret2Instruction None, None
 	"000000000000000000000000001001110",	-- instrucción 586 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000000000",	-- instrucción 587 - Assembler.MovInstruction A, B
+	"000000000000000000000000001001111",	-- instrucción 587 - Assembler.Instructions.PushInstruction B, None
 	"000000000000001100000000001010101",	-- instrucción 588 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 589 - Assembler.CmpInstruction A, B
-	"000000100100000000000000001011010",	-- instrucción 590 - Assembler.Instructions.JgtInstruction Lit, None
-	"000000000000000000000000000000001",	-- instrucción 591 - Assembler.MovInstruction B, A
-	"000000000000000100000000001100000",	-- instrucción 592 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 593 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 594 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 595 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000100000000001100000",	-- instrucción 596 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 597 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000100000000001100001",	-- instrucción 598 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 599 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 600 - Assembler.Instructions.PushInstruction A, None
-	"000000100101110000000000001010111",	-- instrucción 601 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000000000001",	-- instrucción 602 - Assembler.MovInstruction B, A
-	"000000000000000100000000001100000",	-- instrucción 603 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 604 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000000000000000001100",	-- instrucción 589 - Assembler.AddInstruction A, B
+	"000000000000001000000000001010101",	-- instrucción 590 - Assembler.Instructions.InInstruction B, Lit
+	"000000111110100000000000001001011",	-- instrucción 591 - Assembler.CmpInstruction A, Lit
+	"000000100101001100000000001011100",	-- instrucción 592 - Assembler.Instructions.JltInstruction Lit, None
+	"000000111110100000000000000010111",	-- instrucción 593 - Assembler.SubInstruction A, Lit
+	"000000000000000000000000001000110",	-- instrucción 594 - Assembler.IncInstruction B, Lit
+	"000000100100111000000000001010111",	-- instrucción 595 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000011111101000000000001010010",	-- instrucción 596 - Assembler.Instructions.CallInstruction Lit, None
+	"000000100000111000000000001010010",	-- instrucción 597 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 598 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 599 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000100000000001100000",	-- instrucción 600 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 601 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 602 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 603 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 604 - Assembler.Instructions.PushInstruction A, None
 	"000000000000000000000000001001111",	-- instrucción 605 - Assembler.Instructions.PushInstruction B, None
-	"000000000000001100000000001010101",	-- instrucción 606 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 607 - Assembler.CmpInstruction A, B
-	"000000100110111000000000001011001",	-- instrucción 608 - Assembler.Instructions.JneInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 609 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 610 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000000000000001001110",	-- instrucción 611 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000000000",	-- instrucción 612 - Assembler.MovInstruction A, B
-	"000000000000010000000000001010101",	-- instrucción 613 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000001001010",	-- instrucción 614 - Assembler.CmpInstruction A, B
-	"000000100101100100000000001011010",	-- instrucción 615 - Assembler.Instructions.JgtInstruction Lit, None
-	"000000000000000000000000000000001",	-- instrucción 616 - Assembler.MovInstruction B, A
-	"000000000000000100000000001100000",	-- instrucción 617 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 618 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100000",	-- instrucción 619 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 620 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 621 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 622 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000100000000001100000",	-- instrucción 623 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 624 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000100000000001100000",	-- instrucción 625 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 626 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 627 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 628 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 629 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000001001111",	-- instrucción 630 - Assembler.Instructions.PushInstruction B, None
-	"000000000000001100000000001010101",	-- instrucción 631 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000000001100",	-- instrucción 632 - Assembler.AddInstruction A, B
-	"000000000000001000000000001010101",	-- instrucción 633 - Assembler.Instructions.InInstruction B, Lit
-	"000000111110100000000000001001011",	-- instrucción 634 - Assembler.CmpInstruction A, Lit
-	"000000100111111000000000001011100",	-- instrucción 635 - Assembler.Instructions.JltInstruction Lit, None
-	"000000111110100000000000000010111",	-- instrucción 636 - Assembler.SubInstruction A, Lit
-	"000000000000000000000000001000110",	-- instrucción 637 - Assembler.IncInstruction B, Lit
-	"000000100111100100000000001010111",	-- instrucción 638 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000100010010100000000001010010",	-- instrucción 639 - Assembler.Instructions.CallInstruction Lit, None
-	"000000100011100100000000001010010",	-- instrucción 640 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 641 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 642 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000100000000001100000",	-- instrucción 643 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 644 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 645 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 646 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 647 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000001001111",	-- instrucción 648 - Assembler.Instructions.PushInstruction B, None
-	"000000000000010000000000001010101",	-- instrucción 649 - Assembler.Instructions.InInstruction B, Lit
-	"000000000000000000000000000001100",	-- instrucción 650 - Assembler.AddInstruction A, B
-	"000000000000000100000000001000101",	-- instrucción 651 - Assembler.IncInstruction A, Lit
-	"000000000000000000000000000000011",	-- instrucción 652 - Assembler.MovInstruction B, Lit
-	"000000111110100000000000001001011",	-- instrucción 653 - Assembler.CmpInstruction A, Lit
-	"000000101001000100000000001011100",	-- instrucción 654 - Assembler.Instructions.JltInstruction Lit, None
-	"000000111110100000000000000010111",	-- instrucción 655 - Assembler.SubInstruction A, Lit
-	"000000000000000000000000001000110",	-- instrucción 656 - Assembler.IncInstruction B, Lit
-	"000000101000110000000000001010111",	-- instrucción 657 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000000000000001001011",	-- instrucción 658 - Assembler.CmpInstruction A, Lit
-	"000000101001010000000000001011000",	-- instrucción 659 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000000000000100000000001001001",	-- instrucción 660 - Assembler.Instructions.DecInstruction A, Lit
-	"000000000000000000000000001001110",	-- instrucción 661 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000001001111",	-- instrucción 662 - Assembler.Instructions.PushInstruction B, None
-	"000000000000001100000000001010100",	-- instrucción 663 - Assembler.Instructions.InInstruction A, Lit
-	"000000000000000000000000000001101",	-- instrucción 664 - Assembler.AddInstruction B, A
-	"000000000000000100000000001100000",	-- instrucción 665 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 666 - Assembler.Instructions.Pop2Instruction A, None
-	"000000100111010000000000001010010",	-- instrucción 667 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000000000000000000000",	-- instrucción 668 - Assembler.MovInstruction A, B
-	"000000111110100000000000001001011",	-- instrucción 669 - Assembler.CmpInstruction A, Lit
-	"000000101001111100000000001011100",	-- instrucción 670 - Assembler.Instructions.JltInstruction Lit, None
-	"000000111110100000000000000010111",	-- instrucción 671 - Assembler.SubInstruction A, Lit
-	"000000000000000100000000001100000",	-- instrucción 672 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 673 - Assembler.Instructions.Pop2Instruction B, None
-	"000000100101011100000000001010010",	-- instrucción 674 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 675 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 676 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000100000000001100000",	-- instrucción 677 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 678 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 679 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 680 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 681 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000001100010",	-- instrucción 682 - Assembler.Instructions.OutInstruction A, B
-	"000000000010011100000000000000010",	-- instrucción 683 - Assembler.MovInstruction A, Lit
-	"000000101000011000000000001010010",	-- instrucción 684 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 685 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 686 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 687 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 688 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 689 - Assembler.Instructions.PushInstruction A, None
-	"000000100000000000000000000101001",	-- instrucción 690 - Assembler.OrInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 691 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 692 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 693 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 694 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 695 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 696 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000100000000000000010",	-- instrucción 697 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 698 - Assembler.Instructions.CallInstruction Lit, None
-	"000001011111101000000000000000010",	-- instrucción 699 - Assembler.MovInstruction A, Lit
-	"000000101000011000000000001010010",	-- instrucción 700 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 701 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 702 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 703 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 704 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 705 - Assembler.Instructions.PushInstruction A, None
-	"000000000000001000000000000000010",	-- instrucción 706 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 707 - Assembler.Instructions.CallInstruction Lit, None
-	"000001011111101000000000000000010",	-- instrucción 708 - Assembler.MovInstruction A, Lit
-	"000000101000011000000000001010010",	-- instrucción 709 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 710 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 711 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 712 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 713 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 714 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000000010",	-- instrucción 715 - Assembler.MovInstruction A, Lit
-	"000000101101011100000000001010010",	-- instrucción 716 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 717 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 718 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 719 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 720 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 721 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000000000010",	-- instrucción 722 - Assembler.MovInstruction A, Lit
-	"000000101101111100000000001010010",	-- instrucción 723 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 724 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 725 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 726 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 727 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 728 - Assembler.Instructions.PushInstruction A, None
-	"000000001000000000000000000101001",	-- instrucción 729 - Assembler.OrInstruction A, Lit
-	"000000000101011100000000000000110",	-- instrucción 730 - Assembler.MovInstruction Dir, A
-	"000000101010100000000000001010010",	-- instrucción 731 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 732 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 733 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 734 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 735 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 736 - Assembler.Instructions.PushInstruction A, None
-	"000000001100000000000000000101001",	-- instrucción 737 - Assembler.OrInstruction A, Lit
-	"000000000101011100000000000000110",	-- instrucción 738 - Assembler.MovInstruction Dir, A
-	"000000101010100000000000001010010",	-- instrucción 739 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 740 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 741 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 742 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 743 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 744 - Assembler.Instructions.PushInstruction A, None
-	"000000000001100000000000000000010",	-- instrucción 745 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 746 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 747 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 748 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 749 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 750 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 751 - Assembler.Instructions.PushInstruction A, None
-	"000000000001110000000000000000010",	-- instrucción 752 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 753 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 754 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 755 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 756 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 757 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 758 - Assembler.Instructions.PushInstruction A, None
-	"000000000001000000000000000000010",	-- instrucción 759 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 760 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 761 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 762 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 763 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 764 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 765 - Assembler.Instructions.PushInstruction A, None
-	"000000000001010000000000000000010",	-- instrucción 766 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 767 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 768 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 769 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 770 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 771 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 772 - Assembler.Instructions.PushInstruction A, None
-	"000000000000000000000000001001111",	-- instrucción 773 - Assembler.Instructions.PushInstruction B, None
-	"000000000000000000000000000000001",	-- instrucción 774 - Assembler.MovInstruction B, A
-	"000000000000000000000000000001000",	-- instrucción 775 - Assembler.MovInstruction A, DirB
-	"000000000000000100000000001100000",	-- instrucción 776 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010001",	-- instrucción 777 - Assembler.Instructions.Pop2Instruction B, None
-	"000000000000000000000000001001011",	-- instrucción 778 - Assembler.CmpInstruction A, Lit
-	"000000110001000000000000001011000",	-- instrucción 779 - Assembler.Instructions.JeqInstruction Lit, None
-	"000000101011000000000000001010010",	-- instrucción 780 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 781 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 782 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001000101",	-- instrucción 783 - Assembler.IncInstruction A, Lit
-	"000000110000001100000000001010111",	-- instrucción 784 - Assembler.Instructions.JmpInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 785 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 786 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 787 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 788 - Assembler.Instructions.Ret2Instruction None, None
-	"000000000000000000000000001001110",	-- instrucción 789 - Assembler.Instructions.PushInstruction A, None
-	"000000000001111000000000000000010",	-- instrucción 790 - Assembler.MovInstruction A, Lit
-	"000000100111010000000000001010010",	-- instrucción 791 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000011110000000000000000010",	-- instrucción 792 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 793 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000111100000000000000010",	-- instrucción 794 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 795 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101011011100000000001010010",	-- instrucción 796 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000011000000000000000010",	-- instrucción 797 - Assembler.MovInstruction A, Lit
-	"000000101010100000000000001010010",	-- instrucción 798 - Assembler.Instructions.CallInstruction Lit, None
-	"000000101100000000000000001010010",	-- instrucción 799 - Assembler.Instructions.CallInstruction Lit, None
-	"000000000000000100000000001100000",	-- instrucción 800 - Assembler.Instructions.Pop1Instruction Lit, None
-	"000000000000000000000000001010000",	-- instrucción 801 - Assembler.Instructions.Pop2Instruction A, None
-	"000000000000000100000000001100001",	-- instrucción 802 - Assembler.Instructions.Ret1Instruction Lit, None
-	"000000000000000000000000001010011",	-- instrucción 803 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000010000000000001010101",	-- instrucción 606 - Assembler.Instructions.InInstruction B, Lit
+	"000000000000000000000000000001100",	-- instrucción 607 - Assembler.AddInstruction A, B
+	"000000000000000100000000001000101",	-- instrucción 608 - Assembler.IncInstruction A, Lit
+	"000000000000000000000000000000011",	-- instrucción 609 - Assembler.MovInstruction B, Lit
+	"000000111110100000000000001001011",	-- instrucción 610 - Assembler.CmpInstruction A, Lit
+	"000000100110011000000000001011100",	-- instrucción 611 - Assembler.Instructions.JltInstruction Lit, None
+	"000000111110100000000000000010111",	-- instrucción 612 - Assembler.SubInstruction A, Lit
+	"000000000000000000000000001000110",	-- instrucción 613 - Assembler.IncInstruction B, Lit
+	"000000100110000100000000001010111",	-- instrucción 614 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000000000000001001011",	-- instrucción 615 - Assembler.CmpInstruction A, Lit
+	"000000100110100100000000001011000",	-- instrucción 616 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000000000000100000000001001001",	-- instrucción 617 - Assembler.Instructions.DecInstruction A, Lit
+	"000000000000000000000000001001110",	-- instrucción 618 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000001001111",	-- instrucción 619 - Assembler.Instructions.PushInstruction B, None
+	"000000000000001100000000001010100",	-- instrucción 620 - Assembler.Instructions.InInstruction A, Lit
+	"000000000000000000000000000001101",	-- instrucción 621 - Assembler.AddInstruction B, A
+	"000000000000000100000000001100000",	-- instrucción 622 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 623 - Assembler.Instructions.Pop2Instruction A, None
+	"000000100100100100000000001010010",	-- instrucción 624 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000000000000000000000",	-- instrucción 625 - Assembler.MovInstruction A, B
+	"000000111110100000000000001001011",	-- instrucción 626 - Assembler.CmpInstruction A, Lit
+	"000000100111010000000000001011100",	-- instrucción 627 - Assembler.Instructions.JltInstruction Lit, None
+	"000000111110100000000000000010111",	-- instrucción 628 - Assembler.SubInstruction A, Lit
+	"000000000000000100000000001100000",	-- instrucción 629 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 630 - Assembler.Instructions.Pop2Instruction B, None
+	"000000100010110000000000001010010",	-- instrucción 631 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 632 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 633 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000100000000001100000",	-- instrucción 634 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 635 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 636 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 637 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 638 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000001100010",	-- instrucción 639 - Assembler.Instructions.OutInstruction A, B
+	"000000000010011100000000000000010",	-- instrucción 640 - Assembler.MovInstruction A, Lit
+	"000000100101101100000000001010010",	-- instrucción 641 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 642 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 643 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 644 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 645 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 646 - Assembler.Instructions.PushInstruction A, None
+	"000000100000000000000000000101001",	-- instrucción 647 - Assembler.OrInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 648 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 649 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 650 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 651 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 652 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 653 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000100000000000000010",	-- instrucción 654 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 655 - Assembler.Instructions.CallInstruction Lit, None
+	"000001011111101000000000000000010",	-- instrucción 656 - Assembler.MovInstruction A, Lit
+	"000000100101101100000000001010010",	-- instrucción 657 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 658 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 659 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 660 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 661 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 662 - Assembler.Instructions.PushInstruction A, None
+	"000000000000001000000000000000010",	-- instrucción 663 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 664 - Assembler.Instructions.CallInstruction Lit, None
+	"000001011111101000000000000000010",	-- instrucción 665 - Assembler.MovInstruction A, Lit
+	"000000100101101100000000001010010",	-- instrucción 666 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 667 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 668 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 669 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 670 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 671 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000010",	-- instrucción 672 - Assembler.MovInstruction A, Lit
+	"000000101010110000000000001010010",	-- instrucción 673 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 674 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 675 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 676 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 677 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 678 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000000000010",	-- instrucción 679 - Assembler.MovInstruction A, Lit
+	"000000101011010000000000001010010",	-- instrucción 680 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 681 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 682 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 683 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 684 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 685 - Assembler.Instructions.PushInstruction A, None
+	"000000001000000000000000000101001",	-- instrucción 686 - Assembler.OrInstruction A, Lit
+	"000000000101100000000000000000110",	-- instrucción 687 - Assembler.MovInstruction Dir, A
+	"000000100111110100000000001010010",	-- instrucción 688 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 689 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 690 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 691 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 692 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 693 - Assembler.Instructions.PushInstruction A, None
+	"000000001100000000000000000101001",	-- instrucción 694 - Assembler.OrInstruction A, Lit
+	"000000000101100000000000000000110",	-- instrucción 695 - Assembler.MovInstruction Dir, A
+	"000000100111110100000000001010010",	-- instrucción 696 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 697 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 698 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 699 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 700 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 701 - Assembler.Instructions.PushInstruction A, None
+	"000000000001100000000000000000010",	-- instrucción 702 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 703 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 704 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 705 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 706 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 707 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 708 - Assembler.Instructions.PushInstruction A, None
+	"000000000001110000000000000000010",	-- instrucción 709 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 710 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 711 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 712 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 713 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 714 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 715 - Assembler.Instructions.PushInstruction A, None
+	"000000000001000000000000000000010",	-- instrucción 716 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 717 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 718 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 719 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 720 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 721 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 722 - Assembler.Instructions.PushInstruction A, None
+	"000000000001010000000000000000010",	-- instrucción 723 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 724 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 725 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 726 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 727 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 728 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 729 - Assembler.Instructions.PushInstruction A, None
+	"000000000000000000000000001001111",	-- instrucción 730 - Assembler.Instructions.PushInstruction B, None
+	"000000000000000000000000000000001",	-- instrucción 731 - Assembler.MovInstruction B, A
+	"000000000000000000000000000001000",	-- instrucción 732 - Assembler.MovInstruction A, DirB
+	"000000000000000100000000001100000",	-- instrucción 733 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010001",	-- instrucción 734 - Assembler.Instructions.Pop2Instruction B, None
+	"000000000000000000000000001001011",	-- instrucción 735 - Assembler.CmpInstruction A, Lit
+	"000000101110010100000000001011000",	-- instrucción 736 - Assembler.Instructions.JeqInstruction Lit, None
+	"000000101000010100000000001010010",	-- instrucción 737 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 738 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 739 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001000101",	-- instrucción 740 - Assembler.IncInstruction A, Lit
+	"000000101101100000000000001010111",	-- instrucción 741 - Assembler.Instructions.JmpInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 742 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 743 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 744 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 745 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001001110",	-- instrucción 746 - Assembler.Instructions.PushInstruction A, None
+	"000000000001111000000000000000010",	-- instrucción 747 - Assembler.MovInstruction A, Lit
+	"000000100100100100000000001010010",	-- instrucción 748 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000011110000000000000000010",	-- instrucción 749 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 750 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000111100000000000000010",	-- instrucción 751 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 752 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101000110000000000001010010",	-- instrucción 753 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000011000000000000000010",	-- instrucción 754 - Assembler.MovInstruction A, Lit
+	"000000100111110100000000001010010",	-- instrucción 755 - Assembler.Instructions.CallInstruction Lit, None
+	"000000101001010100000000001010010",	-- instrucción 756 - Assembler.Instructions.CallInstruction Lit, None
+	"000000000000000100000000001100000",	-- instrucción 757 - Assembler.Instructions.Pop1Instruction Lit, None
+	"000000000000000000000000001010000",	-- instrucción 758 - Assembler.Instructions.Pop2Instruction A, None
+	"000000000000000100000000001100001",	-- instrucción 759 - Assembler.Instructions.Ret1Instruction Lit, None
+	"000000000000000000000000001010011",	-- instrucción 760 - Assembler.Instructions.Ret2Instruction None, None
+	"000000000000000000000000001011111",	-- instrucción 761
+	"000000000000000000000000001011111",	-- instrucción 762
+	"000000000000000000000000001011111",	-- instrucción 763
+	"000000000000000000000000001011111",	-- instrucción 764
+	"000000000000000000000000001011111",	-- instrucción 765
+	"000000000000000000000000001011111",	-- instrucción 766
+	"000000000000000000000000001011111",	-- instrucción 767
+	"000000000000000000000000001011111",	-- instrucción 768
+	"000000000000000000000000001011111",	-- instrucción 769
+	"000000000000000000000000001011111",	-- instrucción 770
+	"000000000000000000000000001011111",	-- instrucción 771
+	"000000000000000000000000001011111",	-- instrucción 772
+	"000000000000000000000000001011111",	-- instrucción 773
+	"000000000000000000000000001011111",	-- instrucción 774
+	"000000000000000000000000001011111",	-- instrucción 775
+	"000000000000000000000000001011111",	-- instrucción 776
+	"000000000000000000000000001011111",	-- instrucción 777
+	"000000000000000000000000001011111",	-- instrucción 778
+	"000000000000000000000000001011111",	-- instrucción 779
+	"000000000000000000000000001011111",	-- instrucción 780
+	"000000000000000000000000001011111",	-- instrucción 781
+	"000000000000000000000000001011111",	-- instrucción 782
+	"000000000000000000000000001011111",	-- instrucción 783
+	"000000000000000000000000001011111",	-- instrucción 784
+	"000000000000000000000000001011111",	-- instrucción 785
+	"000000000000000000000000001011111",	-- instrucción 786
+	"000000000000000000000000001011111",	-- instrucción 787
+	"000000000000000000000000001011111",	-- instrucción 788
+	"000000000000000000000000001011111",	-- instrucción 789
+	"000000000000000000000000001011111",	-- instrucción 790
+	"000000000000000000000000001011111",	-- instrucción 791
+	"000000000000000000000000001011111",	-- instrucción 792
+	"000000000000000000000000001011111",	-- instrucción 793
+	"000000000000000000000000001011111",	-- instrucción 794
+	"000000000000000000000000001011111",	-- instrucción 795
+	"000000000000000000000000001011111",	-- instrucción 796
+	"000000000000000000000000001011111",	-- instrucción 797
+	"000000000000000000000000001011111",	-- instrucción 798
+	"000000000000000000000000001011111",	-- instrucción 799
+	"000000000000000000000000001011111",	-- instrucción 800
+	"000000000000000000000000001011111",	-- instrucción 801
+	"000000000000000000000000001011111",	-- instrucción 802
+	"000000000000000000000000001011111",	-- instrucción 803
 	"000000000000000000000000001011111",	-- instrucción 804
 	"000000000000000000000000001011111",	-- instrucción 805
 	"000000000000000000000000001011111",	-- instrucción 806
