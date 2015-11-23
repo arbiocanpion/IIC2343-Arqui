@@ -328,7 +328,7 @@ JEQ		a_xor_clave
 CMP		A, 10000b		// abajo SUB
 JEQ		a_sub_clave
 
-count:					 //A viene con el resultado OR,XOR,ADD,SUB,AND
+contarUnos:					 //A viene con el resultado OR,XOR,ADD,SUB,AND
 MOV	B,0
 MOV	(contador), B
 MOV	B, 15
@@ -337,7 +337,7 @@ CALL	cicloUnos
 MOV	A, (contador)
 RET
 
-ciclo:
+cicloUnos:
 PUSH A
 MOV	B, A
 AND	B,1
