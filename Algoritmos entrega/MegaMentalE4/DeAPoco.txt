@@ -1,4 +1,4 @@
-DATA:
+﻿DATA:
 
 ingresa		"Ingresa"
 limpia		"Limpia"
@@ -12,8 +12,8 @@ espacio		" "
 inicio_a	"Nombre Jugador 1"
 inicio_b	"Nombre Jugador 2"
 
-nombre1	"AAAA"
-nombre2	"AAAA"
+nombre1		"AAAA"
+nombre2		"AAAA"
 
 ptje1		"0"
 ptje2		"0"
@@ -25,8 +25,8 @@ leds		FFFFh
 
 clave		0
 
-contador 0
-digitos 0
+contador 	0
+digitos 	0
 
 CODE:
 
@@ -38,18 +38,18 @@ MOV 	A, 0
 PUSH 	A
 MOV 	(cursor), A
 CALL	elegirNombre1
-POP		A
+POP	A
 PUSH 	A
 MOV 	(cursor), A
 CALL	elegirNombre2
-POP		A
+POP	A
 PUSH 	A
 MOV 	(cursor), A
-MOV		A, (turno)
+MOV	A, (turno)
 CALL	ingreso
-MOV		A, (turno)
+MOV	A, (turno)
 CALL 	limpia
-MOV		A, (turno)
+MOV	A, (turno)
 JMP 	start
 
 elegirNombre1:  // entra A = 0
@@ -96,39 +96,39 @@ endPosCursor:
 RET
 
 aumentarLetra1:
-MOV		A,nombre1
-ADD		A,(cursor)
-MOV		B,A
-INC		(B)
-JMP		elegirNombre1
+MOV	A,nombre1
+ADD	A,(cursor)
+MOV	B,A
+INC	(B)
+JMP	elegirNombre1
 
 decrementarLetra1:
-MOV		A,nombre1
-ADD		A,(cursor)
-MOV		B,A
+MOV	A,nombre1
+ADD	A,(cursor)
+MOV	B,A
 PUSH 	A
 MOV 	A, (B)
-DEC		A
+DEC	A
 MOV 	(B), A
 POP 	A
-JMP		elegirNombre1
+JMP	elegirNombre1
 
 aumentarCursor1:
-MOV		A,(cursor)
-CMP		A,3
-JEQ		elegirNombre1
-INC		(cursor)
-JMP		elegirNombre1
+MOV	A,(cursor)
+CMP	A,3
+JEQ	elegirNombre1
+INC	(cursor)
+JMP	elegirNombre1
 
 decrementarCursor1:
-MOV		A,(cursor)
-CMP		A,0
+MOV	A,(cursor)
+CMP	A,0
 JEQ 	elegirNombre1
 PUSH 	A
 DEC 	A
 MOV 	(cursor), A
 POP 	A
-JMP		elegirNombre1
+JMP	elegirNombre1
 
 
 elegirNombre2:
@@ -159,39 +159,39 @@ JMP		elegirNombre2
 
 
 aumentarLetra2:
-MOV		A,nombre2
-ADD		A,(cursor)
-//MOV		B,A
-INC		(B)
-JMP		elegirNombre2
+MOV	A,nombre2
+ADD	A,(cursor)
+//MOV	B,A
+INC	(B)
+JMP	elegirNombre2
 
 decrementarLetra2:
-MOV		A,nombre2	
-ADD		A,(cursor)
-MOV		B,A
+MOV	A,nombre2	
+ADD	A,(cursor)
+MOV	B,A
 PUSH 	A
 MOV 	A, (B)
 DEC 	A
 MOV 	(B), A
 POP 	A
-JMP		elegirNombre2
+JMP	elegirNombre2
 
 aumentarCursor2:
-MOV		A,(cursor)
-CMP		A,3
-JEQ		elegirNombre2
-INC		(cursor)
-JMP		elegirNombre2
+MOV	A,(cursor)
+CMP	A,3
+JEQ	elegirNombre2
+INC	(cursor)
+JMP	elegirNombre2
 
 decrementarCursor2:
-MOV		A,(cursor)
-CMP		A,0
+MOV	A,(cursor)
+CMP	A,0
 JEQ 	elegirNombre2
 PUSH 	A
 DEC 	A
 MOV 	(cursor),A
 POP 	A
-JMP		elegirNombre2 
+JMP	elegirNombre2 
 
 imprimirPuntajes:
 PUSH 	A
@@ -217,42 +217,47 @@ CALL	lcd_string
 POP 	A
 RET
 
-ingreso:   // entra A = (turno)
+ingreso:   				// entra A = (turno)
 CALL	lcd_clear
 CALL 	imprimirPuntajes
-CMP		A,0b
-JEQ		juega1
-MOV		A,nombre1
-JMP		printIngresa
+CMP	A,0b
+JEQ	juega1
+MOV	A,nombre1
+JMP	printIngresa
+
 juega1:
-MOV		A,nombre2
+MOV	A,nombre2
+
 printIngresa:
 CALL	lcd_go_start_line_b		//imprime en la segunda linea: "NOMBRE: Ingresa"
 CALL	lcd_string
-MOV		A, espacio
+MOV	A, espacio
 CALL	lcd_char
-MOV		A, ingresa
+MOV	A, ingresa
 CALL	lcd_string
+
 whileIngreso:
 CALL 	std_button_wait			//esperar hasta que se aprete un boton
-CMP		A, 00001b
-JEQ		finIngreso
-JMP		whileIngreso
+CMP	A, 00001b
+JEQ	finIngreso
+JMP	whileIngreso
+
 finIngreso:
-IN		A,0
-MOV		(clave),A
+IN	A,0
+MOV	(clave),A
 MOV 	A,0
 RET
 
-limpia:		//entra A = (turno)
+limpia:					//entra A = (turno)
 CALL	 lcd_clear
 CALL 	imprimirPuntajes
-CMP		A,0b
-JEQ		limpia1
-MOV		A,nombre1
-JMP		printLimpia
+CMP	A,0b
+JEQ	limpia1
+MOV	A,nombre1
+JMP	printLimpia
+
 limpia1:
-MOV		A,nombre2
+MOV	A,nombre2
 printLimpia:
 CALL	lcd_go_start_line_b		//imprime en la segunda linea: "NOMBRE: Limpia"
 CALL	lcd_string
@@ -260,30 +265,34 @@ MOV		A, espacio
 CALL	lcd_char
 MOV		A, limpia
 CALL	lcd_string
+
 whileLimpia:
 CALL 	std_button_wait			//esperar hasta que se aprete un boton
 CMP		A, 00001b
 JEQ		finLimpia
 JMP		whileLimpia
+
 finLimpia:
 RET
 
 start: //entra con turno en A
 PUSH 	A
-MOV		A,FFFFh					//nuevo turno, por lo que los led tienen que estar todos prendidos
+MOV		A,FFFFh			//nuevo turno, por lo que los led tienen que estar todos prendidos
 MOV 	(leds), A
 POP		A
 CALL 	lcd_clear
 CALL 	imprimirPuntajes
 CALL 	lcd_go_start_line_b
-CMP		A,0b					//digo quien es el que va a adivinar
+CMP		A,0b			//digo quien es el que va a adivinar
 JEQ		adivina1
 MOV 	A, nombre2
 CALL 	lcd_string
 JMP 	xAdivina
+
 adivina1:
 MOV 	A, nombre1
 CALL 	lcd_string
+
 xAdivina:
 MOV 	A, espacio
 CALL 	lcd_string
@@ -294,20 +303,20 @@ MOV 	A,0
 JMP 	play
 
 
-play:					  	//entra A = 0 desde start
+play:					//entra A = 0 desde start
 PUSH	A
-CALL 	encenderLeds		//enciendo los leds
+CALL 	encenderLeds			//enciendo los leds
 MOV 	A,(leds)
 CMP 	A,0b				//comparo si no me queda ningun led prendido
-JEQ		lose				//pierdo
+JEQ		lose			//pierdo
 POP 	A
 CALL	contarUnos
-CALL 	std_button_wait		//espero boton para ver los switchs
+CALL 	std_button_wait			//espero boton para ver los switchs
 MOV 	B, A				//guardo el boton en B
-IN		A,0					//guardo switches en A
+IN		A,0			//guardo switches en A
 CMP 	A, (clave)			//comparo switches con la clave
-JEQ 	win					//gano
-CALL 	std_reg_swap		//si no gane, comparo los botones para cada operacion
+JEQ 	win				//gano
+CALL 	std_reg_swap			//si no gane, comparo los botones para cada operacion
 CMP		A, 00001b		// central AND
 JEQ		a_and_clave
 CMP		A, 00010b		// arriba ADD
@@ -319,31 +328,29 @@ JEQ		a_xor_clave
 CMP		A, 10000b		// abajo SUB
 JEQ		a_sub_clave
 
-contarUnos:      //A viene con el resultado OR,XOR,ADD,SUB,AND
-PUSH A
-MOV A, 0
-MOV (contador), A
-MOV A, 15
-MOV (digitos), A
-POP A
-CALL  cicloUnos
-MOV A, (contador)
+count:					 //A viene con el resultado OR,XOR,ADD,SUB,AND
+MOV	B,0
+MOV	(contador), B
+MOV	B, 15
+MOV	(digitos), B
+CALL	cicloUnos
+MOV	A, (contador)
 RET
 
-cicloUnos:
+ciclo:
+PUSH A
 MOV	B, A
-AND	A,1
-ADD	A, (contador)
-MOV	(contador), A
-MOV	A, (digitos)
-DEC	A
-MOV	(digitos), A
+AND	B,1
+ADD	B, (contador)
+MOV	(contador), B
+MOV	B, (digitos)
+SUB	B, 1
+MOV	(digitos), B
+MOV	A, B
 CMP	A,0
 JEQ	endCicloUnos
-
-CALL std_reg_swap
+POP	A
 SHR	A
-CALL std_reg_swap
 JMP	cicloUnos
 
 endCicloUnos:
@@ -353,28 +360,27 @@ a_and_clave:
 CALL 	std_reg_swap
 AND 	A, (clave)
 CALL	decLed
-JMP		play
+JMP	play
 a_add_clave:
 CALL 	std_reg_swap
 ADD 	A, (clave)
 CALL	decLed
-JMP		play
+JMP	play
 a_or_clave:
 CALL 	std_reg_swap
-OR		A, (clave)
+OR	A, (clave)
 CALL	decLed
-JMP		play
+JMP	play
 a_xor_clave:
 CALL 	std_reg_swap
 XOR 	A, (clave)
 CALL	decLed
-JMP		play
+JMP	play
 a_sub_clave:
 CALL 	std_reg_swap
 SUB 	A, (clave)
 CALL	decLed
-JMP		play
-
+JMP	play
 
 encenderLeds:
 PUSH 	A
@@ -385,93 +391,95 @@ RET
 
 decLed:
 PUSH	A
-MOV		A, (leds)
-SHL		A
+MOV	A, (leds)
+SHL	A
 MOV 	(leds), A
-POP		A
+POP	A
 RET
 
 win:
-CALL 	lcd_clear						//limpio lcd para anotar de nuevo los puntajes
-CALL	lcd_go_start_line_b				//voy a la linea dos para decir que gano (si, antes de anotar el puntaje)
-MOV 	A,(turno)						//veo quien estaba jugando para subierle el puntaje
-CMP		A,0b
+CALL 	lcd_clear			//limpio lcd para anotar de nuevo los puntajes
+CALL	lcd_go_start_line_b		//voy a la linea dos para decir que gano (si, antes de anotar el puntaje)
+MOV 	A,(turno)			//veo quien estaba jugando para subierle el puntaje
+CMP	A,0b
 JEQ 	gana1
-MOV 	A,nombre2						//gano 2, su nombre en A
-CALL	lcd_string						//escribo el nombre
-CALL	lcd_shr_c						//espacio
-MOV 	A,(ptje2)						//gana2->aumento ptje 2
-INC		A
-MOV		(ptje2), A
-JMP		win1
+MOV 	A,nombre2			//gano 2, su nombre en A
+CALL	lcd_string			//escribo el nombre
+CALL	lcd_shr_c			//espacio
+MOV 	A,(ptje2)			//gana2->aumento ptje 2
+INC	A
+MOV	(ptje2), A
+JMP	win1
 gana1:				
-MOV	 	A,nombre1						//gano 1, su nombre en A
-CALL	lcd_string						//escribo el nombre
-CALL	lcd_shr_c						//espacio
-MOV 	A,(ptje1)						//gana1 -> aumento ptje 1	
-INC	 	A
+MOV	A,nombre1			//gano 1, su nombre en A
+CALL	lcd_string			//escribo el nombre
+CALL	lcd_shr_c			//espacio
+MOV 	A,(ptje1)			//gana1 -> aumento ptje 1	
+INC	A
 MOV 	(ptje1), A
 win1:
 //imprime puntajes nuevos diciendo que gano
-MOV 	A, gana							// escribe GANA
+MOV 	A, gana				// escribe GANA
 CALL 	lcd_string
 CALL 	lcd_home			//voy a la primera linea del lcd
-CALL 	imprimirPuntajes				//escribo los puntajes ahora que si estan actualizados
-CALL	std_button_wait					//espero....
+CALL 	imprimirPuntajes		//escribo los puntajes ahora que si estan actualizados
+CALL	std_button_wait			//espero....
 //pregunta si continua o no
 CALL 	lcd_clear						
 CALL 	imprimirPuntajes
 CALL 	lcd_go_start_line_b
-MOV 	A, continuar					//pregunto si continuo o no
+MOV 	A, continuar			//pregunto si continuo o no
 CALL 	lcd_string
 CALL 	std_button_wait
-CMP 	A,00001b						//si continuo, voy a contiuar
-JEQ		continuar
-JMP 	reinicia						//sino, reinicio
+CMP 	A,00001b			//si continuo, voy a contiuar
+JEQ	continuar
+JMP 	reinicia			//sino, reinicio
 
 
 lose:
-POP 	A								//POP A porque no lo habia hecho antes
-CALL 	lcd_clear						//limpio lcd
-CALL 	lcd_go_start_line_b				//voy a la linea dos para decir que gano (si, antes de anotar el puntaje)
-MOV	 	A,(turno)						//veo de quien es el turno
-CMP		A,0b							//era de uno
-JEQ 	pierde1							//voy a pieede 1
-MOV	 	A,nombre2						//aqui perdio2
-CALL 	lcd_string						//escribo el nombre de 2
-CALL	lcd_shr_c						//espacio
-MOV	 	A,(ptje1)						//pierde 2 -> agrego ptje a 1
-INC	 	A
+POP 	A				//POP A porque no lo habia hecho antes
+CALL 	lcd_clear			//limpio lcd
+CALL 	lcd_go_start_line_b		//voy a la linea dos para decir que gano (si, antes de anotar el puntaje)
+MOV	A,(turno)			//veo de quien es el turno
+CMP	A,0b				//era de uno
+JEQ 	pierde1				//voy a pieede 1
+MOV	 	A,nombre2		//aqui perdio2
+CALL 	lcd_string			//escribo el nombre de 2
+CALL	lcd_shr_c			//espacio
+MOV	 A,(ptje1)			//pierde 2 -> agrego ptje a 1
+INC	 A
 MOV 	(ptje1), A
 JMP 	lose1
-pierde1:								//aqui perdio 1 
-MOV 	A,nombre1						//anoto su nombre
-CALL	lcd_string						//lo escribo
-CALL	lcd_shr_c						//espacio
-MOV	 	A,(ptje2)						//perdio 1 -> agrego ptje a 2
+
+pierde1:				//aqui perdio 1 
+MOV 	A,nombre1			//anoto su nombre
+CALL	lcd_string			//lo escribo
+CALL	lcd_shr_c			//espacio
+MOV	 	A,(ptje2)		//perdio 1 -> agrego ptje a 2
 INC	 	A
 MOV	 	(ptje2), A
+
 lose1:
-MOV 	A, pierde						//escribo que perdio
+MOV 	A, pierde			//escribo que perdio
 CALL 	lcd_string		
 CALL 	lcd_home			//voy a la linea 1
-CALL 	imprimirPuntajes				//escribo que perdio
-CALL 	std_button_wait					//espero
-CALL 	lcd_clear						//limpio lcd
-CALL 	imprimirPuntajes				//escribo ptjes
-CALL 	lcd_go_start_line_b				//linea 2
-MOV 	A, continuar					//escribo si quiere continuar
+CALL 	imprimirPuntajes		//escribo que perdio
+CALL 	std_button_wait			//espero
+CALL 	lcd_clear			//limpio lcd
+CALL 	imprimirPuntajes		//escribo ptjes
+CALL 	lcd_go_start_line_b		//linea 2
+MOV 	A, continuar			//escribo si quiere continuar
 CALL 	lcd_string	
 CALL 	std_button_wait
 CMP 	A,00001b
 JEQ		continuar
 JMP 	reinicia
 
-continuar:			//cambio el turno
+continuar:				//cambio el turno
 MOV 	A, (turno)
 NOT 	A
 MOV 	(turno), A
-JMP		siguiente		//voy a start guardando el turno en A como se supone que entra en start
+JMP	siguiente			//voy a start guardando el turno en A como se supone que entra en start
 
 reinicia:
 POP 	A
@@ -479,9 +487,9 @@ JMP 	nuevo
 
 siguiente:
 CALL	ingreso
-MOV		A, (turno)
+MOV	A, (turno)
 CALL 	limpia
-MOV		A, (turno)
+MOV	A, (turno)
 JMP 	start
 
 
