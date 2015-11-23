@@ -25,6 +25,8 @@ leds		FFFFh
 
 clave		0
 
+contador 0
+
 CODE:
 
 MOV	B,2

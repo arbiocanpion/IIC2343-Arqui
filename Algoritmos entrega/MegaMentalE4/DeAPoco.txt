@@ -25,6 +25,9 @@ leds		FFFFh
 
 clave		0
 
+contador 0
+digitos 0
+
 CODE:
 
 MOV	B,2
@@ -316,6 +319,35 @@ JEQ		a_xor_clave
 CMP		A, 10000b		// abajo SUB
 JEQ		a_sub_clave
 
+contarUnos:      //A viene con el resultado OR,XOR,ADD,SUB,AND
+PUSH A
+MOV A, 0
+MOV (contador), A
+MOV A, 15
+MOV (digitos), A
+POP A
+CALL  cicloUnos
+MOV A, (contador)
+RET
+
+cicloUnos:
+MOV	B, A
+AND	A,1
+ADD	A, (contador)
+MOV	(contador), A
+MOV	A, (digitos)
+DEC	A
+MOV	(digitos), A
+CMP	A,0
+JEQ	endCicloUnos
+
+CALL std_reg_swap
+SHR	A
+CALL std_reg_swap
+JMP	cicloUnos
+
+endCicloUnos:
+RET
 
 a_and_clave:
 CALL 	std_reg_swap
